@@ -4,8 +4,12 @@ import { LanguageSetup } from './components/LanguageSetup'
 import { WordCard } from './components/WordCard'
 import { LanguageMap } from './components/LanguageMap'
 import { SettingsPanel } from './components/SettingsPanel'
+import { QuizMode } from './components/QuizMode'
+import { SemanticMap } from './components/SemanticMap'
 import { WORD_ENTRIES, CATEGORIES } from './data/words'
 import { LANGUAGES } from './data/languages'
+
+type AppMode = 'explore' | 'quiz' | 'map'
 
 export default function App() {
   const { settings, toggleKnownLanguage, setTargetLanguage, toggleSetting } = useSettings()
@@ -13,6 +17,7 @@ export default function App() {
   const [expandedWord, setExpandedWord] = useState<string | null>(null)
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const [appMode, setAppMode] = useState<AppMode>('explore')
 
   const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
 
@@ -41,7 +46,7 @@ export default function App() {
   }
 
   const filtered = WORD_ENTRIES.filter(w => {
-    if (!q) return !activeCategory || w.category === activeCategory
+    if (!q && !activeCategory) return true
     const allText = [
       w.concept,
       w.latinRoot ?? '',
@@ -53,7 +58,7 @@ export default function App() {
         ...(e.regional ?? []).map(r => r.word),
       ]),
     ]
-    const matchesSearch = allText.some(s => s.toLowerCase().includes(q))
+    const matchesSearch = !q || allText.some(s => s.toLowerCase().includes(q))
     const matchesCategory = !activeCategory || w.category === activeCategory
     return matchesSearch && matchesCategory
   })
@@ -71,7 +76,7 @@ export default function App() {
 
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🗺️</span>
             <div>
@@ -80,19 +85,43 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex-1 max-w-md">
-            <input
-              type="search"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              placeholder="Search words, roots..."
-              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
-            />
+          {/* Mode switcher */}
+          <div className="flex bg-slate-800/80 rounded-lg p-0.5 text-xs font-medium border border-slate-700/50">
+            {([
+              { id: 'explore', label: '🗂 Explore' },
+              { id: 'quiz',    label: '🎴 Quiz' },
+              { id: 'map',     label: '🕸 Map' },
+            ] as { id: AppMode; label: string }[]).map(m => (
+              <button
+                key={m.id}
+                onClick={() => setAppMode(m.id)}
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  appMode === m.id
+                    ? 'bg-indigo-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
           </div>
+
+          {/* Search — only in explore/map modes */}
+          {appMode !== 'quiz' && (
+            <div className="flex-1 max-w-md">
+              <input
+                type="search"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search words, roots, notte, amigo…"
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+              />
+            </div>
+          )}
 
           <div className="flex items-center gap-2 ml-auto">
             {targetLang && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 rounded-lg text-sm">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 rounded-lg text-sm border border-slate-700/50">
                 <span>Learning:</span>
                 <span>{targetLang.flag}</span>
                 <span className="font-semibold" style={{ color: targetLang.color }}>{targetLang.name}</span>
@@ -108,45 +137,46 @@ export default function App() {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6">
-        {/* Sidebar */}
-        <aside className="w-64 shrink-0 space-y-4 hidden lg:block">
-          <LanguageMap
-            knownLanguages={settings.knownLanguages}
-            targetLanguage={settings.targetLanguage}
-          />
-
-          <SettingsPanel settings={settings} onToggle={toggleSetting} />
-
-          {/* Known languages summary */}
-          <div className="bg-slate-900/60 rounded-2xl border border-slate-700/60 p-4">
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Your Languages</h3>
-            <div className="space-y-1.5">
-              {settings.knownLanguages.map(code => {
-                const lang = LANGUAGES.find(l => l.code === code)
-                if (!lang) return null
-                return (
-                  <div key={code} className="flex items-center gap-2 text-sm">
-                    <span>{lang.flag}</span>
-                    <span className="text-slate-300">{lang.name}</span>
-                    <span className="text-xs text-slate-600 ml-auto">{lang.branch}</span>
-                  </div>
-                )
-              })}
+      {/* Quiz mode — full width, no sidebar */}
+      {appMode === 'quiz' && (
+        <div className="max-w-2xl mx-auto px-4 py-4">
+          <div className="flex items-center gap-3 mb-4 flex-wrap">
+            <span className="text-sm text-slate-400">{filtered.length} words in pool</span>
+            <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => setActiveCategory(null)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  !activeCategory ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                All
+              </button>
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    activeCategory === cat ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
             </div>
           </div>
-        </aside>
+          <QuizMode words={filtered} settings={settings} />
+        </div>
+      )}
 
-        {/* Main content */}
-        <main className="flex-1 min-w-0">
-          {/* Category filter */}
-          <div className="flex gap-2 mb-4 flex-wrap">
+      {/* Map mode — full width */}
+      {appMode === 'map' && (
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          {/* Category filter for map */}
+          <div className="flex gap-2 mb-3 flex-wrap">
             <button
               onClick={() => setActiveCategory(null)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                !activeCategory
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                !activeCategory ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
               }`}
             >
               All ({WORD_ENTRIES.length})
@@ -156,48 +186,98 @@ export default function App() {
                 key={cat}
                 onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  activeCategory === cat
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                  activeCategory === cat ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
                 {cat}
               </button>
             ))}
           </div>
+          <SemanticMap words={filtered} settings={settings} />
+        </div>
+      )}
 
-          {/* Stats bar */}
-          <div className="flex items-center gap-4 mb-4 text-xs text-slate-500">
-            <span>{filtered.length} words</span>
-            <span>·</span>
-            <span>
-              {settings.knownLanguages.length} known language{settings.knownLanguages.length !== 1 ? 's' : ''}
-            </span>
-            <span>·</span>
-            <span>showing cognates across Romance & Germanic branches</span>
-          </div>
-
-          {/* Word list */}
-          <div className="space-y-2">
-            {filtered.map(word => (
-              <WordCard
-                key={word.id}
-                word={word}
-                settings={settings}
-                isExpanded={expandedWord === word.id}
-                onToggle={() => setExpandedWord(expandedWord === word.id ? null : word.id)}
-                matchHint={getMatchHint(word)}
-              />
-            ))}
-            {filtered.length === 0 && (
-              <div className="text-center py-16 text-slate-500">
-                <div className="text-4xl mb-3">🔍</div>
-                <div>No words match your search.</div>
+      {/* Explore mode — with sidebar */}
+      {appMode === 'explore' && (
+        <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6">
+          {/* Sidebar */}
+          <aside className="w-64 shrink-0 space-y-4 hidden lg:block">
+            <LanguageMap
+              knownLanguages={settings.knownLanguages}
+              targetLanguage={settings.targetLanguage}
+            />
+            <SettingsPanel settings={settings} onToggle={toggleSetting} />
+            <div className="bg-slate-900/60 rounded-2xl border border-slate-700/60 p-4">
+              <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Your Languages</h3>
+              <div className="space-y-1.5">
+                {settings.knownLanguages.map(code => {
+                  const lang = LANGUAGES.find(l => l.code === code)
+                  if (!lang) return null
+                  return (
+                    <div key={code} className="flex items-center gap-2 text-sm">
+                      <span>{lang.flag}</span>
+                      <span className="text-slate-300">{lang.name}</span>
+                      <span className="text-xs text-slate-600 ml-auto">{lang.branch}</span>
+                    </div>
+                  )
+                })}
               </div>
-            )}
-          </div>
-        </main>
-      </div>
+            </div>
+          </aside>
+
+          {/* Main content */}
+          <main className="flex-1 min-w-0">
+            <div className="flex gap-2 mb-4 flex-wrap">
+              <button
+                onClick={() => setActiveCategory(null)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  !activeCategory ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                All ({WORD_ENTRIES.length})
+              </button>
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    activeCategory === cat ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-4 mb-4 text-xs text-slate-500">
+              <span>{filtered.length} words</span>
+              <span>·</span>
+              <span>{settings.knownLanguages.length} known language{settings.knownLanguages.length !== 1 ? 's' : ''}</span>
+              <span>·</span>
+              <span>showing cognates across Romance &amp; Germanic branches</span>
+            </div>
+
+            <div className="space-y-2">
+              {filtered.map(word => (
+                <WordCard
+                  key={word.id}
+                  word={word}
+                  settings={settings}
+                  isExpanded={expandedWord === word.id}
+                  onToggle={() => setExpandedWord(expandedWord === word.id ? null : word.id)}
+                  matchHint={getMatchHint(word)}
+                />
+              ))}
+              {filtered.length === 0 && (
+                <div className="text-center py-16 text-slate-500">
+                  <div className="text-4xl mb-3">🔍</div>
+                  <div>No words match your search.</div>
+                </div>
+              )}
+            </div>
+          </main>
+        </div>
+      )}
     </div>
   )
 }
