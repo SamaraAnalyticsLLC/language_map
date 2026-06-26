@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSettings } from './hooks/useSettings'
+import { TranslationProvider, useT } from './hooks/useTranslation'
 import { LanguageSetup } from './components/LanguageSetup'
 import { WordCard } from './components/WordCard'
 import { LanguageMap } from './components/LanguageMap'
@@ -11,8 +12,26 @@ import { LANGUAGES } from './data/languages'
 
 type AppMode = 'explore' | 'quiz' | 'map'
 
+// Outer shell: sets up the translation context
 export default function App() {
-  const { settings, toggleKnownLanguage, setTargetLanguage, toggleSetting } = useSettings()
+  const { settings, setUILanguage, toggleKnownLanguage, setTargetLanguage, toggleSetting } = useSettings()
+  return (
+    <TranslationProvider lang={settings.uiLanguage}>
+      <AppInner
+        settings={settings}
+        setUILanguage={setUILanguage}
+        toggleKnownLanguage={toggleKnownLanguage}
+        setTargetLanguage={setTargetLanguage}
+        toggleSetting={toggleSetting}
+      />
+    </TranslationProvider>
+  )
+}
+
+type SettingsActions = Omit<ReturnType<typeof useSettings>, 'settings'>
+
+function AppInner({ settings, setUILanguage, toggleKnownLanguage, setTargetLanguage, toggleSetting }: { settings: ReturnType<typeof useSettings>['settings'] } & SettingsActions) {
+  const t = useT()
   const [showSetup, setShowSetup] = useState(true)
   const [expandedWord, setExpandedWord] = useState<string | null>(null)
   const [search, setSearch] = useState('')
@@ -68,6 +87,7 @@ export default function App() {
       {showSetup && (
         <LanguageSetup
           settings={settings}
+          onSetUILanguage={setUILanguage}
           onToggleKnown={toggleKnownLanguage}
           onSetTarget={setTargetLanguage}
           onClose={() => setShowSetup(false)}
@@ -81,16 +101,16 @@ export default function App() {
             <span className="text-2xl">🗺️</span>
             <div>
               <h1 className="text-lg font-bold leading-none">EtymoMap</h1>
-              <p className="text-xs text-slate-500 leading-none mt-0.5">Interactive Language Learning</p>
+              <p className="text-xs text-slate-500 leading-none mt-0.5">{t.app_subtitle}</p>
             </div>
           </div>
 
           {/* Mode switcher */}
           <div className="flex bg-slate-800/80 rounded-lg p-0.5 text-xs font-medium border border-slate-700/50">
             {([
-              { id: 'explore', label: '🗂 Explore' },
-              { id: 'quiz',    label: '🎴 Quiz' },
-              { id: 'map',     label: '🕸 Map' },
+              { id: 'explore', label: t.mode_explore },
+              { id: 'quiz',    label: t.mode_quiz },
+              { id: 'map',     label: t.mode_map },
             ] as { id: AppMode; label: string }[]).map(m => (
               <button
                 key={m.id}
@@ -106,14 +126,13 @@ export default function App() {
             ))}
           </div>
 
-          {/* Search — only in explore/map modes */}
           {appMode !== 'quiz' && (
             <div className="flex-1 max-w-md">
               <input
                 type="search"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search words, roots, notte, amigo…"
+                placeholder={t.search_placeholder}
                 className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
               />
             </div>
@@ -122,26 +141,26 @@ export default function App() {
           <div className="flex items-center gap-2 ml-auto">
             {targetLang && (
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 rounded-lg text-sm border border-slate-700/50">
-                <span>Learning:</span>
+                <span>{t.learning_label}</span>
                 <span>{targetLang.flag}</span>
-                <span className="font-semibold" style={{ color: targetLang.color }}>{targetLang.name}</span>
+                <span className="font-semibold" style={{ color: targetLang.color }}>{targetLang.nativeName}</span>
               </div>
             )}
             <button
               onClick={() => setShowSetup(true)}
               className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm text-slate-300 transition-colors"
             >
-              ⚙️ Languages
+              {t.btn_languages}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Quiz mode — full width, no sidebar */}
+      {/* Quiz mode */}
       {appMode === 'quiz' && (
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center gap-3 mb-4 flex-wrap">
-            <span className="text-sm text-slate-400">{filtered.length} words in pool</span>
+            <span className="text-sm text-slate-400">{t.quiz_pool(filtered.length)}</span>
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setActiveCategory(null)}
@@ -149,7 +168,7 @@ export default function App() {
                   !activeCategory ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
-                All
+                {t.all_label}
               </button>
               {CATEGORIES.map(cat => (
                 <button
@@ -168,10 +187,9 @@ export default function App() {
         </div>
       )}
 
-      {/* Map mode — full width */}
+      {/* Map mode */}
       {appMode === 'map' && (
         <div className="max-w-6xl mx-auto px-4 py-4">
-          {/* Category filter for map */}
           <div className="flex gap-2 mb-3 flex-wrap">
             <button
               onClick={() => setActiveCategory(null)}
@@ -179,7 +197,7 @@ export default function App() {
                 !activeCategory ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
               }`}
             >
-              All ({WORD_ENTRIES.length})
+              {t.all_label} ({WORD_ENTRIES.length})
             </button>
             {CATEGORIES.map(cat => (
               <button
@@ -197,10 +215,9 @@ export default function App() {
         </div>
       )}
 
-      {/* Explore mode — with sidebar */}
+      {/* Explore mode */}
       {appMode === 'explore' && (
         <div className="max-w-6xl mx-auto px-4 py-6 flex gap-6">
-          {/* Sidebar */}
           <aside className="w-64 shrink-0 space-y-4 hidden lg:block">
             <LanguageMap
               knownLanguages={settings.knownLanguages}
@@ -208,7 +225,7 @@ export default function App() {
             />
             <SettingsPanel settings={settings} onToggle={toggleSetting} />
             <div className="bg-slate-900/60 rounded-2xl border border-slate-700/60 p-4">
-              <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Your Languages</h3>
+              <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">{t.known_langs_sidebar}</h3>
               <div className="space-y-1.5">
                 {settings.knownLanguages.map(code => {
                   const lang = LANGUAGES.find(l => l.code === code)
@@ -216,7 +233,7 @@ export default function App() {
                   return (
                     <div key={code} className="flex items-center gap-2 text-sm">
                       <span>{lang.flag}</span>
-                      <span className="text-slate-300">{lang.name}</span>
+                      <span className="text-slate-300">{lang.nativeName}</span>
                       <span className="text-xs text-slate-600 ml-auto">{lang.branch}</span>
                     </div>
                   )
@@ -225,7 +242,6 @@ export default function App() {
             </div>
           </aside>
 
-          {/* Main content */}
           <main className="flex-1 min-w-0">
             <div className="flex gap-2 mb-4 flex-wrap">
               <button
@@ -234,7 +250,7 @@ export default function App() {
                   !activeCategory ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
-                All ({WORD_ENTRIES.length})
+                {t.all_label} ({WORD_ENTRIES.length})
               </button>
               {CATEGORIES.map(cat => (
                 <button
@@ -250,11 +266,7 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-4 mb-4 text-xs text-slate-500">
-              <span>{filtered.length} words</span>
-              <span>·</span>
-              <span>{settings.knownLanguages.length} known language{settings.knownLanguages.length !== 1 ? 's' : ''}</span>
-              <span>·</span>
-              <span>showing cognates across Romance &amp; Germanic branches</span>
+              {t.stats(filtered.length, settings.knownLanguages.length)}
             </div>
 
             <div className="space-y-2">
@@ -271,7 +283,7 @@ export default function App() {
               {filtered.length === 0 && (
                 <div className="text-center py-16 text-slate-500">
                   <div className="text-4xl mb-3">🔍</div>
-                  <div>No words match your search.</div>
+                  <div>{t.no_results}</div>
                 </div>
               )}
             </div>

@@ -1,30 +1,30 @@
+import { useT } from '../hooks/useTranslation'
 import type { Settings } from '../hooks/useSettings'
-
-interface ToggleOption {
-  key: keyof Omit<Settings, 'knownLanguages' | 'targetLanguage'>
-  label: string
-  description: string
-  emoji: string
-}
-
-const TOGGLES: ToggleOption[] = [
-  { key: 'showEtymology', label: 'Etymology', description: 'Show Latin roots & word history', emoji: '🏛️' },
-  { key: 'showContext', label: 'Context', description: 'Show usage context & register', emoji: '💬' },
-  { key: 'showRegional', label: 'Regional variants', description: 'Show differences between regions', emoji: '🗺️' },
-  { key: 'showIPA', label: 'Pronunciation (IPA)', description: 'Show phonetic transcriptions', emoji: '🔊' },
-  { key: 'showFunFact', label: 'Fun facts', description: 'Show linguistic trivia', emoji: '💡' },
-  { key: 'showFalseFriends', label: 'False friends', description: 'Highlight deceptive cognates', emoji: '⚠️' },
-]
 
 interface Props {
   settings: Settings
-  onToggle: (key: keyof Omit<Settings, 'knownLanguages' | 'targetLanguage'>) => void
+  onToggle: (key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguage'>) => void
 }
 
 export function SettingsPanel({ settings, onToggle }: Props) {
+  const t = useT()
+
+  const TOGGLES: Array<{
+    key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguage'>
+    label: string
+    description: string
+  }> = [
+    { key: 'showEtymology',   label: t.toggle_etymology,   description: t.toggle_etymology_desc },
+    { key: 'showContext',     label: t.toggle_context,     description: t.toggle_context_desc },
+    { key: 'showRegional',   label: t.toggle_regional,    description: t.toggle_regional_desc },
+    { key: 'showIPA',        label: t.toggle_ipa,         description: t.toggle_ipa_desc },
+    { key: 'showFunFact',    label: t.toggle_funfact,     description: t.toggle_funfact_desc },
+    { key: 'showFalseFriends', label: t.toggle_falsefriends, description: t.toggle_falsefriends_desc },
+  ]
+
   return (
     <div className="bg-slate-900/60 rounded-2xl border border-slate-700/60 p-4">
-      <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Display Options</h3>
+      <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">{t.settings_title}</h3>
       <div className="space-y-2">
         {TOGGLES.map(toggle => (
           <button
@@ -36,7 +36,6 @@ export function SettingsPanel({ settings, onToggle }: Props) {
                 : 'bg-slate-800/50 border border-slate-700/50 opacity-60'
             }`}
           >
-            <span className="text-base shrink-0">{toggle.emoji}</span>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-slate-200">{toggle.label}</div>
               <div className="text-xs text-slate-500 truncate">{toggle.description}</div>

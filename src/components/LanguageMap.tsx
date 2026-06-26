@@ -1,4 +1,5 @@
 import { LANGUAGES } from '../data/languages'
+import { useT } from '../hooks/useTranslation'
 
 interface Props {
   knownLanguages: string[]
@@ -29,10 +30,11 @@ const TREE_EDGES = [
 ]
 
 export function LanguageMap({ knownLanguages, targetLanguage }: Props) {
+  const t = useT()
   return (
     <div className="relative bg-slate-900/60 rounded-2xl border border-slate-700/60 overflow-hidden">
       <div className="px-4 pt-3 pb-1">
-        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Language Family Tree</h3>
+        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{t.lang_tree_title}</h3>
       </div>
       <svg viewBox="0 0 580 290" className="w-full h-auto">
         {/* Family group backgrounds */}

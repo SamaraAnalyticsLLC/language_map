@@ -2,6 +2,7 @@ import { useQuiz } from '../hooks/useQuiz'
 import type { WordEntry } from '../data/words'
 import type { Settings } from '../hooks/useSettings'
 import { LANGUAGES } from '../data/languages'
+import { useT } from '../hooks/useTranslation'
 import { useState, useRef, useEffect, useCallback } from 'react'
 
 interface Props {
@@ -14,6 +15,7 @@ function normalize(s: string): string {
 }
 
 export function QuizMode({ words, settings }: Props) {
+  const t = useT()
   const wordIds = words.map(w => w.id)
   const [state, actions] = useQuiz(wordIds)
   const [guess, setGuess] = useState('')
@@ -66,9 +68,9 @@ export function QuizMode({ words, settings }: Props) {
       {/* Progress bar */}
       <div className="w-full max-w-xl mb-6">
         <div className="flex justify-between text-xs text-slate-500 mb-1.5">
-          <span>{seen} / {state.total} cards</span>
+          <span>{t.quiz_cards(seen, state.total)}</span>
           {scorePercent !== null && (
-            <span className="text-emerald-400">{scorePercent}% correct</span>
+            <span className="text-emerald-400">{t.quiz_score(scorePercent)}</span>
           )}
         </div>
         <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -77,11 +79,10 @@ export function QuizMode({ words, settings }: Props) {
             style={{ width: `${progress}%` }}
           />
         </div>
-        {/* Mini score indicators */}
         <div className="flex gap-3 mt-1.5 text-xs">
-          <span className="text-emerald-400">✓ {state.correct.size}</span>
-          <span className="text-red-400">✗ {state.incorrect.size}</span>
-          <span className="text-slate-500">→ {state.skipped.size} skipped</span>
+          <span className="text-emerald-400">{t.quiz_correct_count} {state.correct.size}</span>
+          <span className="text-red-400">{t.quiz_missed_count} {state.incorrect.size}</span>
+          <span className="text-slate-500">{state.skipped.size} {t.quiz_skipped_count}</span>
         </div>
       </div>
 
@@ -134,7 +135,7 @@ export function QuizMode({ words, settings }: Props) {
                     value={guess}
                     onChange={e => setGuess(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter') handleGuessSubmit() }}
-                    placeholder={`Type in ${targetLang?.name ?? 'target language'}…`}
+                    placeholder={t.quiz_type_placeholder(targetLang?.nativeName ?? targetLang?.name ?? '')}
                     className="flex-1 px-4 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 text-base"
                   />
                   <button
@@ -142,14 +143,14 @@ export function QuizMode({ words, settings }: Props) {
                     disabled={!guess.trim()}
                     className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-xl font-semibold transition-colors"
                   >
-                    Check
+                    {t.quiz_check}
                   </button>
                 </div>
                 <button
                   onClick={actions.reveal}
                   className="w-full py-2 text-slate-500 hover:text-slate-300 text-sm transition-colors"
                 >
-                  Reveal without guessing →
+                  {t.quiz_reveal_no_guess}
                 </button>
               </div>
             ) : (
@@ -157,12 +158,12 @@ export function QuizMode({ words, settings }: Props) {
                 {/* Guess result banner */}
                 {guessResult === 'correct' && (
                   <div className="flex items-center justify-center gap-2 py-2 bg-emerald-900/40 border border-emerald-700/60 rounded-xl text-emerald-300 font-semibold text-sm">
-                    ✓ Correct! Marking as got it…
+                    {t.quiz_correct_banner}
                   </div>
                 )}
                 {guessResult === 'incorrect' && guess && (
                   <div className="flex items-center justify-center gap-2 py-2 bg-red-900/30 border border-red-700/50 rounded-xl text-red-300 text-sm">
-                    ✗ You wrote <span className="font-mono font-bold mx-1">"{guess}"</span> — see correct answer below
+                    {t.quiz_wrong_banner(guess)}
                   </div>
                 )}
 
@@ -182,14 +183,14 @@ export function QuizMode({ words, settings }: Props) {
                   )}
                   {targetEntry?.cognateStrength === 'false-friend' && (
                     <div className="mt-2 text-xs bg-red-900/40 text-red-300 border border-red-700/40 rounded px-2 py-1 inline-block">
-                      ⚠️ False friend — careful!
+                      {t.quiz_false_friend}
                     </div>
                   )}
                   {targetEntry?.forms.length && targetEntry.forms.length > 1 && (
                     <div className="mt-2 space-y-1">
                       {targetEntry.forms.slice(1).map((form, i) => (
                         <div key={i} className="text-sm text-slate-400">
-                          also: <span className="font-medium text-white">{form.word}</span>
+                          {t.quiz_also} <span className="font-medium text-white">{form.word}</span>
                           {form.context && <span className="text-slate-500"> ({form.context})</span>}
                         </div>
                       ))}
@@ -211,19 +212,19 @@ export function QuizMode({ words, settings }: Props) {
                       onClick={actions.markIncorrect}
                       className="py-2.5 bg-red-900/40 hover:bg-red-800/60 border border-red-700/60 text-red-300 rounded-xl font-medium transition-colors text-sm"
                     >
-                      ✗ Missed it
+                      {t.quiz_missed_btn}
                     </button>
                     <button
                       onClick={actions.skip}
                       className="py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-400 rounded-xl font-medium transition-colors text-sm"
                     >
-                      → Skip
+                      {t.quiz_skip_btn}
                     </button>
                     <button
                       onClick={actions.markCorrect}
                       className="py-2.5 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/60 text-emerald-300 rounded-xl font-medium transition-colors text-sm"
                     >
-                      ✓ Got it
+                      {t.quiz_got_it_btn}
                     </button>
                   </div>
                 )}
@@ -236,7 +237,7 @@ export function QuizMode({ words, settings }: Props) {
         {state.phase === 'question' && (
           <div className="mt-3 text-center">
             <button onClick={actions.skip} className="text-xs text-slate-600 hover:text-slate-400 transition-colors">
-              skip this card →
+              {t.quiz_skip_link}
             </button>
           </div>
         )}
@@ -254,6 +255,7 @@ function QuizSummary({
   onRestart: () => void
   onReshuffle: () => void
 }) {
+  const t = useT()
   const answered = state.correct.size + state.incorrect.size
   const pct = answered > 0 ? Math.round((state.correct.size / answered) * 100) : 0
   const grade = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '💪' : '📖'
@@ -261,28 +263,25 @@ function QuizSummary({
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] py-8 text-center">
       <div className="text-6xl mb-4">{grade}</div>
-      <h2 className="text-3xl font-bold text-white mb-2">Round complete!</h2>
+      <h2 className="text-3xl font-bold text-white mb-2">{t.quiz_done_title}</h2>
       {answered > 0 ? (
-        <p className="text-slate-400 mb-6">
-          You got <span className="text-emerald-400 font-semibold">{state.correct.size}</span> out of{' '}
-          <span className="font-semibold text-white">{answered}</span> answered ({pct}%)
-        </p>
+        <p className="text-slate-400 mb-6">{t.quiz_done_score(state.correct.size, answered, pct)}</p>
       ) : (
-        <p className="text-slate-400 mb-6">You skipped all cards this round.</p>
+        <p className="text-slate-400 mb-6">{t.quiz_done_all_skipped}</p>
       )}
 
       <div className="flex gap-4 mb-8 text-sm">
         <div className="bg-emerald-900/30 border border-emerald-700/40 rounded-xl px-5 py-3 text-center">
           <div className="text-2xl font-bold text-emerald-400">{state.correct.size}</div>
-          <div className="text-emerald-600 text-xs mt-0.5">Correct</div>
+          <div className="text-emerald-600 text-xs mt-0.5">{t.quiz_correct_label}</div>
         </div>
         <div className="bg-red-900/30 border border-red-700/40 rounded-xl px-5 py-3 text-center">
           <div className="text-2xl font-bold text-red-400">{state.incorrect.size}</div>
-          <div className="text-red-600 text-xs mt-0.5">Missed</div>
+          <div className="text-red-600 text-xs mt-0.5">{t.quiz_missed_label}</div>
         </div>
         <div className="bg-slate-800 border border-slate-700 rounded-xl px-5 py-3 text-center">
           <div className="text-2xl font-bold text-slate-400">{state.skipped.size}</div>
-          <div className="text-slate-600 text-xs mt-0.5">Skipped</div>
+          <div className="text-slate-600 text-xs mt-0.5">{t.quiz_skipped_label}</div>
         </div>
       </div>
 
@@ -291,13 +290,13 @@ function QuizSummary({
           onClick={onReshuffle}
           className="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl font-medium transition-colors"
         >
-          🔀 Same set, reshuffled
+          {t.quiz_reshuffle}
         </button>
         <button
           onClick={onRestart}
           className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-medium transition-colors"
         >
-          ↺ Start fresh
+          {t.quiz_restart}
         </button>
       </div>
     </div>

@@ -116,6 +116,13 @@ export const NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   salt:     { x: 630, y: 540 },
   old:      { x: 560, y: 210 },
   city:     { x: 690, y: 280 },
+
+  // Batch 3 additions
+  green:    { x: 545, y: 455 },
+  sleep:    { x: 240, y: 345 },
+  rain:     { x: 120, y: 200 },
+  father:   { x: 305, y: 555 },
+  world:    { x: 490, y: 170 },
 }
 
 export const ETYMOLOGY_EDGES: Array<{ source: string; target: string; strength: 'strong' | 'medium' | 'weak' }> = [
@@ -228,4 +235,23 @@ export const ETYMOLOGY_EDGES: Array<{ source: string; target: string; strength: 
   { source: 'city', target: 'school', strength: 'medium' },
   { source: 'city', target: 'friend', strength: 'weak' },
   { source: 'city', target: 'big', strength: 'medium' },
+  // Batch 3 edges
+  { source: 'green', target: 'red', strength: 'medium' },
+  { source: 'green', target: 'white', strength: 'weak' },
+  { source: 'green', target: 'flower', strength: 'strong' },
+  { source: 'green', target: 'water', strength: 'medium' },
+  { source: 'sleep', target: 'night', strength: 'strong' },
+  { source: 'sleep', target: 'eye', strength: 'medium' },
+  { source: 'sleep', target: 'time', strength: 'weak' },
+  { source: 'rain', target: 'water', strength: 'strong' },
+  { source: 'rain', target: 'sea', strength: 'medium' },
+  { source: 'rain', target: 'night', strength: 'weak' },
+  { source: 'rain', target: 'flower', strength: 'medium' },
+  { source: 'father', target: 'mother', strength: 'strong' },
+  { source: 'father', target: 'child', strength: 'strong' },
+  { source: 'father', target: 'friend', strength: 'weak' },
+  { source: 'world', target: 'sea', strength: 'medium' },
+  { source: 'world', target: 'language', strength: 'strong' },
+  { source: 'world', target: 'time', strength: 'medium' },
+  { source: 'world', target: 'city', strength: 'medium' },
 ]

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import type { UILang } from '../data/translations'
 
 export interface Settings {
+  uiLanguage: UILang
   knownLanguages: string[]
   targetLanguage: string
   showEtymology: boolean
@@ -12,6 +14,7 @@ export interface Settings {
 }
 
 const DEFAULT_SETTINGS: Settings = {
+  uiLanguage: 'en',
   knownLanguages: ['en'],
   targetLanguage: 'it',
   showEtymology: true,
@@ -29,7 +32,6 @@ function loadSettings(): Settings {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return DEFAULT_SETTINGS
     const parsed = JSON.parse(raw) as Partial<Settings>
-    // Merge with defaults so new keys added in future releases still appear
     return { ...DEFAULT_SETTINGS, ...parsed }
   } catch {
     return DEFAULT_SETTINGS
@@ -55,28 +57,40 @@ export function useSettings() {
     })
   }
 
-  // Sync on first load in case the stored value is newer than the in-memory default
   useEffect(() => {
     const stored = loadSettings()
     setSettingsRaw(stored)
   }, [])
 
+  const setUILanguage = (code: UILang) => {
+    setSettings(s => ({ ...s, uiLanguage: code }))
+  }
+
   const toggleKnownLanguage = (code: string) => {
-    setSettings(s => ({
-      ...s,
-      knownLanguages: s.knownLanguages.includes(code)
-        ? s.knownLanguages.filter(l => l !== code)
-        : [...s.knownLanguages, code],
-    }))
+    setSettings(s => {
+      // Cannot add a language that is already the target
+      if (code === s.targetLanguage) return s
+      return {
+        ...s,
+        knownLanguages: s.knownLanguages.includes(code)
+          ? s.knownLanguages.filter(l => l !== code)
+          : [...s.knownLanguages, code],
+      }
+    })
   }
 
   const setTargetLanguage = (code: string) => {
-    setSettings(s => ({ ...s, targetLanguage: code }))
+    setSettings(s => ({
+      ...s,
+      targetLanguage: code,
+      // Remove from known if it was there
+      knownLanguages: s.knownLanguages.filter(l => l !== code),
+    }))
   }
 
-  const toggleSetting = (key: keyof Omit<Settings, 'knownLanguages' | 'targetLanguage'>) => {
+  const toggleSetting = (key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguage'>) => {
     setSettings(s => ({ ...s, [key]: !s[key] }))
   }
 
-  return { settings, toggleKnownLanguage, setTargetLanguage, toggleSetting }
+  return { settings, setUILanguage, toggleKnownLanguage, setTargetLanguage, toggleSetting }
 }

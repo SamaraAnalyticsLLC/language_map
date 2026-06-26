@@ -4,6 +4,7 @@ import { LANGUAGES } from '../data/languages'
 import { EtymologyTree } from './EtymologyTree'
 import { RegionalVariants } from './RegionalVariants'
 import type { Settings } from '../hooks/useSettings'
+import { useT } from '../hooks/useTranslation'
 
 interface Props {
   word: WordEntry
@@ -16,6 +17,7 @@ interface Props {
 type Tab = 'overview' | 'etymology' | 'regional'
 
 export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Props) {
+  const t = useT()
   const [tab, setTab] = useState<Tab>('overview')
 
   const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
@@ -28,6 +30,12 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
 
   const isFalseFriend = targetEntry?.cognateStrength === 'false-friend'
 
+  const tabs = [
+    { id: 'overview' as Tab, label: t.tab_overview, show: true },
+    { id: 'etymology' as Tab, label: t.tab_etymology, show: settings.showEtymology },
+    { id: 'regional' as Tab, label: t.tab_regional, show: settings.showRegional },
+  ].filter(tb => tb.show)
+
   return (
     <div
       className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
@@ -36,27 +44,19 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
           : 'border-slate-700/60 bg-slate-900/60 hover:border-slate-600 hover:bg-slate-900/80'
       }`}
     >
-      {/* Card header — always visible */}
-      <button
-        className="w-full text-left p-4 flex items-start gap-4"
-        onClick={onToggle}
-      >
+      {/* Card header */}
+      <button className="w-full text-left p-4 flex items-start gap-4" onClick={onToggle}>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-1">
             <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">{word.category}</span>
             {isFalseFriend && (
               <span className="text-xs bg-red-900/50 text-red-400 border border-red-700/50 px-1.5 py-0.5 rounded">
-                ⚠️ false friend
+                {t.strength_false_friend}
               </span>
             )}
             {matchHint && (
               <span className="text-xs bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 px-1.5 py-0.5 rounded">
-                matched in {matchHint}
-              </span>
-            )}
-            {settings.showFalseFriends && targetEntry?.cognateStrength === 'identical' && (
-              <span className="text-xs bg-emerald-900/40 text-emerald-400 px-1.5 py-0.5 rounded">
-                ✓ same in Romance
+                ∈ {matchHint}
               </span>
             )}
           </div>
@@ -72,7 +72,6 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
             )}
           </div>
 
-          {/* Quick cognate preview */}
           {settings.showContext && (
             <div className="flex items-center gap-2 mt-1.5 flex-wrap">
               {knownEntries.slice(0, 4).map(entry => {
@@ -91,59 +90,41 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
           )}
         </div>
 
-        <div className="text-slate-500 text-sm mt-1 shrink-0">
-          {isExpanded ? '▲' : '▼'}
-        </div>
+        <div className="text-slate-500 text-sm mt-1 shrink-0">{isExpanded ? '▲' : '▼'}</div>
       </button>
 
       {/* Expanded content */}
       {isExpanded && (
         <div className="border-t border-slate-800">
-          {/* Tabs */}
           <div className="flex border-b border-slate-800 px-4">
-            {[
-              { id: 'overview' as Tab, label: 'Overview', show: true },
-              { id: 'etymology' as Tab, label: 'Etymology', show: settings.showEtymology },
-              { id: 'regional' as Tab, label: 'Regional', show: settings.showRegional },
-            ].filter(t => t.show).map(t => (
+            {tabs.map(tb => (
               <button
-                key={t.id}
-                onClick={() => setTab(t.id)}
+                key={tb.id}
+                onClick={() => setTab(tb.id)}
                 className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
-                  tab === t.id
+                  tab === tb.id
                     ? 'border-indigo-500 text-indigo-400'
                     : 'border-transparent text-slate-500 hover:text-slate-300'
                 }`}
               >
-                {t.label}
+                {tb.label}
               </button>
             ))}
           </div>
 
           <div className="p-4">
-            {tab === 'overview' && (
-              <OverviewTab word={word} settings={settings} />
-            )}
+            {tab === 'overview' && <OverviewTab word={word} settings={settings} />}
             {tab === 'etymology' && settings.showEtymology && (
-              <EtymologyTree
-                word={word}
-                knownLanguages={settings.knownLanguages}
-                targetLanguage={settings.targetLanguage}
-              />
+              <EtymologyTree word={word} knownLanguages={settings.knownLanguages} targetLanguage={settings.targetLanguage} />
             )}
             {tab === 'regional' && settings.showRegional && (
-              <RegionalVariants
-                word={word}
-                knownLanguages={settings.knownLanguages}
-                targetLanguage={settings.targetLanguage}
-              />
+              <RegionalVariants word={word} knownLanguages={settings.knownLanguages} targetLanguage={settings.targetLanguage} />
             )}
           </div>
 
-          {/* Fun fact */}
           {word.funFact && settings.showFunFact && (
             <div className="mx-4 mb-4 p-3 rounded-xl bg-indigo-950/40 border border-indigo-800/40">
-              <div className="text-xs font-semibold text-indigo-400 mb-1">💡 Fun Fact</div>
+              <div className="text-xs font-semibold text-indigo-400 mb-1">{t.fun_fact_label} {t.toggle_funfact.replace('💡 ', '')}</div>
               <p className="text-sm text-slate-300 leading-relaxed">{word.funFact}</p>
             </div>
           )}
@@ -154,6 +135,7 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
 }
 
 function OverviewTab({ word, settings }: { word: WordEntry; settings: Settings }) {
+  const t = useT()
   const relevantLangCodes = [...new Set([...settings.knownLanguages, settings.targetLanguage])]
   const entries = word.languages.filter(e => relevantLangCodes.includes(e.langCode) && e.langCode !== 'la')
 
@@ -163,7 +145,6 @@ function OverviewTab({ word, settings }: { word: WordEntry; settings: Settings }
         const lang = LANGUAGES.find(l => l.code === entry.langCode)
         const isTarget = entry.langCode === settings.targetLanguage
         if (!lang) return null
-
         return (
           <div
             key={entry.langCode}
@@ -173,8 +154,12 @@ function OverviewTab({ word, settings }: { word: WordEntry; settings: Settings }
             <span className="text-xl shrink-0 mt-0.5">{lang.flag}</span>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-xs font-semibold" style={{ color: lang.color }}>{lang.name}</span>
-                {isTarget && <span className="text-xs bg-indigo-600/50 text-indigo-300 px-1.5 py-0.5 rounded">your target</span>}
+                <span className="text-xs font-semibold" style={{ color: lang.color }}>{lang.nativeName}</span>
+                {isTarget && (
+                  <span className="text-xs bg-indigo-600/50 text-indigo-300 px-1.5 py-0.5 rounded">
+                    {t.learning_label.replace(':', '')}
+                  </span>
+                )}
               </div>
               {entry.forms.map((form, i) => (
                 <div key={i} className={i > 0 ? 'mt-1 pt-1 border-t border-slate-700' : ''}>
