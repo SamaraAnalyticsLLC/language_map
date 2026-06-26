@@ -7,20 +7,24 @@ interface Props {
 
 // Positions on a simplified language family tree (SVG coordinate space 0-600 x 0-340)
 const LANG_POSITIONS: Record<string, { x: number; y: number }> = {
-  la:    { x: 300, y: 40 },
-  it:    { x: 180, y: 140 },
-  es:    { x: 260, y: 200 },
-  pt:    { x: 160, y: 240 },
-  fr:    { x: 340, y: 160 },
-  ro:    { x: 420, y: 140 },
-  ca:    { x: 300, y: 200 },
-  en:    { x: 500, y: 240 },
-  de:    { x: 480, y: 160 },
-  nl:    { x: 540, y: 200 },
+  la:    { x: 300, y: 35 },
+  it:    { x: 165, y: 130 },
+  es:    { x: 235, y: 200 },
+  pt:    { x: 140, y: 220 },
+  gl:    { x: 185, y: 265 },
+  fr:    { x: 330, y: 150 },
+  oc:    { x: 290, y: 210 },
+  ro:    { x: 415, y: 130 },
+  ca:    { x: 285, y: 155 },
+  en:    { x: 510, y: 230 },
+  de:    { x: 475, y: 150 },
+  nl:    { x: 545, y: 195 },
 }
 
 const TREE_EDGES = [
-  ['la', 'it'], ['la', 'es'], ['la', 'pt'], ['la', 'fr'], ['la', 'ro'], ['la', 'ca'],
+  ['la', 'it'], ['la', 'es'], ['la', 'pt'], ['la', 'fr'], ['la', 'ro'], ['la', 'ca'], ['la', 'oc'],
+  ['pt', 'gl'],
+  ['es', 'gl'],
   ['de', 'en'], ['de', 'nl'],
 ]
 

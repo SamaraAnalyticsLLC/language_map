@@ -25,6 +25,8 @@ export const LANGUAGES: Language[] = [
   { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷', family: 'Indo-European', branch: 'Romance', color: '#6366F1' },
   { code: 'ro', name: 'Romanian', nativeName: 'Română', flag: '🇷🇴', family: 'Indo-European', branch: 'Romance', color: '#EC4899' },
   { code: 'ca', name: 'Catalan', nativeName: 'Català', flag: '🏴', family: 'Indo-European', branch: 'Romance', color: '#F97316' },
+  { code: 'gl', name: 'Galician', nativeName: 'Galego', flag: '🌊', family: 'Indo-European', branch: 'Romance', color: '#0EA5E9' },
+  { code: 'oc', name: 'Occitan', nativeName: 'Occitan', flag: '🌹', family: 'Indo-European', branch: 'Romance', color: '#D946EF' },
   { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪', family: 'Indo-European', branch: 'Germanic', color: '#84CC16' },
   { code: 'nl', name: 'Dutch', nativeName: 'Nederlands', flag: '🇳🇱', family: 'Indo-European', branch: 'Germanic', color: '#06B6D4' },
 ]
@@ -43,6 +45,8 @@ export const REGIONS: Region[] = [
   { code: 'it_si', name: 'Sicilian-influenced', country: 'Sicily', flag: '🏝️', parentLanguage: 'it' },
   { code: 'de_de', name: 'Standard German', country: 'Germany', flag: '🇩🇪', parentLanguage: 'de' },
   { code: 'de_at', name: 'Austrian German', country: 'Austria', flag: '🇦🇹', parentLanguage: 'de' },
+  { code: 'gl_es', name: 'Galician', country: 'Galicia, Spain', flag: '🌊', parentLanguage: 'gl' },
+  { code: 'ca_es', name: 'Valencian / Catalan', country: 'Catalonia & Valencia', flag: '🏴', parentLanguage: 'ca' },
 ]
 
 export const LEARNABLE_LANGUAGES = LANGUAGES.filter(l => l.code !== 'la')

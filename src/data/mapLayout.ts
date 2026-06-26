@@ -1,4 +1,5 @@
 export const CATEGORY_COLORS: Record<string, string> = {
+  'Animals':              '#A78BFA',
   'Time & Nature':          '#6366F1',
   'Time & Calendar':        '#818CF8',
   'Elements & Nature':      '#10B981',
@@ -82,7 +83,32 @@ export const NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   // Time & Nature (astronomical) — top right
   // sun & moon already placed top-left
 
-  // Catch-all fallback handled in component
+  // Animals — top center
+  dog:    { x: 390, y: 60  },
+  cat:    { x: 460, y: 80  },
+  bird:   { x: 425, y: 130 },
+
+  // Adjectives — center right
+  big:    { x: 550, y: 270 },
+  good:   { x: 600, y: 220 },
+  new:    { x: 620, y: 300 },
+
+  // More verbs
+  want:   { x: 340, y: 400 },
+  come:   { x: 375, y: 230 },
+  have:   { x: 510, y: 310 },
+
+  // Place & Movement — right side
+  road:   { x: 730, y: 265 },
+  sea:    { x: 770, y: 310 },
+
+  // More body
+  head:   { x: 100, y: 320 },
+  foot:   { x: 195, y: 470 },
+
+  // Abstract / Language — center top
+  name:     { x: 280, y: 110 },
+  language: { x: 330, y: 60  },
 }
 
 export const ETYMOLOGY_EDGES: Array<{ source: string; target: string; strength: 'strong' | 'medium' | 'weak' }> = [
@@ -140,4 +166,40 @@ export const ETYMOLOGY_EDGES: Array<{ source: string; target: string; strength: 
   { source: 'give', target: 'friend', strength: 'weak' },
   // Night/moon
   { source: 'night', target: 'moon', strength: 'medium' },
+  // Animals
+  { source: 'dog', target: 'cat', strength: 'medium' },
+  { source: 'dog', target: 'bird', strength: 'medium' },
+  { source: 'cat', target: 'bird', strength: 'weak' },
+  { source: 'fish', target: 'bird', strength: 'weak' },
+  { source: 'fish', target: 'dog', strength: 'weak' },
+  // Adjectives
+  { source: 'big', target: 'good', strength: 'weak' },
+  { source: 'good', target: 'new', strength: 'weak' },
+  { source: 'big', target: 'sea', strength: 'medium' },
+  // New verbs
+  { source: 'want', target: 'love', strength: 'medium' },
+  { source: 'want', target: 'give', strength: 'medium' },
+  { source: 'come', target: 'go', strength: 'strong' },
+  { source: 'come', target: 'speak', strength: 'weak' },
+  { source: 'have', target: 'give', strength: 'medium' },
+  { source: 'have', target: 'house', strength: 'weak' },
+  // Place & Movement
+  { source: 'road', target: 'house', strength: 'medium' },
+  { source: 'road', target: 'door', strength: 'medium' },
+  { source: 'road', target: 'go', strength: 'strong' },
+  { source: 'sea', target: 'fish', strength: 'strong' },
+  { source: 'sea', target: 'water', strength: 'strong' },
+  { source: 'sea', target: 'moon', strength: 'weak' },
+  // More body
+  { source: 'head', target: 'eye', strength: 'strong' },
+  { source: 'head', target: 'mouth', strength: 'strong' },
+  { source: 'head', target: 'know', strength: 'medium' },
+  { source: 'foot', target: 'go', strength: 'medium' },
+  { source: 'foot', target: 'road', strength: 'medium' },
+  // Language / name
+  { source: 'language', target: 'speak', strength: 'strong' },
+  { source: 'language', target: 'name', strength: 'strong' },
+  { source: 'name', target: 'know', strength: 'medium' },
+  { source: 'language', target: 'book', strength: 'medium' },
+  { source: 'language', target: 'school', strength: 'medium' },
 ]

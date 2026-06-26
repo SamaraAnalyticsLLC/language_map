@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export interface Settings {
   knownLanguages: string[]
@@ -22,8 +22,44 @@ const DEFAULT_SETTINGS: Settings = {
   showFalseFriends: true,
 }
 
+const STORAGE_KEY = 'etymomap-settings'
+
+function loadSettings(): Settings {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return DEFAULT_SETTINGS
+    const parsed = JSON.parse(raw) as Partial<Settings>
+    // Merge with defaults so new keys added in future releases still appear
+    return { ...DEFAULT_SETTINGS, ...parsed }
+  } catch {
+    return DEFAULT_SETTINGS
+  }
+}
+
+function saveSettings(s: Settings) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
+  } catch {
+    // storage might be unavailable (private browsing etc.)
+  }
+}
+
 export function useSettings() {
-  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS)
+  const [settings, setSettingsRaw] = useState<Settings>(loadSettings)
+
+  const setSettings = (updater: (s: Settings) => Settings) => {
+    setSettingsRaw(prev => {
+      const next = updater(prev)
+      saveSettings(next)
+      return next
+    })
+  }
+
+  // Sync on first load in case the stored value is newer than the in-memory default
+  useEffect(() => {
+    const stored = loadSettings()
+    setSettingsRaw(stored)
+  }, [])
 
   const toggleKnownLanguage = (code: string) => {
     setSettings(s => ({

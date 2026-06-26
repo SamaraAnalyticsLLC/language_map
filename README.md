@@ -1,5 +1,24 @@
 # EtymoMap — Interactive Etymological Language Map
 
+## Roadmap
+
+| # | Feature | Status |
+|---|---------|--------|
+| 1 | More words | ✅ Done (50 entries) |
+| 2 | Cross-language search | ✅ Done |
+| 3 | Quiz / flashcard mode | ✅ Done |
+| 4 | Semantic field map | ✅ Done |
+| 5 | More languages (Galician, Occitan, Catalan) | ✅ Done |
+| 6 | User persistence (localStorage) | ✅ Done |
+| 7 | Quiz typing input — type your guess before revealing | 🔜 Next |
+| 8 | Quiz speech input — speak your answer (Web Speech API) | 🔜 Next |
+| 9 | More words (target: 100+) | 🔜 Next |
+| 10 | Force-directed map layout (auto-position nodes) | 🔜 Future |
+| 11 | User accounts / progress sync across devices | 🔜 Future |
+| 12 | Audio pronunciation (TTS or recorded) | 🔜 Future |
+
+---
+
 An interactive web app for learning languages through etymology, cognates, and regional variants. Discover how words are related across Romance and Germanic languages, trace them back to Latin roots, and understand regional differences (e.g. Brazilian vs European Portuguese).
 
 ## Features
