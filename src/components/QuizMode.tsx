@@ -23,6 +23,8 @@ export function QuizMode({ words, settings }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const word = words.find(w => w.id === state.currentId)
+  // Show concept in the user's UI language, falling back to the English concept name
+  const conceptWord = word?.languages.find(e => e.langCode === settings.uiLanguage)?.forms[0]?.word ?? word?.concept
   const targetLangs = LANGUAGES.filter(l => settings.targetLanguages.includes(l.code))
   const primaryTargetLang = targetLangs[0]
   const knownEntries = word?.languages.filter(e => settings.knownLanguages.includes(e.langCode)) ?? []
@@ -100,7 +102,7 @@ export function QuizMode({ words, settings }: Props) {
 
           {/* Concept */}
           <div className="px-6 pb-6 text-center">
-            <div className="text-4xl font-bold text-white mb-2">{word.concept}</div>
+            <div className="text-4xl font-bold text-white mb-2">{conceptWord}</div>
             {word.latinRoot && (
               <div className="text-sm text-amber-600 font-mono mb-4">← {word.latinRoot}</div>
             )}
