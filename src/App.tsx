@@ -14,7 +14,7 @@ type AppMode = 'explore' | 'quiz' | 'map'
 
 // Outer shell: sets up the translation context
 export default function App() {
-  const { settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting } = useSettings()
+  const { settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting, resetLanguages } = useSettings()
   return (
     <TranslationProvider lang={settings.uiLanguage}>
       <AppInner
@@ -23,6 +23,7 @@ export default function App() {
         toggleKnownLanguage={toggleKnownLanguage}
         toggleTargetLanguage={toggleTargetLanguage}
         toggleSetting={toggleSetting}
+        resetLanguages={resetLanguages}
       />
     </TranslationProvider>
   )
@@ -30,7 +31,7 @@ export default function App() {
 
 type SettingsActions = Omit<ReturnType<typeof useSettings>, 'settings'>
 
-function AppInner({ settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting }: { settings: ReturnType<typeof useSettings>['settings'] } & SettingsActions) {
+function AppInner({ settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting, resetLanguages }: { settings: ReturnType<typeof useSettings>['settings'] } & SettingsActions) {
   const t = useT()
   const [showSetup, setShowSetup] = useState(true)
   const [expandedWord, setExpandedWord] = useState<string | null>(null)
@@ -90,6 +91,7 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, toggleTargetLa
           onSetUILanguage={setUILanguage}
           onToggleKnown={toggleKnownLanguage}
           onToggleTarget={toggleTargetLanguage}
+          onReset={resetLanguages}
           onClose={() => setShowSetup(false)}
         />
       )}

@@ -15,8 +15,8 @@ export interface Settings {
 
 const DEFAULT_SETTINGS: Settings = {
   uiLanguage: 'en',
-  knownLanguages: ['en'],
-  targetLanguages: ['it'],
+  knownLanguages: [],
+  targetLanguages: [],
   showEtymology: true,
   showContext: true,
   showRegional: true,
@@ -103,5 +103,9 @@ export function useSettings() {
     setSettings(s => ({ ...s, [key]: !s[key] }))
   }
 
-  return { settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting }
+  const resetLanguages = () => {
+    setSettings(s => ({ ...s, knownLanguages: [], targetLanguages: [] }))
+  }
+
+  return { settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting, resetLanguages }
 }

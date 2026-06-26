@@ -12,14 +12,20 @@ interface Props {
   onSetUILanguage: (code: UILang) => void
   onToggleKnown: (code: string) => void
   onToggleTarget: (code: string) => void
+  onReset: () => void
   onClose: () => void
 }
 
-export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onToggleTarget, onClose }: Props) {
+export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onToggleTarget, onReset, onClose }: Props) {
   const [step, setStep] = useState(0)
   const t = useT()
 
-  const canClose = settings.knownLanguages.length > 0 && settings.targetLanguages.length > 0
+  const canClose = settings.targetLanguages.length > 0
+
+  const handleReset = () => {
+    onReset()
+    setStep(0)
+  }
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -61,7 +67,15 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onTogg
                 })}
               </div>
             </div>
-            <div className="p-6 border-t border-slate-700 flex justify-end">
+            <div className="p-6 border-t border-slate-700 flex justify-between items-center">
+              {(settings.knownLanguages.length > 0 || settings.targetLanguages.length > 0) ? (
+                <button
+                  onClick={handleReset}
+                  className="text-xs text-slate-600 hover:text-red-400 transition-colors"
+                >
+                  ↺ Reset all
+                </button>
+              ) : <span />}
               <button
                 onClick={() => setStep(1)}
                 className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-medium transition-colors"
@@ -111,17 +125,24 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onTogg
                 })}
               </div>
             </div>
-            <div className="p-6 border-t border-slate-700 flex justify-between">
-              <button
-                onClick={() => setStep(0)}
-                className="px-4 py-2 text-slate-400 hover:text-slate-200 transition-colors text-sm"
-              >
-                {t.btn_back}
-              </button>
+            <div className="p-6 border-t border-slate-700 flex justify-between items-center">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setStep(0)}
+                  className="px-4 py-2 text-slate-400 hover:text-slate-200 transition-colors text-sm"
+                >
+                  {t.btn_back}
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="text-xs text-slate-600 hover:text-red-400 transition-colors"
+                >
+                  ↺ Reset all
+                </button>
+              </div>
               <button
                 onClick={() => setStep(2)}
-                disabled={settings.knownLanguages.length === 0}
-                className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-medium transition-colors"
               >
                 {t.btn_continue}
               </button>
@@ -174,13 +195,21 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onTogg
                 </p>
               )}
             </div>
-            <div className="p-6 border-t border-slate-700 flex justify-between">
-              <button
-                onClick={() => setStep(1)}
-                className="px-4 py-2 text-slate-400 hover:text-slate-200 transition-colors text-sm"
-              >
-                {t.btn_back}
-              </button>
+            <div className="p-6 border-t border-slate-700 flex justify-between items-center">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setStep(1)}
+                  className="px-4 py-2 text-slate-400 hover:text-slate-200 transition-colors text-sm"
+                >
+                  {t.btn_back}
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="text-xs text-slate-600 hover:text-red-400 transition-colors"
+                >
+                  ↺ Reset all
+                </button>
+              </div>
               <button
                 onClick={onClose}
                 disabled={!canClose}
