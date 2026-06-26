@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/EtymologyTree.tsx","./src/components/LanguageMap.tsx","./src/components/LanguageSetup.tsx","./src/components/RegionalVariants.tsx","./src/components/SettingsPanel.tsx","./src/components/WordCard.tsx","./src/data/languages.ts","./src/data/words.ts","./src/hooks/useSettings.ts"],"version":"5.9.3"}
