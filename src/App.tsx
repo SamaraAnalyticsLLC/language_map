@@ -16,12 +16,44 @@ export default function App() {
 
   const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
 
+  const q = search.toLowerCase().trim()
+
+  const getMatchHint = (w: typeof WORD_ENTRIES[number]): string | null => {
+    if (!q) return null
+    for (const entry of w.languages) {
+      for (const form of entry.forms) {
+        if (form.word.toLowerCase().includes(q)) {
+          const lang = LANGUAGES.find(l => l.code === entry.langCode)
+          return lang ? `${lang.flag} ${lang.name}` : null
+        }
+      }
+      for (const rv of entry.regional ?? []) {
+        if (rv.word.toLowerCase().includes(q)) {
+          const lang = LANGUAGES.find(l => l.code === entry.langCode)
+          return lang ? `${lang.flag} ${lang.name} (regional)` : null
+        }
+      }
+    }
+    for (const node of w.etymology) {
+      if (node.word.toLowerCase().includes(q)) return `🏛️ Etymology (${node.source})`
+    }
+    return null
+  }
+
   const filtered = WORD_ENTRIES.filter(w => {
-    const matchesSearch = !search || [
+    if (!q) return !activeCategory || w.category === activeCategory
+    const allText = [
       w.concept,
       w.latinRoot ?? '',
-      ...w.languages.map(e => e.forms.map(f => f.word).join(' ')),
-    ].some(s => s.toLowerCase().includes(search.toLowerCase()))
+      w.protoIndoEuropean ?? '',
+      ...w.etymology.map(e => e.word),
+      ...w.languages.flatMap(e => [
+        ...e.forms.map(f => f.word),
+        ...e.forms.map(f => f.ipa ?? ''),
+        ...(e.regional ?? []).map(r => r.word),
+      ]),
+    ]
+    const matchesSearch = allText.some(s => s.toLowerCase().includes(q))
     const matchesCategory = !activeCategory || w.category === activeCategory
     return matchesSearch && matchesCategory
   })
@@ -154,6 +186,7 @@ export default function App() {
                 settings={settings}
                 isExpanded={expandedWord === word.id}
                 onToggle={() => setExpandedWord(expandedWord === word.id ? null : word.id)}
+                matchHint={getMatchHint(word)}
               />
             ))}
             {filtered.length === 0 && (

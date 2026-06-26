@@ -10,11 +10,12 @@ interface Props {
   settings: Settings
   isExpanded: boolean
   onToggle: () => void
+  matchHint?: string | null
 }
 
 type Tab = 'overview' | 'etymology' | 'regional'
 
-export function WordCard({ word, settings, isExpanded, onToggle }: Props) {
+export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Props) {
   const [tab, setTab] = useState<Tab>('overview')
 
   const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
@@ -46,6 +47,11 @@ export function WordCard({ word, settings, isExpanded, onToggle }: Props) {
             {isFalseFriend && (
               <span className="text-xs bg-red-900/50 text-red-400 border border-red-700/50 px-1.5 py-0.5 rounded">
                 ⚠️ false friend
+              </span>
+            )}
+            {matchHint && (
+              <span className="text-xs bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 px-1.5 py-0.5 rounded">
+                matched in {matchHint}
               </span>
             )}
             {settings.showFalseFriends && targetEntry?.cognateStrength === 'identical' && (
