@@ -93,9 +93,9 @@ export function SemanticMap({ words, settings }: Props) {
   const selectedWord = selectedId ? wordMap[selectedId] : null
 
   return (
-    <div className="flex gap-4 h-[calc(100vh-120px)] min-h-[500px]">
+    <div className="flex flex-col md:flex-row gap-4 h-auto md:h-[calc(100vh-160px)] min-h-[400px]">
       {/* Map canvas */}
-      <div className="flex-1 relative rounded-2xl overflow-hidden border border-slate-700/60 bg-slate-950">
+      <div className="flex-1 relative rounded-2xl overflow-hidden border border-slate-700/60 bg-slate-950 h-[50vh] md:h-auto">
         {/* Legend */}
         <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-1 max-w-[220px]">
           {Object.entries(CATEGORY_COLORS).map(([cat, color]) => {
@@ -232,13 +232,14 @@ export function SemanticMap({ words, settings }: Props) {
 
         {/* Hint */}
         <div className="absolute bottom-3 left-3 text-xs text-slate-600">
-          Scroll to zoom · Drag to pan · Click node to explore
+          <span className="hidden sm:inline">Scroll to zoom · Drag to pan · Click node to explore</span>
+          <span className="sm:hidden">Pinch to zoom · Drag to pan · Tap node</span>
         </div>
       </div>
 
       {/* Side panel */}
       {selectedWord ? (
-        <div className="w-80 shrink-0 overflow-y-auto">
+        <div className="w-full md:w-80 md:shrink-0 overflow-y-auto">
           <div className="bg-slate-900 border border-slate-700/60 rounded-2xl overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
               <div>
@@ -266,7 +267,7 @@ export function SemanticMap({ words, settings }: Props) {
           </div>
         </div>
       ) : (
-        <div className="w-80 shrink-0 flex items-center justify-center text-center px-4">
+        <div className="hidden md:flex w-80 shrink-0 items-center justify-center text-center px-4">
           <div className="text-slate-600">
             <div className="text-4xl mb-3">🕸️</div>
             <div className="text-sm">Click any node on the map to explore that word's etymology and cognates.</div>

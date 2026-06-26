@@ -98,38 +98,67 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, toggleTargetLa
 
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🗺️</span>
-            <div>
-              <h1 className="text-lg font-bold leading-none">EtymoMap</h1>
-              <p className="text-xs text-slate-500 leading-none mt-0.5">{t.app_subtitle}</p>
+        <div className="max-w-6xl mx-auto px-3 sm:px-4">
+          {/* Top row: logo + languages button */}
+          <div className="flex items-center gap-2 py-2.5">
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <span className="text-2xl shrink-0">🗺️</span>
+              <div className="min-w-0">
+                <h1 className="text-base sm:text-lg font-bold leading-none">EtymoMap</h1>
+                <p className="text-xs text-slate-500 leading-none mt-0.5 hidden sm:block">{t.app_subtitle}</p>
+              </div>
+            </div>
+
+            {/* Mode switcher */}
+            <div className="flex bg-slate-800/80 rounded-lg p-0.5 text-xs font-medium border border-slate-700/50 shrink-0">
+              {([
+                { id: 'explore', label: t.mode_explore },
+                { id: 'quiz',    label: t.mode_quiz },
+                { id: 'map',     label: t.mode_map },
+              ] as { id: AppMode; label: string }[]).map(m => (
+                <button
+                  key={m.id}
+                  onClick={() => setAppMode(m.id)}
+                  className={`px-2.5 sm:px-3 py-1.5 rounded transition-colors ${
+                    appMode === m.id
+                      ? 'bg-indigo-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-1.5 shrink-0">
+              {targetLangs.length > 0 && (
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 rounded-lg text-sm border border-slate-700/50">
+                  <span className="hidden md:inline">{t.learning_label}</span>
+                  {targetLangs.map(lang => (
+                    <span key={lang.code} title={lang.nativeName} className="flex items-center gap-0.5">
+                      <span>{lang.flag}</span>
+                      {targetLangs.length === 1 && (
+                        <span className="font-semibold hidden md:inline" style={{ color: lang.color }}>{lang.nativeName}</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <button
+                onClick={() => setShowSetup(true)}
+                className="px-2.5 sm:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs sm:text-sm text-slate-300 transition-colors"
+              >
+                {targetLangs.length > 0
+                  ? <span className="sm:hidden">{targetLangs.map(l => l.flag).join('')}</span>
+                  : null}
+                <span className={targetLangs.length > 0 ? 'hidden sm:inline' : ''}>{t.btn_languages}</span>
+              </button>
             </div>
           </div>
 
-          {/* Mode switcher */}
-          <div className="flex bg-slate-800/80 rounded-lg p-0.5 text-xs font-medium border border-slate-700/50">
-            {([
-              { id: 'explore', label: t.mode_explore },
-              { id: 'quiz',    label: t.mode_quiz },
-              { id: 'map',     label: t.mode_map },
-            ] as { id: AppMode; label: string }[]).map(m => (
-              <button
-                key={m.id}
-                onClick={() => setAppMode(m.id)}
-                className={`px-3 py-1.5 rounded transition-colors ${
-                  appMode === m.id
-                    ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-
+          {/* Search row (explore + map modes) */}
           {appMode !== 'quiz' && (
-            <div className="flex-1 max-w-md">
+            <div className="pb-2">
               <input
                 type="search"
                 value={search}
@@ -139,28 +168,6 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, toggleTargetLa
               />
             </div>
           )}
-
-          <div className="flex items-center gap-2 ml-auto">
-            {targetLangs.length > 0 && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 rounded-lg text-sm border border-slate-700/50">
-                <span>{t.learning_label}</span>
-                {targetLangs.map(lang => (
-                  <span key={lang.code} title={lang.nativeName} className="flex items-center gap-0.5">
-                    <span>{lang.flag}</span>
-                    {targetLangs.length === 1 && (
-                      <span className="font-semibold" style={{ color: lang.color }}>{lang.nativeName}</span>
-                    )}
-                  </span>
-                ))}
-              </div>
-            )}
-            <button
-              onClick={() => setShowSetup(true)}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm text-slate-300 transition-colors"
-            >
-              {t.btn_languages}
-            </button>
-          </div>
         </div>
       </header>
 
