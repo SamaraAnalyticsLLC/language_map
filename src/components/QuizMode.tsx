@@ -2,20 +2,31 @@ import { useQuiz } from '../hooks/useQuiz'
 import type { WordEntry } from '../data/words'
 import type { Settings } from '../hooks/useSettings'
 import { LANGUAGES } from '../data/languages'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 interface Props {
   words: WordEntry[]
   settings: Settings
 }
 
+function normalize(s: string): string {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim()
+}
+
 export function QuizMode({ words, settings }: Props) {
   const wordIds = words.map(w => w.id)
   const [state, actions] = useQuiz(wordIds)
+  const [guess, setGuess] = useState('')
+  const [guessResult, setGuessResult] = useState<'correct' | 'incorrect' | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const word = words.find(w => w.id === state.currentId)
   const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
   const knownEntries = word?.languages.filter(e => settings.knownLanguages.includes(e.langCode)) ?? []
   const targetEntry = word?.languages.find(e => e.langCode === settings.targetLanguage)
+
+  // Collect all accepted forms for the target word
+  const acceptedForms = targetEntry?.forms.map(f => normalize(f.word)) ?? []
 
   const seen = state.correct.size + state.incorrect.size + state.skipped.size
   const progress = state.total > 0 ? (seen / state.total) * 100 : 0
@@ -23,6 +34,26 @@ export function QuizMode({ words, settings }: Props) {
   const scorePercent = answeredCount > 0
     ? Math.round((state.correct.size / answeredCount) * 100)
     : null
+
+  // Reset guess when card changes
+  useEffect(() => {
+    setGuess('')
+    setGuessResult(null)
+    if (state.phase === 'question') {
+      setTimeout(() => inputRef.current?.focus(), 50)
+    }
+  }, [state.currentId, state.phase])
+
+  const handleGuessSubmit = useCallback(() => {
+    if (!guess.trim()) return
+    const isCorrect = acceptedForms.includes(normalize(guess))
+    setGuessResult(isCorrect ? 'correct' : 'incorrect')
+    actions.reveal()
+    if (isCorrect) {
+      // Auto-mark correct after a short delay so the user sees the answer
+      setTimeout(() => actions.markCorrect(), 900)
+    }
+  }, [guess, acceptedForms, actions])
 
   if (state.phase === 'done') {
     return <QuizSummary state={state} onRestart={actions.restart} onReshuffle={actions.reshuffle} />
@@ -94,14 +125,47 @@ export function QuizMode({ words, settings }: Props) {
 
             {/* Target language reveal */}
             {state.phase === 'question' ? (
-              <button
-                onClick={actions.reveal}
-                className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-semibold text-lg transition-colors"
-              >
-                Reveal in {targetLang?.flag} {targetLang?.name}
-              </button>
+              <div className="space-y-3">
+                {/* Typing input */}
+                <div className="flex gap-2">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={guess}
+                    onChange={e => setGuess(e.target.value)}
+                    onKeyDown={e => { if (e.key === 'Enter') handleGuessSubmit() }}
+                    placeholder={`Type in ${targetLang?.name ?? 'target language'}…`}
+                    className="flex-1 px-4 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 text-base"
+                  />
+                  <button
+                    onClick={handleGuessSubmit}
+                    disabled={!guess.trim()}
+                    className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-xl font-semibold transition-colors"
+                  >
+                    Check
+                  </button>
+                </div>
+                <button
+                  onClick={actions.reveal}
+                  className="w-full py-2 text-slate-500 hover:text-slate-300 text-sm transition-colors"
+                >
+                  Reveal without guessing →
+                </button>
+              </div>
             ) : (
               <div className="space-y-4">
+                {/* Guess result banner */}
+                {guessResult === 'correct' && (
+                  <div className="flex items-center justify-center gap-2 py-2 bg-emerald-900/40 border border-emerald-700/60 rounded-xl text-emerald-300 font-semibold text-sm">
+                    ✓ Correct! Marking as got it…
+                  </div>
+                )}
+                {guessResult === 'incorrect' && guess && (
+                  <div className="flex items-center justify-center gap-2 py-2 bg-red-900/30 border border-red-700/50 rounded-xl text-red-300 text-sm">
+                    ✗ You wrote <span className="font-mono font-bold mx-1">"{guess}"</span> — see correct answer below
+                  </div>
+                )}
+
                 {/* Revealed word */}
                 <div
                   className="py-4 px-6 rounded-xl border-2 text-center"
@@ -140,27 +204,29 @@ export function QuizMode({ words, settings }: Props) {
                   </div>
                 )}
 
-                {/* Judgment buttons */}
-                <div className="grid grid-cols-3 gap-2">
-                  <button
-                    onClick={actions.markIncorrect}
-                    className="py-2.5 bg-red-900/40 hover:bg-red-800/60 border border-red-700/60 text-red-300 rounded-xl font-medium transition-colors text-sm"
-                  >
-                    ✗ Missed it
-                  </button>
-                  <button
-                    onClick={actions.skip}
-                    className="py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-400 rounded-xl font-medium transition-colors text-sm"
-                  >
-                    → Skip
-                  </button>
-                  <button
-                    onClick={actions.markCorrect}
-                    className="py-2.5 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/60 text-emerald-300 rounded-xl font-medium transition-colors text-sm"
-                  >
-                    ✓ Got it
-                  </button>
-                </div>
+                {/* Judgment buttons — hidden while auto-advancing after correct guess */}
+                {guessResult !== 'correct' && (
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      onClick={actions.markIncorrect}
+                      className="py-2.5 bg-red-900/40 hover:bg-red-800/60 border border-red-700/60 text-red-300 rounded-xl font-medium transition-colors text-sm"
+                    >
+                      ✗ Missed it
+                    </button>
+                    <button
+                      onClick={actions.skip}
+                      className="py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-400 rounded-xl font-medium transition-colors text-sm"
+                    >
+                      → Skip
+                    </button>
+                    <button
+                      onClick={actions.markCorrect}
+                      className="py-2.5 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/60 text-emerald-300 rounded-xl font-medium transition-colors text-sm"
+                    >
+                      ✓ Got it
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

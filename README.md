@@ -10,7 +10,7 @@
 | 4 | Semantic field map | ✅ Done |
 | 5 | More languages (Galician, Occitan, Catalan) | ✅ Done |
 | 6 | User persistence (localStorage) | ✅ Done |
-| 7 | Quiz typing input — type your guess before revealing | 🔜 Next |
+| 7 | Quiz typing input — type your guess before revealing | ✅ Done |
 | 8 | Quiz speech input — speak your answer (Web Speech API) | 🔜 Next |
 | 9 | More words (target: 100+) | 🔜 Next |
 | 10 | Force-directed map layout (auto-position nodes) | 🔜 Future |
