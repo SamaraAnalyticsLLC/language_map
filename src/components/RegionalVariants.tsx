@@ -4,11 +4,11 @@ import { REGIONS, LANGUAGES } from '../data/languages'
 interface Props {
   word: WordEntry
   knownLanguages: string[]
-  targetLanguage: string
+  targetLanguages: string[]
 }
 
-export function RegionalVariants({ word, knownLanguages, targetLanguage }: Props) {
-  const relevantLangCodes = [...new Set([...knownLanguages, targetLanguage])]
+export function RegionalVariants({ word, knownLanguages, targetLanguages }: Props) {
+  const relevantLangCodes = [...new Set([...knownLanguages, ...targetLanguages])]
 
   const entriesWithRegional = word.languages.filter(
     e => e.regional && e.regional.length > 0 && relevantLangCodes.includes(e.langCode)

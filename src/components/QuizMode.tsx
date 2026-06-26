@@ -23,12 +23,13 @@ export function QuizMode({ words, settings }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const word = words.find(w => w.id === state.currentId)
-  const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
+  const targetLangs = LANGUAGES.filter(l => settings.targetLanguages.includes(l.code))
+  const primaryTargetLang = targetLangs[0]
   const knownEntries = word?.languages.filter(e => settings.knownLanguages.includes(e.langCode)) ?? []
-  const targetEntry = word?.languages.find(e => e.langCode === settings.targetLanguage)
+  const targetEntries = word?.languages.filter(e => settings.targetLanguages.includes(e.langCode)) ?? []
 
-  // Collect all accepted forms for the target word
-  const acceptedForms = targetEntry?.forms.map(f => normalize(f.word)) ?? []
+  // Collect all accepted forms across all target languages
+  const acceptedForms = targetEntries.flatMap(entry => entry.forms.map(f => normalize(f.word)))
 
   const seen = state.correct.size + state.incorrect.size + state.skipped.size
   const progress = state.total > 0 ? (seen / state.total) * 100 : 0
@@ -135,7 +136,7 @@ export function QuizMode({ words, settings }: Props) {
                     value={guess}
                     onChange={e => setGuess(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter') handleGuessSubmit() }}
-                    placeholder={t.quiz_type_placeholder(targetLang?.nativeName ?? targetLang?.name ?? '')}
+                    placeholder={t.quiz_type_placeholder(targetLangs.map(l => l.nativeName).join(' / '))}
                     className="flex-1 px-4 py-2.5 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 text-base"
                   />
                   <button
@@ -167,36 +168,47 @@ export function QuizMode({ words, settings }: Props) {
                   </div>
                 )}
 
-                {/* Revealed word */}
-                <div
-                  className="py-4 px-6 rounded-xl border-2 text-center"
-                  style={{ borderColor: targetLang?.color, backgroundColor: (targetLang?.color ?? '#6366f1') + '15' }}
-                >
-                  <div className="text-3xl font-bold text-white mb-1" style={{ color: targetLang?.color }}>
-                    {targetEntry?.forms[0]?.word ?? '—'}
-                  </div>
-                  {targetEntry?.forms[0]?.ipa && (
-                    <div className="text-sm text-slate-400 font-mono">{targetEntry.forms[0].ipa}</div>
-                  )}
-                  {targetEntry?.forms[0]?.context && (
-                    <div className="text-xs text-slate-500 mt-1 italic">{targetEntry.forms[0].context}</div>
-                  )}
-                  {targetEntry?.cognateStrength === 'false-friend' && (
-                    <div className="mt-2 text-xs bg-red-900/40 text-red-300 border border-red-700/40 rounded px-2 py-1 inline-block">
-                      {t.quiz_false_friend}
-                    </div>
-                  )}
-                  {targetEntry?.forms.length && targetEntry.forms.length > 1 && (
-                    <div className="mt-2 space-y-1">
-                      {targetEntry.forms.slice(1).map((form, i) => (
-                        <div key={i} className="text-sm text-slate-400">
-                          {t.quiz_also} <span className="font-medium text-white">{form.word}</span>
-                          {form.context && <span className="text-slate-500"> ({form.context})</span>}
+                {/* Revealed words — one block per target language */}
+                {targetEntries.map(targetEntry => {
+                  const lang = LANGUAGES.find(l => l.code === targetEntry.langCode)
+                  return (
+                    <div
+                      key={targetEntry.langCode}
+                      className="py-4 px-6 rounded-xl border-2 text-center"
+                      style={{ borderColor: lang?.color, backgroundColor: (lang?.color ?? '#6366f1') + '15' }}
+                    >
+                      {targetEntries.length > 1 && (
+                        <div className="text-xs font-semibold mb-1" style={{ color: lang?.color }}>
+                          {lang?.flag} {lang?.nativeName}
                         </div>
-                      ))}
+                      )}
+                      <div className="text-3xl font-bold mb-1" style={{ color: lang?.color }}>
+                        {targetEntry.forms[0]?.word ?? '—'}
+                      </div>
+                      {targetEntry.forms[0]?.ipa && (
+                        <div className="text-sm text-slate-400 font-mono">{targetEntry.forms[0].ipa}</div>
+                      )}
+                      {targetEntry.forms[0]?.context && (
+                        <div className="text-xs text-slate-500 mt-1 italic">{targetEntry.forms[0].context}</div>
+                      )}
+                      {targetEntry.cognateStrength === 'false-friend' && (
+                        <div className="mt-2 text-xs bg-red-900/40 text-red-300 border border-red-700/40 rounded px-2 py-1 inline-block">
+                          {t.quiz_false_friend}
+                        </div>
+                      )}
+                      {targetEntry.forms.length > 1 && (
+                        <div className="mt-2 space-y-1">
+                          {targetEntry.forms.slice(1).map((form, i) => (
+                            <div key={i} className="text-sm text-slate-400">
+                              {t.quiz_also} <span className="font-medium text-white">{form.word}</span>
+                              {form.context && <span className="text-slate-500"> ({form.context})</span>}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  )
+                })}
 
                 {/* Fun fact if any */}
                 {word.funFact && (

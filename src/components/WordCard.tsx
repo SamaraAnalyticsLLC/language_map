@@ -20,15 +20,17 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
   const t = useT()
   const [tab, setTab] = useState<Tab>('overview')
 
-  const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
-  const targetEntry = word.languages.find(e => e.langCode === settings.targetLanguage)
-  const targetWord = targetEntry?.forms[0]?.word ?? '—'
+  const targetLangs = LANGUAGES.filter(l => settings.targetLanguages.includes(l.code))
+  const primaryTargetLang = targetLangs[0]
+  const targetEntries = word.languages.filter(e => settings.targetLanguages.includes(e.langCode))
+  const primaryTargetEntry = targetEntries[0]
+  const targetWord = primaryTargetEntry?.forms[0]?.word ?? '—'
 
   const knownEntries = word.languages.filter(
     e => settings.knownLanguages.includes(e.langCode) && e.langCode !== 'la'
   )
 
-  const isFalseFriend = targetEntry?.cognateStrength === 'false-friend'
+  const isFalseFriend = targetEntries.some(e => e.cognateStrength === 'false-friend')
 
   const tabs = [
     { id: 'overview' as Tab, label: t.tab_overview, show: true },
@@ -64,11 +66,26 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
           <div className="flex items-baseline gap-3">
             <span className="text-slate-400 text-sm">{word.concept}</span>
             <span className="text-slate-600">→</span>
-            <span className="text-white font-bold text-xl" style={{ color: targetLang?.color }}>
-              {targetWord}
-            </span>
-            {targetEntry?.forms[0]?.ipa && settings.showIPA && (
-              <span className="text-slate-500 text-sm font-mono">{targetEntry.forms[0].ipa}</span>
+            {targetLangs.length === 1 ? (
+              <>
+                <span className="text-white font-bold text-xl" style={{ color: primaryTargetLang?.color }}>
+                  {targetWord}
+                </span>
+                {primaryTargetEntry?.forms[0]?.ipa && settings.showIPA && (
+                  <span className="text-slate-500 text-sm font-mono">{primaryTargetEntry.forms[0].ipa}</span>
+                )}
+              </>
+            ) : (
+              <span className="flex items-center gap-2 flex-wrap">
+                {targetEntries.map(entry => {
+                  const lang = targetLangs.find(l => l.code === entry.langCode)
+                  return (
+                    <span key={entry.langCode} className="font-bold text-lg" style={{ color: lang?.color }}>
+                      {lang?.flag} {entry.forms[0]?.word ?? '—'}
+                    </span>
+                  )
+                })}
+              </span>
             )}
           </div>
 
@@ -115,10 +132,10 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
           <div className="p-4">
             {tab === 'overview' && <OverviewTab word={word} settings={settings} />}
             {tab === 'etymology' && settings.showEtymology && (
-              <EtymologyTree word={word} knownLanguages={settings.knownLanguages} targetLanguage={settings.targetLanguage} />
+              <EtymologyTree word={word} knownLanguages={settings.knownLanguages} targetLanguages={settings.targetLanguages} />
             )}
             {tab === 'regional' && settings.showRegional && (
-              <RegionalVariants word={word} knownLanguages={settings.knownLanguages} targetLanguage={settings.targetLanguage} />
+              <RegionalVariants word={word} knownLanguages={settings.knownLanguages} targetLanguages={settings.targetLanguages} />
             )}
           </div>
 
@@ -136,14 +153,14 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
 
 function OverviewTab({ word, settings }: { word: WordEntry; settings: Settings }) {
   const t = useT()
-  const relevantLangCodes = [...new Set([...settings.knownLanguages, settings.targetLanguage])]
+  const relevantLangCodes = [...new Set([...settings.knownLanguages, ...settings.targetLanguages])]
   const entries = word.languages.filter(e => relevantLangCodes.includes(e.langCode) && e.langCode !== 'la')
 
   return (
     <div className="space-y-2">
       {entries.map(entry => {
         const lang = LANGUAGES.find(l => l.code === entry.langCode)
-        const isTarget = entry.langCode === settings.targetLanguage
+        const isTarget = settings.targetLanguages.includes(entry.langCode)
         if (!lang) return null
         return (
           <div

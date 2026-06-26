@@ -164,7 +164,7 @@ export function SemanticMap({ words, settings }: Props) {
             if (!pos) return null
             const color = CATEGORY_COLORS[word.category] ?? '#6366F1'
             const isSelected = selectedId === word.id
-            const targetEntry = word.languages.find(e => e.langCode === settings.targetLanguage)
+            const targetEntry = word.languages.find(e => settings.targetLanguages.includes(e.langCode))
             const cognateStrength = targetEntry?.cognateStrength
 
             const cognateColor =

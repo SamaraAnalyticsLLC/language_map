@@ -3,7 +3,7 @@ import { useT } from '../hooks/useTranslation'
 
 interface Props {
   knownLanguages: string[]
-  targetLanguage: string
+  targetLanguages: string[]
 }
 
 // Positions on a simplified language family tree (SVG coordinate space 0-600 x 0-340)
@@ -29,7 +29,7 @@ const TREE_EDGES = [
   ['de', 'en'], ['de', 'nl'],
 ]
 
-export function LanguageMap({ knownLanguages, targetLanguage }: Props) {
+export function LanguageMap({ knownLanguages, targetLanguages }: Props) {
   const t = useT()
   return (
     <div className="relative bg-slate-900/60 rounded-2xl border border-slate-700/60 overflow-hidden">
@@ -49,8 +49,8 @@ export function LanguageMap({ knownLanguages, targetLanguage }: Props) {
           const b = LANG_POSITIONS[to]
           if (!a || !b) return null
           const isRelevant =
-            (knownLanguages.includes(from) || from === targetLanguage || from === 'la') &&
-            (knownLanguages.includes(to) || to === targetLanguage || to === 'la')
+            (knownLanguages.includes(from) || targetLanguages.includes(from) || from === 'la') &&
+            (knownLanguages.includes(to) || targetLanguages.includes(to) || to === 'la')
           return (
             <line
               key={`${from}-${to}`}
@@ -66,7 +66,7 @@ export function LanguageMap({ knownLanguages, targetLanguage }: Props) {
         {LANGUAGES.map(lang => {
           const pos = LANG_POSITIONS[lang.code]
           if (!pos) return null
-          const isTarget = lang.code === targetLanguage
+          const isTarget = targetLanguages.includes(lang.code)
           const isKnown = knownLanguages.includes(lang.code)
           const isLatin = lang.code === 'la'
           const isActive = isTarget || isKnown || isLatin

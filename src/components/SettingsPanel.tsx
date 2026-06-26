@@ -3,14 +3,14 @@ import type { Settings } from '../hooks/useSettings'
 
 interface Props {
   settings: Settings
-  onToggle: (key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguage'>) => void
+  onToggle: (key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguages'>) => void
 }
 
 export function SettingsPanel({ settings, onToggle }: Props) {
   const t = useT()
 
   const TOGGLES: Array<{
-    key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguage'>
+    key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguages'>
     label: string
     description: string
   }> = [

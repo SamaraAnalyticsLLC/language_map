@@ -4,11 +4,11 @@ import { LANGUAGES } from '../data/languages'
 interface Props {
   word: WordEntry
   knownLanguages: string[]
-  targetLanguage: string
+  targetLanguages: string[]
 }
 
-export function EtymologyTree({ word, knownLanguages, targetLanguage }: Props) {
-  const allLangCodes = [...new Set([...knownLanguages, targetLanguage, 'la'])]
+export function EtymologyTree({ word, knownLanguages, targetLanguages }: Props) {
+  const allLangCodes = [...new Set([...knownLanguages, ...targetLanguages, 'la'])]
   const relevantEntries = word.languages.filter(e => allLangCodes.includes(e.langCode))
 
   const getLang = (code: string) => LANGUAGES.find(l => l.code === code)
@@ -74,7 +74,7 @@ export function EtymologyTree({ word, knownLanguages, targetLanguage }: Props) {
           {otherEntries.map(entry => {
             const lang = getLang(entry.langCode)
             if (!lang) return null
-            const isTarget = entry.langCode === targetLanguage
+            const isTarget = targetLanguages.includes(entry.langCode)
             const isKnown = knownLanguages.includes(entry.langCode)
             const isFalseFriend = entry.cognateStrength === 'false-friend'
 

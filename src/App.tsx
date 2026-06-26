@@ -14,14 +14,14 @@ type AppMode = 'explore' | 'quiz' | 'map'
 
 // Outer shell: sets up the translation context
 export default function App() {
-  const { settings, setUILanguage, toggleKnownLanguage, setTargetLanguage, toggleSetting } = useSettings()
+  const { settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting } = useSettings()
   return (
     <TranslationProvider lang={settings.uiLanguage}>
       <AppInner
         settings={settings}
         setUILanguage={setUILanguage}
         toggleKnownLanguage={toggleKnownLanguage}
-        setTargetLanguage={setTargetLanguage}
+        toggleTargetLanguage={toggleTargetLanguage}
         toggleSetting={toggleSetting}
       />
     </TranslationProvider>
@@ -30,7 +30,7 @@ export default function App() {
 
 type SettingsActions = Omit<ReturnType<typeof useSettings>, 'settings'>
 
-function AppInner({ settings, setUILanguage, toggleKnownLanguage, setTargetLanguage, toggleSetting }: { settings: ReturnType<typeof useSettings>['settings'] } & SettingsActions) {
+function AppInner({ settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting }: { settings: ReturnType<typeof useSettings>['settings'] } & SettingsActions) {
   const t = useT()
   const [showSetup, setShowSetup] = useState(true)
   const [expandedWord, setExpandedWord] = useState<string | null>(null)
@@ -38,7 +38,7 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, setTargetLangu
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [appMode, setAppMode] = useState<AppMode>('explore')
 
-  const targetLang = LANGUAGES.find(l => l.code === settings.targetLanguage)
+  const targetLangs = LANGUAGES.filter(l => settings.targetLanguages.includes(l.code))
 
   const q = search.toLowerCase().trim()
 
@@ -89,7 +89,7 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, setTargetLangu
           settings={settings}
           onSetUILanguage={setUILanguage}
           onToggleKnown={toggleKnownLanguage}
-          onSetTarget={setTargetLanguage}
+          onToggleTarget={toggleTargetLanguage}
           onClose={() => setShowSetup(false)}
         />
       )}
@@ -139,11 +139,17 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, setTargetLangu
           )}
 
           <div className="flex items-center gap-2 ml-auto">
-            {targetLang && (
+            {targetLangs.length > 0 && (
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 rounded-lg text-sm border border-slate-700/50">
                 <span>{t.learning_label}</span>
-                <span>{targetLang.flag}</span>
-                <span className="font-semibold" style={{ color: targetLang.color }}>{targetLang.nativeName}</span>
+                {targetLangs.map(lang => (
+                  <span key={lang.code} title={lang.nativeName} className="flex items-center gap-0.5">
+                    <span>{lang.flag}</span>
+                    {targetLangs.length === 1 && (
+                      <span className="font-semibold" style={{ color: lang.color }}>{lang.nativeName}</span>
+                    )}
+                  </span>
+                ))}
               </div>
             )}
             <button
@@ -221,7 +227,7 @@ function AppInner({ settings, setUILanguage, toggleKnownLanguage, setTargetLangu
           <aside className="w-64 shrink-0 space-y-4 hidden lg:block">
             <LanguageMap
               knownLanguages={settings.knownLanguages}
-              targetLanguage={settings.targetLanguage}
+              targetLanguages={settings.targetLanguages}
             />
             <SettingsPanel settings={settings} onToggle={toggleSetting} />
             <div className="bg-slate-900/60 rounded-2xl border border-slate-700/60 p-4">

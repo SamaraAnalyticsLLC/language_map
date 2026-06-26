@@ -4,7 +4,7 @@ import type { UILang } from '../data/translations'
 export interface Settings {
   uiLanguage: UILang
   knownLanguages: string[]
-  targetLanguage: string
+  targetLanguages: string[]
   showEtymology: boolean
   showContext: boolean
   showRegional: boolean
@@ -16,7 +16,7 @@ export interface Settings {
 const DEFAULT_SETTINGS: Settings = {
   uiLanguage: 'en',
   knownLanguages: ['en'],
-  targetLanguage: 'it',
+  targetLanguages: ['it'],
   showEtymology: true,
   showContext: true,
   showRegional: true,
@@ -31,8 +31,12 @@ function loadSettings(): Settings {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return DEFAULT_SETTINGS
-    const parsed = JSON.parse(raw) as Partial<Settings>
-    return { ...DEFAULT_SETTINGS, ...parsed }
+    const parsed = JSON.parse(raw) as Record<string, unknown>
+    // Migrate old single targetLanguage to array
+    if (typeof parsed.targetLanguage === 'string' && !parsed.targetLanguages) {
+      parsed.targetLanguages = [parsed.targetLanguage]
+    }
+    return { ...DEFAULT_SETTINGS, ...parsed } as Settings
   } catch {
     return DEFAULT_SETTINGS
   }
@@ -68,8 +72,8 @@ export function useSettings() {
 
   const toggleKnownLanguage = (code: string) => {
     setSettings(s => {
-      // Cannot add a language that is already the target
-      if (code === s.targetLanguage) return s
+      // Cannot add a language that is already a target
+      if (s.targetLanguages.includes(code)) return s
       return {
         ...s,
         knownLanguages: s.knownLanguages.includes(code)
@@ -79,18 +83,25 @@ export function useSettings() {
     })
   }
 
-  const setTargetLanguage = (code: string) => {
-    setSettings(s => ({
-      ...s,
-      targetLanguage: code,
-      // Remove from known if it was there
-      knownLanguages: s.knownLanguages.filter(l => l !== code),
-    }))
+  const toggleTargetLanguage = (code: string) => {
+    setSettings(s => {
+      // Cannot target a known language
+      if (s.knownLanguages.includes(code)) return s
+      const isCurrentlyTarget = s.targetLanguages.includes(code)
+      // Must keep at least one target
+      if (isCurrentlyTarget && s.targetLanguages.length === 1) return s
+      return {
+        ...s,
+        targetLanguages: isCurrentlyTarget
+          ? s.targetLanguages.filter(l => l !== code)
+          : [...s.targetLanguages, code],
+      }
+    })
   }
 
-  const toggleSetting = (key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguage'>) => {
+  const toggleSetting = (key: keyof Omit<Settings, 'uiLanguage' | 'knownLanguages' | 'targetLanguages'>) => {
     setSettings(s => ({ ...s, [key]: !s[key] }))
   }
 
-  return { settings, setUILanguage, toggleKnownLanguage, setTargetLanguage, toggleSetting }
+  return { settings, setUILanguage, toggleKnownLanguage, toggleTargetLanguage, toggleSetting }
 }

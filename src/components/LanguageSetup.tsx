@@ -11,17 +11,15 @@ interface Props {
   settings: Settings
   onSetUILanguage: (code: UILang) => void
   onToggleKnown: (code: string) => void
-  onSetTarget: (code: string) => void
+  onToggleTarget: (code: string) => void
   onClose: () => void
 }
 
-export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onSetTarget, onClose }: Props) {
+export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onToggleTarget, onClose }: Props) {
   const [step, setStep] = useState(0)
-  // Use the translation for the currently-selected UI language so the modal
-  // updates in real time as the user picks a different UI language on step 0.
   const t = useT()
 
-  const canClose = settings.knownLanguages.length > 0
+  const canClose = settings.knownLanguages.length > 0 && settings.targetLanguages.length > 0
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -41,7 +39,6 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onSetT
                   const lang = KNOWN_LANGUAGES.find(l => l.code === code)
                   if (!lang) return null
                   const isSelected = settings.uiLanguage === code
-                  // Show the language name in that language itself
                   const nativeT = TRANSLATIONS[code]
                   return (
                     <button
@@ -89,13 +86,13 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onSetT
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {KNOWN_LANGUAGES.map(lang => {
                   const isSelected = settings.knownLanguages.includes(lang.code)
-                  const isTarget = lang.code === settings.targetLanguage
+                  const isTarget = settings.targetLanguages.includes(lang.code)
                   return (
                     <button
                       key={lang.code}
                       onClick={() => !isTarget && onToggleKnown(lang.code)}
                       disabled={isTarget}
-                      title={isTarget ? (t.target_title) : undefined}
+                      title={isTarget ? t.target_title : undefined}
                       className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-all ${
                         isTarget
                           ? 'border-slate-700 text-slate-600 cursor-not-allowed opacity-40'
@@ -132,7 +129,7 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onSetT
           </>
         )}
 
-        {/* Step 2 — Target language */}
+        {/* Step 2 — Target languages (multi-select) */}
         {step === 2 && (
           <>
             <div className="p-6 border-b border-slate-700">
@@ -145,14 +142,15 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onSetT
             <div className="p-6">
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {LEARNABLE_LANGUAGES.map(lang => {
-                  const isSelected = settings.targetLanguage === lang.code
+                  const isSelected = settings.targetLanguages.includes(lang.code)
                   const isKnown = settings.knownLanguages.includes(lang.code)
+                  const isLastTarget = isSelected && settings.targetLanguages.length === 1
                   return (
                     <button
                       key={lang.code}
-                      onClick={() => !isKnown && onSetTarget(lang.code)}
-                      disabled={isKnown}
-                      title={isKnown ? t.known_title : undefined}
+                      onClick={() => !isKnown && onToggleTarget(lang.code)}
+                      disabled={isKnown || isLastTarget}
+                      title={isKnown ? t.known_title : isLastTarget ? 'At least one target required' : undefined}
                       className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-all ${
                         isKnown
                           ? 'border-slate-700 text-slate-600 cursor-not-allowed opacity-40'
@@ -170,6 +168,11 @@ export function LanguageSetup({ settings, onSetUILanguage, onToggleKnown, onSetT
                   )
                 })}
               </div>
+              {settings.targetLanguages.length > 1 && (
+                <p className="text-xs text-indigo-400 mt-3 text-center">
+                  {settings.targetLanguages.length} languages selected
+                </p>
+              )}
             </div>
             <div className="p-6 border-t border-slate-700 flex justify-between">
               <button
