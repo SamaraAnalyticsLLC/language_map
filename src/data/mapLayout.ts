@@ -109,6 +109,13 @@ export const NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   // Abstract / Language — center top
   name:     { x: 280, y: 110 },
   language: { x: 330, y: 60  },
+
+  // Batch 2 additions
+  flower:   { x: 75,  y: 160 },
+  stone:    { x: 130, y: 290 },
+  salt:     { x: 630, y: 540 },
+  old:      { x: 560, y: 210 },
+  city:     { x: 690, y: 280 },
 }
 
 export const ETYMOLOGY_EDGES: Array<{ source: string; target: string; strength: 'strong' | 'medium' | 'weak' }> = [
@@ -202,4 +209,23 @@ export const ETYMOLOGY_EDGES: Array<{ source: string; target: string; strength: 
   { source: 'name', target: 'know', strength: 'medium' },
   { source: 'language', target: 'book', strength: 'medium' },
   { source: 'language', target: 'school', strength: 'medium' },
+  // Batch 2 — flower / stone / salt / old / city
+  { source: 'flower', target: 'water', strength: 'medium' },
+  { source: 'flower', target: 'sun', strength: 'medium' },
+  { source: 'stone', target: 'water', strength: 'weak' },
+  { source: 'stone', target: 'fire', strength: 'weak' },
+  { source: 'stone', target: 'house', strength: 'medium' },
+  { source: 'stone', target: 'road', strength: 'medium' },
+  { source: 'salt', target: 'water', strength: 'medium' },
+  { source: 'salt', target: 'sea', strength: 'strong' },
+  { source: 'salt', target: 'fish', strength: 'strong' },
+  { source: 'salt', target: 'bread', strength: 'medium' },
+  { source: 'old', target: 'time', strength: 'strong' },
+  { source: 'old', target: 'year', strength: 'medium' },
+  { source: 'old', target: 'new', strength: 'medium' },
+  { source: 'city', target: 'house', strength: 'strong' },
+  { source: 'city', target: 'road', strength: 'strong' },
+  { source: 'city', target: 'school', strength: 'medium' },
+  { source: 'city', target: 'friend', strength: 'weak' },
+  { source: 'city', target: 'big', strength: 'medium' },
 ]
