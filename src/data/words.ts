@@ -37,6 +37,7 @@ export interface WordEntry {
   languages: LanguageEntry[]
   semanticField: string[]
   funFact?: string
+  funFactFr?: string
 }
 
 export const WORD_ENTRIES: WordEntry[] = [
@@ -67,6 +68,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'nature', 'daily-life'],
     funFact: 'The word "nocturnal" in English comes directly from Latin *nocturnalis*, showing how Latin roots persist in scientific vocabulary across languages.',
+    funFactFr: 'Le mot anglais « nocturnal » vient directement du latin *nocturnalis*, illustrant comment les racines latines perdurent dans le vocabulaire scientifique à travers les langues.',
   },
   {
     id: 'day',
@@ -94,6 +96,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'nature', 'daily-life'],
     funFact: 'Spanish "día" and Italian "giorno" both come from Latin "dies", but via different paths. Italian took the adjective form "diurnum" → "giorno", while Spanish kept the root directly.',
+    funFactFr: 'L\'espagnol *día* et l\'italien *giorno* viennent tous deux du latin *dies*, mais par des chemins différents. L\'italien a pris la forme adjectivale *diurnum* → *giorno*, tandis que l\'espagnol a conservé la racine directement.',
   },
   {
     id: 'sun',
@@ -118,6 +121,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'astronomy', 'weather'],
     funFact: 'French "soleil" is a diminutive — it literally meant "little sun." Solar, solstice, parasol — all from the same Latin root *sol*.',
+    funFactFr: 'Le mot français *soleil* est un diminutif — il signifiait littéralement « petit soleil ». Solaire, solstice, parasol… tous viennent de la même racine latine *sol*.',
   },
   {
     id: 'moon',
@@ -141,6 +145,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'astronomy', 'time'],
     funFact: '"Lunatic," "lunacy," and "lunar" all come from Latin *luna* — the ancients believed the moon influenced the mind. Romanian *lună* uniquely means both moon and month.',
+    funFactFr: '« Lunatique », « lunaire » et *lunacy* viennent tous du latin *luna* — les Anciens croyaient que la lune influençait l\'esprit. Le roumain *lună* a la particularité de signifier à la fois lune et mois.',
   },
   {
     id: 'water',
@@ -168,6 +173,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'elements', 'daily-life'],
     funFact: 'French "eau" descended from Latin "aqua" through: *aqua → aiga → eaue → eau*. The spelling "eau" preserves the medieval pronunciation!',
+    funFactFr: 'Le mot *eau* descend du latin *aqua* par étapes : *aqua → aiga → eaue → eau*. L\'orthographe « eau » conserve la prononciation médiévale !',
   },
   {
     id: 'fire',
@@ -191,6 +197,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'elements', 'daily-life'],
     funFact: 'All Romance languages chose Latin *focus* (hearth/fireplace) over the classical *ignis* (fire) — a domestic word beat the poetic one. English "focus" is a learned borrowing from Latin, originally meaning "hearth."',
+    funFactFr: 'Toutes les langues romanes ont choisi le latin *focus* (foyer) plutôt que le classique *ignis* (feu) — un mot domestique l\'a emporté sur le mot poétique. L\'anglais *focus* est un emprunt savant au latin, signifiant à l\'origine « foyer ».',
   },
 
   // ── BODY ──────────────────────────────────────────────────────────────────
@@ -219,6 +226,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'emotions', 'anatomy'],
     funFact: '"Cordial," "accord," "discord," and "courage" all come from Latin *cor/cordis*. In French, *coeur* lives on in "par coeur" (by heart = memorized).',
+    funFactFr: '« Cordial », « accord », « discorde » et « courage » viennent tous du latin *cor/cordis*. En français, *cœur* survit dans l\'expression « par cœur » (mémorisé).',
   },
   {
     id: 'hand',
@@ -245,6 +253,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy'],
     funFact: 'Latin *manus* gave us: manual, manuscript, manufacture, manipulate, manicure, mandate — and the Italian greeting "ciao" likely has roots in *schiavo* (slave, servant) meaning "I am your servant," not from *manus* itself.',
+    funFactFr: 'Le latin *manus* nous a donné : manuel, manuscrit, manufacture, manipuler, manucure, mandat… La salutation italienne *ciao* vient probablement de *schiavo* (esclave, serviteur), signifiant « je suis votre serviteur », et non de *manus*.',
   },
   {
     id: 'eye',
@@ -268,6 +277,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy', 'senses'],
     funFact: 'French has a unique irregular plural: *œil* (eye) → *yeux* (eyes) — completely different stems! This is called suppletion, the same phenomenon as English "go/went."',
+    funFactFr: 'Le français possède un pluriel irrégulier unique : *œil* → *yeux* — deux radicaux totalement différents ! On appelle ce phénomène la supplétivité, comme en anglais avec *go/went*.',
   },
   {
     id: 'mouth',
@@ -290,6 +300,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy', 'senses'],
     funFact: 'All main Romance languages replaced the classical Latin *os/oris* (mouth) with the vulgar *bucca* (puffed cheek). English "oral" and "orifice" preserve the classical root.',
+    funFactFr: 'Toutes les grandes langues romanes ont remplacé le latin classique *os/oris* (bouche) par le latin vulgaire *bucca* (joue gonflée). L\'anglais *oral* et *orifice* préservent la racine classique.',
   },
 
   // ── NUMBERS ───────────────────────────────────────────────────────────────
@@ -314,6 +325,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['numbers', 'abstract'],
     funFact: '"Unique," "union," "universe," "unanimous" — all from Latin *unus*. English "one" and German "ein" are cousins through Proto-Germanic *ainaz.',
+    funFactFr: '« Unique », « union », « univers », « unanime » — tous viennent du latin *unus*. L\'anglais *one* et l\'allemand *ein* sont cousins par le proto-germanique *ainaz*.',
   },
   {
     id: 'two',
@@ -338,6 +350,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['numbers', 'abstract'],
     funFact: '"Duo," "dual," "double," "doubt" (< Latin *dubitare*, to have two minds), "duel," "dozen" (< *duodecim*, twelve) — all from Latin *duo*.',
+    funFactFr: '« Duo », « duel », « double », « doute » (< latin *dubitare*, avoir deux esprits), « douzaine » (< *duodecim*, douze) — tous viennent du latin *duo*.',
   },
   {
     id: 'three',
@@ -362,6 +375,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['numbers', 'abstract'],
     funFact: 'Numbers are uniquely resistant to borrowing — they often show the clearest Indo-European connections. Italian *tre*, French *trois*, English *three*, German *drei*, Sanskrit *trīṇi* — all cousins.',
+    funFactFr: 'Les nombres résistent particulièrement bien aux emprunts — ils révèlent souvent les connexions indo-européennes les plus claires. Italien *tre*, français *trois*, anglais *three*, allemand *drei*, sanskrit *trīṇi* — tous cousins.',
   },
 
   // ── COLORS ────────────────────────────────────────────────────────────────
@@ -387,6 +401,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'abstract'],
     funFact: 'Portuguese "vermelho" (red) comes from Latin *vermiculus*, meaning "little worm" — specifically the kermes insect used to make crimson dye. English "vermilion" comes from the same root!',
+    funFactFr: 'Le portugais *vermelho* (rouge) vient du latin *vermiculus*, « petit ver » — précisément l\'insecte kermès utilisé pour fabriquer le colorant cramoisi. L\'anglais *vermilion* vient de la même racine !',
   },
   {
     id: 'white',
@@ -410,6 +425,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'abstract'],
     funFact: 'Romance languages replaced the classical Latin *albus* with a Germanic loanword *blankaz* — yet Romanian kept *alb*. "Album" (white tablet), "albino," and "albumen" preserve the Latin root in English.',
+    funFactFr: 'Les langues romanes ont remplacé le latin classique *albus* par l\'emprunt germanique *blankaz* — sauf le roumain qui a gardé *alb*. En anglais, *album* (tablette blanche), *albinos* et *albumen* conservent la racine latine.',
   },
   {
     id: 'black',
@@ -436,6 +452,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'abstract'],
     funFact: 'Latin had two blacks: *niger* (shiny, like polished stone) gave us "Negro," "noir," "nero." The other, *ater* (dull, gloomy), gave us "atrocious" — a word that started meaning merely "black."',
+    funFactFr: 'Le latin avait deux mots pour le noir : *niger* (brillant, comme la pierre polie) a donné *noir*, *nero*… L\'autre, *ater* (mat, sombre), a donné « atroce » — un mot qui signifiait simplement « noir » à l\'origine.',
   },
 
   // ── FOOD & DRINK ──────────────────────────────────────────────────────────
@@ -460,6 +477,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'daily-life'],
     funFact: '"Company" comes from Latin *com* + *panis* — literally "with-bread," those you share bread with. A "companion" is your bread-sharer. "Pantry" also comes from *panis*.',
+    funFactFr: '« Compagnie » vient du latin *com* + *panis* — littéralement « avec-pain », ceux avec qui on partage le pain. Un « compagnon » est votre partageur de pain. « Panier » et « pantry » viennent aussi de *panis*.',
   },
   {
     id: 'wine',
@@ -486,6 +504,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'drinks', 'culture'],
     funFact: 'Unlike most words, "wine" / "Wein" in Germanic languages are actually Latin loans — the Romans spread viticulture northward, and the word came with the drink.',
+    funFactFr: 'Contrairement à la plupart des mots, *wine* / *Wein* dans les langues germaniques sont des emprunts au latin — les Romains ont propagé la viticulture vers le nord, et le mot est venu avec la boisson.',
   },
   {
     id: 'fish',
@@ -509,6 +528,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'nature', 'animals'],
     funFact: 'Spanish uniquely distinguishes *pez* (a living fish in the water) from *pescado* (a fish out of the water, caught or cooked). This live/dead distinction doesn\'t exist in other Romance languages.',
+    funFactFr: 'L\'espagnol distingue uniquement *pez* (un poisson vivant dans l\'eau) de *pescado* (un poisson hors de l\'eau, pêché ou cuisiné). Cette distinction vivant/mort n\'existe pas dans les autres langues romanes.',
   },
 
   // ── VERBS ─────────────────────────────────────────────────────────────────
@@ -536,6 +556,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'action', 'daily-life'],
     funFact: 'The vulgar Latin *manducare* gave us "mangiare", "manger", "mânca" — and also the English word "munch"! Spanish and Portuguese kept the more classical *comedere*.',
+    funFactFr: 'Le latin vulgaire *manducare* nous a donné *mangiare*, *manger*, *mânca* — et aussi le mot anglais *munch* (mâcher) ! L\'espagnol et le portugais ont conservé le plus classique *comedere*.',
   },
   {
     id: 'speak',
@@ -566,6 +587,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['communication', 'action', 'language'],
     funFact: 'Spanish "hablar" and Portuguese "falar" both descend from Latin "fabulare" (to tell fables). Italian and French use "parabolare" as their base. These two paths split early in the Romance world!',
+    funFactFr: 'L\'espagnol *hablar* et le portugais *falar* descendent tous deux du latin *fabulare* (raconter des fables). L\'italien et le français utilisent *parabolare* comme base. Ces deux chemins se sont séparés tôt dans le monde roman !',
   },
   {
     id: 'go',
