@@ -325,6 +325,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['numbers', 'abstract'],
     funFact: '"Unique," "union," "universe," "unanimous" — all from Latin *unus*. English "one" and German "ein" are cousins through Proto-Germanic *ainaz.',
+    funFactEs: '"Único", "unión", "universo", "unánime"… todas del latín *unus*. El inglés "one" y el alemán "ein" son primos a través del protogermánico *ainaz*.',
   },
   {
     id: 'two',
@@ -349,6 +350,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['numbers', 'abstract'],
     funFact: '"Duo," "dual," "double," "doubt" (< Latin *dubitare*, to have two minds), "duel," "dozen" (< *duodecim*, twelve) — all from Latin *duo*.',
+    funFactEs: '"Dúo", "dual", "doble", "duda" (< latín *dubitare*, tener dos mentes), "duelo", "docena" (< *duodecim*, doce)… todas del latín *duo*.',
   },
   {
     id: 'three',
@@ -373,6 +375,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['numbers', 'abstract'],
     funFact: 'Numbers are uniquely resistant to borrowing — they often show the clearest Indo-European connections. Italian *tre*, French *trois*, English *three*, German *drei*, Sanskrit *trīṇi* — all cousins.',
+    funFactEs: 'Los números son especialmente resistentes al préstamo lingüístico: son los que muestran con más claridad las conexiones indoeuropeas. Italiano *tre*, francés *trois*, inglés *three*, alemán *drei*, sánscrito *trīṇi*: todos primos.',
   },
 
   // ── COLORS ────────────────────────────────────────────────────────────────
@@ -398,6 +401,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'abstract'],
     funFact: 'Portuguese "vermelho" (red) comes from Latin *vermiculus*, meaning "little worm" — specifically the kermes insect used to make crimson dye. English "vermilion" comes from the same root!',
+    funFactEs: 'El portugués "vermelho" (rojo) proviene del latín *vermiculus*, que significa "gusanillo", concretamente el insecto quermes usado para fabricar tinte carmesí. ¡El inglés "vermilion" viene de la misma raíz!',
   },
   {
     id: 'white',
@@ -421,6 +425,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'abstract'],
     funFact: 'Romance languages replaced the classical Latin *albus* with a Germanic loanword *blankaz* — yet Romanian kept *alb*. "Album" (white tablet), "albino," and "albumen" preserve the Latin root in English.',
+    funFactEs: 'Las lenguas romances sustituyeron el latín clásico *albus* por un préstamo germánico *blankaz*, pero el rumano conservó *alb*. "Álbum" (tablilla blanca), "albino" y "albumen" preservan la raíz latina en inglés.',
   },
   {
     id: 'black',
@@ -447,6 +452,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'abstract'],
     funFact: 'Latin had two blacks: *niger* (shiny, like polished stone) gave us "Negro," "noir," "nero." The other, *ater* (dull, gloomy), gave us "atrocious" — a word that started meaning merely "black."',
+    funFactEs: 'El latín tenía dos negros: *niger* (brillante, como piedra pulida) nos dio "negro", "noir", "nero". El otro, *ater* (apagado, sombrío), nos dio "atroz": una palabra que en origen significaba simplemente "negro".',
   },
 
   // ── FOOD & DRINK ──────────────────────────────────────────────────────────
@@ -471,6 +477,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'daily-life'],
     funFact: '"Company" comes from Latin *com* + *panis* — literally "with-bread," those you share bread with. A "companion" is your bread-sharer. "Pantry" also comes from *panis*.',
+    funFactEs: '"Compañía" viene del latín *com* + *panis*: literalmente "con-pan", quienes comparten el pan contigo. Un "compañero" es quien parte el pan contigo. "Despensa" también proviene de *panis*.',
   },
   {
     id: 'wine',
@@ -497,6 +504,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'drinks', 'culture'],
     funFact: 'Unlike most words, "wine" / "Wein" in Germanic languages are actually Latin loans — the Romans spread viticulture northward, and the word came with the drink.',
+    funFactEs: 'A diferencia de la mayoría de las palabras, "wine" y "Wein" en las lenguas germánicas son en realidad préstamos del latín: los romanos extendieron la viticultura hacia el norte y la palabra viajó con la bebida.',
   },
   {
     id: 'fish',
@@ -520,6 +528,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'nature', 'animals'],
     funFact: 'Spanish uniquely distinguishes *pez* (a living fish in the water) from *pescado* (a fish out of the water, caught or cooked). This live/dead distinction doesn\'t exist in other Romance languages.',
+    funFactEs: 'El español distingue de forma única *pez* (el pez vivo en el agua) de *pescado* (el pez fuera del agua, capturado o cocinado). Esta distinción vivo/muerto no existe en otras lenguas romances.',
   },
 
   // ── VERBS ─────────────────────────────────────────────────────────────────
@@ -547,6 +556,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'action', 'daily-life'],
     funFact: 'The vulgar Latin *manducare* gave us "mangiare", "manger", "mânca" — and also the English word "munch"! Spanish and Portuguese kept the more classical *comedere*.',
+    funFactEs: 'El latín vulgar *manducare* nos dio "mangiare", "manger", "mânca"… ¡y también la palabra inglesa "munch"! El español y el portugués conservaron el más clásico *comedere*.',
   },
   {
     id: 'speak',
