@@ -733,6 +733,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['social', 'relationships', 'people'],
     funFact: 'Romanian uses "prieten" (from Slavic), not a Latin-derived word, showing how Romanian absorbed significant Slavic vocabulary despite being a Romance language.',
+    funFacts: { pt: 'O romeno usa "prieten" (de origem eslava) em vez de uma palavra latina, mostrando como o romeno absorveu vocabulário eslavo mesmo sendo uma língua românica. O português "amigo" vem diretamente do latim *amicus*, preservando a raiz intacta.' },
   },
   {
     id: 'mother',
@@ -768,6 +769,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['family', 'people', 'relationships'],
     funFact: '"Mother," "mutter," "madre," "mère," "mãe," "mater" — one of the most universally shared roots in Indo-European. Even the childlike "mama" (reduplication of *ma*) appears in virtually every language on Earth.',
+    funFacts: { pt: '"Mother", "Mutter", "madre", "mère", "mãe", "mater" — uma das raízes mais universalmente compartilhadas do indo-europeu. Até o infantil "mamã" (reduplicação de *ma*) aparece em praticamente todas as línguas da Terra. "Mãe" é a forma mais curta e afetiva que o português criou.' },
   },
   {
     id: 'child',
@@ -807,6 +809,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['family', 'people', 'age'],
     funFact: 'French kept the Latin "infans" → "enfant", while Spanish and Italian developed new words (niño, bambino). "Infant" in English is a Latin borrowing — showing how English often has both a Germanic word and a Latin formal synonym.',
+    funFacts: { pt: 'O francês manteve o latim "infans" → "enfant", enquanto o espanhol e o italiano criaram palavras novas (niño, bambino). O português "criança" vem do latim *creare* (criar, educar) — literalmente "a que está sendo criada". "Infante" existe em português mas é forma erudita ou histórica.' },
   },
 
   // ── ABSTRACT ──────────────────────────────────────────────────────────────
@@ -836,6 +839,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'abstract', 'weather'],
     funFact: 'In Italian, Spanish, Portuguese, and French, the same word means both "time" and "weather" — a fascinating polysemy from Latin *tempus*. Ask a Spanish speaker "¿Qué tiempo hace?" and they\'ll tell you the weather, not the hour!',
+    funFacts: { pt: 'Em português, espanhol, italiano e francês, a mesma palavra significa tanto "tempo" (duração) quanto "tempo" (clima) — uma polissemia fascinante herdada do latim *tempus*. Pergunte "Que tempo faz?" e ouvirá sobre o clima; "Que tempo leva?" e ouvirá sobre duração.' },
   },
   {
     id: 'love',
@@ -862,6 +866,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['emotions', 'relationships', 'abstract'],
     funFact: 'Romanian "dragoste" (love) is Slavic, while all other Romance languages kept the Latin "amor". Yet Romanian still uses "a iubi" (to love) from Slavic *ljubiti*.',
+    funFacts: { pt: 'O romeno "dragoste" (amor) é eslavo, enquanto as demais línguas românicas mantiveram o latim "amor". O português "amor" preserva a raiz latina de forma direta, e "amar", "amável", "amizade" e até "amante" derivam todos do mesmo *amare*.' },
   },
 
   // ── KNOWLEDGE & CULTURE ───────────────────────────────────────────────────
@@ -886,6 +891,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['knowledge', 'culture', 'objects'],
     funFact: '"Book" in English and German literally means "beech tree" — ancient Germanic peoples carved writing onto beech bark tablets! Meanwhile, Romance languages kept the Latin *liber* (possibly from the inner bark of a tree).',
+    funFacts: { pt: '"Book" em inglês e "Buch" em alemão significam literalmente "faia" — os germânicos antigos gravavam textos na casca dessa árvore! O português "livro" vem do latim *liber*, que também pode referir-se à entrecasca de árvore usada para escrever. Dois povos, a mesma casca de árvore.' },
   },
   {
     id: 'school',
@@ -908,6 +914,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['knowledge', 'culture', 'education'],
     funFact: 'The Greek *σχολή* originally meant "leisure" or "free time" — school was what educated people did with their free time! The concept of school as a place of learning came later.',
+    funFacts: { pt: 'O grego *σχολή* significava originalmente "lazer" ou "tempo livre" — a escola era o que pessoas educadas faziam com seu tempo livre! O português "escola" herdou essa palavra via latim *schola*, perdendo a conotação de ócio pelo caminho.' },
   },
 
   // ── HOUSE & DAILY LIFE ────────────────────────────────────────────────────
@@ -935,6 +942,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['home', 'architecture', 'daily-life'],
     funFact: 'French chose "maison" (from Latin *mansio*, a staying-place) while all other major Romance languages stuck with *casa*. This is why a French real-estate agent might confuse an Italian!',
+    funFacts: { pt: 'O francês escolheu "maison" (do latim *mansio*, lugar de parada) enquanto o português, espanhol e italiano ficaram com *casa*. "Casa" em português vem do latim vulgar *casa* (cabana, habitação simples) — mais humilde que o palácio romano, mas que venceu na língua popular.' },
   },
   {
     id: 'door',
@@ -959,6 +967,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['home', 'architecture', 'daily-life'],
     funFact: 'January (*Ianuarius*) is named after Janus, the Roman god of doors and beginnings — *ianua* (house door) was his symbol. He looked both ways: the old year and the new.',
+    funFacts: { pt: 'Janeiro (*Ianuarius*) recebeu o nome de Jano, deus romano das portas e dos começos — *ianua* (porta de casa) era seu símbolo. Ele olhava para os dois lados. O português "porta" vem de *porta* (portão, entrada), parente de *ianua* na mesma família semântica.' },
   },
 
   // ── CALENDAR ──────────────────────────────────────────────────────────────
@@ -987,6 +996,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'calendar', 'astronomy'],
     funFact: 'Romanian "lună" means BOTH "moon" AND "month." In English, "month" and "moon" are related. In French, "lune" (moon) and "mois" (month) split into two words.',
+    funFacts: { pt: 'O romeno "lună" significa tanto "lua" quanto "mês". Em português, "lua" e "mês" são palavras distintas — "mês" vem do latim *mensis*, enquanto "lua" vem de *luna*. O inglês "month" e "moon" também compartilham a mesma raiz germânica.' },
   },
   {
     id: 'year',
@@ -1010,6 +1020,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'calendar'],
     funFact: 'French uses two words for year: *an* (a counted year: "Il a 30 ans") and *année* (a lived year: "Bonne année!"). Spanish used to have the same distinction (*año* vs *año*) but merged them.',
+    funFacts: { pt: 'O francês distingue *an* (ano contado: "il a 30 ans") de *année* (ano vivido: "Bonne année!"). O português usa apenas "ano" para os dois sentidos — do latim *annus* — mas preserva a nuance na frase: "tem 30 anos" vs. "Feliz Ano Novo!".' },
   },
 
   // ── ANIMALS ───────────────────────────────────────────────────────────────
@@ -1040,6 +1051,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['animals', 'daily-life'],
     funFact: 'Brazilian Portuguese uses "cachorro" (puppy) where European Portuguese uses "cão" (from Latin *canis*). Spanish "perro" has no clear Latin etymology — it may be pre-Roman Iberian. English "dog" is also of mysterious origin; "hound" (from *hundaz*) is the true Germanic cousin of Latin *canis*.',
+    funFacts: { pt: 'O português brasileiro usa "cachorro" (originalmente "filhote") onde o português europeu prefere "cão" (do latim *canis*). É uma das diferenças mais marcantes entre as duas variantes. "Cão" e "canino" compartilham a raiz latina; "cachorro" vem do árabe *qašur* via espanhol antigo.' },
   },
   {
     id: 'cat',
@@ -1064,6 +1076,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['animals', 'daily-life'],
     funFact: '"Cat" in English, "gato" in Spanish/Portuguese, "gatto" in Italian, "chat" in French — all from the same Late Latin *cattus*, which was itself borrowed from Afroasiatic (possibly Nubian *kadīs*). The domestic cat spread from Egypt and its word travelled with it.',
+    funFacts: { pt: '"Cat" em inglês, "gato" em português e espanhol, "gatto" em italiano, "chat" em francês — todos do latim tardio *cattus*, ele próprio emprestado do afroasiático (possivelmente núbio *kadīs*). O gato doméstico se espalhou do Egito e a palavra viajou junto com ele.' },
   },
   {
     id: 'bird',
@@ -1089,6 +1102,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['animals', 'nature'],
     funFact: 'French "oiseau" (bird) came from Latin *avicellus* (little bird, diminutive of *avis*) through so many sound changes it no longer resembles "avis" at all. English "aviary," "aviation," and "aviator" all preserve the original Latin root.',
+    funFacts: { pt: 'O francês "oiseau" veio do latim *avicellus* (passarinho, diminutivo de *avis*) por tantas mudanças sonoras que não se parece mais com *avis*. O português "ave" é uma das formas mais próximas do latim original — "aviário", "aviação" e "aviador" preservam a mesma raiz.' },
   },
 
   // ── ADJECTIVES ────────────────────────────────────────────────────────────
@@ -1119,6 +1133,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['adjectives', 'abstract'],
     funFact: 'Romanian "mare" means both "big" AND "sea" (from Latin *mare*). It\'s a coincidence that two different Latin words (*marem* and *mare*) merged in Romanian. English "grand," "magnitude," and "magnificent" preserve Latin *magnus*.',
+    funFacts: { pt: 'O romeno "mare" significa tanto "grande" quanto "mar" — dois latins distintos (*marem* e *mare*) que fundiram no romeno. O português usa "grande" (do latim *grandis*) e "mar" (do latim *mare*) separados, evitando essa ambiguidade curiosa.' },
   },
   {
     id: 'good',
@@ -1150,6 +1165,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['adjectives', 'abstract', 'emotions'],
     funFact: '"Bonus," "bonbon," "bona fide," "bonanza" — all from Latin *bonus*. The Italian greeting "buongiorno" is literally "good day." Galician "bo" is the closest to the original Latin form.',
+    funFacts: { pt: '"Bônus", "bonbon", "bona fide", "bonança" — todos do latim *bonus*. O português "bom" e "boa" são das formas mais diretas: "bom dia" é literalmente *bonus dies*. "Bonança" — tempo calmo no mar — veio para o inglês via português dos navegadores.' },
   },
   {
     id: 'new',
@@ -1177,6 +1193,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['adjectives', 'abstract'],
     funFact: '"Novel," "novelty," "innovate," "renovate," "Nova Scotia" (New Scotland) — all from Latin *novus*. "November" was the ninth month (the *novem* = nine) in the original Roman calendar.',
+    funFacts: { pt: '"Novo", "novidade", "inovar", "renovar", "novembro" — todos do latim *novus*. O português "novo" é praticamente idêntico ao latim. "Novembro" era o nono mês (*novem* = nove) no calendário romano original, antes de julho e agosto serem inseridos em homenagem a Júlio César e Augusto.' },
   },
 
   // ── MORE VERBS ────────────────────────────────────────────────────────────
@@ -1207,6 +1224,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['action', 'emotions', 'abstract'],
     funFact: 'Spanish and Portuguese "querer" means BOTH "to want" AND "to love" — "te quiero" is a softer way to say "I love you." Italian "volere" and French "vouloir" kept the Latin *velle* root, while Spanish/Portuguese diverged to *quaerere* (to seek).',
+    funFacts: { pt: 'O português e o espanhol "querer" significa tanto "querer" quanto "amar" — "quero-te" é uma forma carinhosa de dizer "amo-te". Italiano e francês mantiveram a raiz latina *velle*, enquanto o ibérico divergiu para *quaerere* (buscar, procurar). Querer é, etimologicamente, buscar.' },
   },
   {
     id: 'come',
@@ -1236,6 +1254,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['action', 'movement'],
     funFact: '"Venture," "adventure," "avenue," "event," "invent," "prevent," "convention" — all from Latin *venire* (to come). An "event" is something that "comes out" (*ex* + *venire*).',
+    funFacts: { pt: '"Aventura", "avenida", "evento", "inventar", "prevenir", "convenção" — todos do latim *venire* (vir). O português "vir" é diretamente desse verbo. Um "evento" é algo que "vem para fora" (*ex* + *venire*), e "advento" é o "vir" de algo esperado.' },
   },
   {
     id: 'have',
@@ -1264,6 +1283,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['action', 'abstract'],
     funFact: 'Spanish and Portuguese both split "have" into two verbs: *haber/haver* (auxiliary for compound tenses) and *tener/ter* (to physically have). Brazilian Portuguese almost entirely dropped *haver* from everyday speech.',
+    funFacts: { pt: 'O português e o espanhol dividem "ter" em dois verbos: *haver* (auxiliar para tempos compostos) e *ter* (ter fisicamente). O português brasileiro quase abandonou *haver* na fala cotidiana — "tem gente" substitui "há gente" — uma das maiores divergências entre o PB e o PE.' },
   },
 
   // ── PLACE & MOVEMENT ──────────────────────────────────────────────────────
@@ -1291,6 +1311,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['place', 'movement', 'architecture'],
     funFact: 'The "Camino de Santiago" (Way of Saint James) uses Latin *via* → Spanish *camino*. Italian *strada* and German *Straße* are both from Latin *strata* — the Romans\' paved roads left their word across Europe.',
+    funFacts: { pt: 'O "Caminho de Santiago" usa o latim *via* → *camino* em espanhol; o português diz "caminho" da mesma raiz. Mas o português "estrada" vem de *strata* (via pavimentada) — a mesma raiz do italiano *strada* e do alemão *Straße*. Portugal, terra de caminhos e estradas romanas.' },
   },
   {
     id: 'sea',
@@ -1317,6 +1338,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'place', 'geography'],
     funFact: 'The Mediterranean is *Mare Medi Terra* — the sea in the middle of the land. Spanish "mar" is unique among nouns in being both masculine (*el mar abierto*) and feminine (*la mar brava*) depending on poetic/sailor tradition.',
+    funFacts: { pt: 'O Mediterrâneo é *Mare Medi Terra* — o mar no meio da terra. Em português, "mar" é masculino ("o mar"), mas a tradição marinheira usa o feminino afetivo — "a mar alta", "a mar brava" — assim como em espanhol. O país que navegou o mundo carrega o mar na própria língua.' },
   },
 
   // ── BODY (CONTINUED) ──────────────────────────────────────────────────────
@@ -1344,6 +1366,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy'],
     funFact: 'Italian and French both replaced classical *caput* with slang meaning "pot" or "jar" (*testa*). Romanian and Catalan kept "cap" from *caput*. "Captain," "capital," "chapter," "cape" (headland) all come from *caput* — the head as "the top."',
+    funFacts: { pt: 'Italiano e francês substituíram o clássico *caput* por uma gíria que significava "pote" (*testa*). O português "cabeça" vem de *capitia* (forma vulgar de *caput*) — mais próxima do original do que *testa*, mas já distante. "Capitão", "capital", "cabo" (ponta de terra) vêm todos de *caput*.' },
   },
   {
     id: 'foot',
@@ -1370,6 +1393,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy', 'movement'],
     funFact: '"Pedestrian," "pedal," "pedicure," "centipede," "expedition" (setting foot out), "impede" (catching the foot) — all from Latin *pes/pedis*. The measurement "foot" is literally named after the body part.',
+    funFacts: { pt: '"Pedestre", "pedal", "pedicure", "centopeias", "expedição" (pôr o pé para fora), "impedir" (prender o pé) — todos do latim *pes/pedis*. O português "pé" é uma das heranças mais curtas e diretas do latim, quase inalterada em dois mil anos.' },
   },
 
   // ── ABSTRACT / LANGUAGE ───────────────────────────────────────────────────
@@ -1399,6 +1423,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['language', 'abstract', 'identity'],
     funFact: '"Noun," "pronoun," "nominate," "nominal," "nomenclature," "anonymous" (without name), "synonym" (same name), "pseudonym" (false name) — all from Latin *nomen*. This is one of the most universally shared Indo-European roots.',
+    funFacts: { pt: '"Nome", "pronome", "nomear", "nominal", "nomenclatura", "anônimo" (sem nome), "sinônimo" (mesmo nome), "pseudônimo" (nome falso) — todos do latim *nomen*. O português "nome" é idêntico foneticamente ao proto-indo-europeu reconstruído *h₁nómn̥* — uma das raízes mais antigas preservadas.' },
   },
   {
     id: 'language',
@@ -1427,6 +1452,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['language', 'communication', 'abstract'],
     funFact: 'Occitan is sometimes called "la lenga d\'òc" — the language of "oc" (yes in Occitan). Northern France was "langue d\'oïl" (oïl = yes in Old French → oui). This "yes" word divided medieval France linguistically and gave "Languedoc" its name.',
+    funFacts: { pt: 'O occitano é chamado "la lenga d\'òc" — a língua do "oc" (sim em occitano). O norte da França era "langue d\'oïl" (→ oui). O português "língua" vem do latim *lingua* — e o próprio conceito de que uma língua pode ser definida pela palavra "sim" é fascinante para um povo que diz "sim" com tanto sotaque.' },
   },
 
   // ── BATCH 2 — DAILY ADDITIONS ─────────────────────────────────────────────
@@ -1460,6 +1486,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'plants', 'beauty'],
     funFact: 'Latin *flos* and Germanic *Blume* share the same PIE root *bʰleh₃-* ("to bloom"), yet they look completely different — the Latin branch preserved the initial *fl-*, while Germanic shifted it to *bl-*. Florence (*Firenze*) literally means "the flowering one".',
+    funFacts: { pt: 'O latim *flos* e o germânico *Blume* partilham a raiz PIE *bʰleh₃-* ("florescer"), mas parecem completamente diferentes. O português "flor" preservou o *fl-* latino. "Florença" (*Firenze*) significa literalmente "a que floresce" — e "florescer", "florir" e "floral" seguem a mesma raiz.' },
   },
   {
     id: 'stone',
@@ -1495,6 +1522,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'materials', 'elements'],
     funFact: 'The name *Peter* comes from Greek *Petros* ("rock"), itself from *petra*. Jesus said "upon this rock (petros) I will build my church" — making the apostle\'s name a pun. Meanwhile, "petroleum" literally means *petra* (rock) + *oleum* (oil): oil from rock.',
+    funFacts: { pt: 'O nome *Pedro* vem do grego *Petros* ("pedra"), de *petra*. Jesus disse "sobre esta pedra edificarei a minha igreja" — um trocadilho com o nome do apóstolo. "Petróleo" significa literalmente *petra* (pedra) + *oleum* (óleo): óleo da pedra. O português "pedra" conserva a raiz grega quase intacta.' },
   },
   {
     id: 'salt',
@@ -1522,6 +1550,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['food', 'cooking', 'nature', 'minerals'],
     funFact: 'Roman soldiers were sometimes paid in salt — or given an allowance to buy it — giving us the word *salary* (from Latin *salarium*). The phrase "worth his salt" comes from this practice. Salt was so valuable it was used as currency across ancient civilisations.',
+    funFacts: { pt: 'Os soldados romanos às vezes eram pagos em sal — ou recebiam uma verba para comprá-lo — dando origem à palavra "salário" (do latim *salarium*). O português "sal" e "salário" partilham a mesma raiz. O sal foi tão valioso que serviu de moeda em civilizações antigas.' },
   },
   {
     id: 'old',
@@ -1554,6 +1583,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'description', 'age'],
     funFact: 'Romanian distinguishes *bătrân* (old person, from Latin *veteranus* via a different path) and *vechi* (old thing, from Latin *vetulus*). Italian *vecchio* and Spanish *viejo* both come from *vetulus* (diminutive of *vetus*) — literally "a little old".',
+    funFacts: { pt: 'O romeno distingue *bătrân* (pessoa velha) e *vechi* (coisa velha). O português usa "velho" para ambos — do latim *vetulus*, diminutivo de *vetus* ("um tantinho velho"). "Veterano" e "vetusto" preservam a raiz mais formal *vetus* em português.' },
   },
   {
     id: 'city',
@@ -1589,6 +1619,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['places', 'society', 'daily life'],
     funFact: 'French uses *ville* for "city" (from Latin *villa*, a country estate — the irony!) and reserves *cité* for the historic old town or, in modern slang, a housing project. English *city* and French *cité* both come from *civitas*, but French preferred *villa* for everyday use, flipping its meaning from rural to urban.',
+    funFacts: { pt: 'O francês usa *ville* para "cidade" (do latim *villa*, uma propriedade rural — que ironia!) e reserva *cité* para a cidade histórica. O português "cidade" vem de *civitas* (comunidade de cidadãos) — mais fiel ao conceito cívico original do que o francês, que escolheu a palavra rural.' },
   },
 
   // ── BATCH 3 ────────────────────────────────────────────────────────────────
@@ -1622,6 +1653,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['colors', 'nature', 'description'],
     funFact: '"Verde" is almost perfectly preserved from Latin *viridis* across all five major Romance languages. The name "Cape Verde" (Cabo Verde) means "green cape" — the islands were named for the lush African coast. Latin *viridis* also gives us "virile" via a shared sense of vitality.',
+    funFacts: { pt: '"Verde" está quase perfeitamente preservado do latim *viridis* em todas as grandes línguas românicas. "Cabo Verde" significa "cabo verde" — as ilhas foram batizadas pela costa africana exuberante avistada pelos navegadores portugueses. O latim *viridis* também dá origem a "viril" pela ideia de vitalidade.' },
   },
   {
     id: 'sleep',
@@ -1653,6 +1685,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['verbs', 'body', 'daily life'],
     funFact: '"Dormire" is one of the most stable verbs across all Romance languages — it barely changed in 2,000 years. "Dormitory" comes from the same root. Latin had a separate word *somnus* (sleep as a noun → English "somnolent", "insomnia"), itself from PIE *swep-, while *dormire* (the verb "to sleep") has a disputed separate origin.',
+    funFacts: { pt: '"Dormir" é um dos verbos mais estáveis das línguas românicas — quase não mudou em 2.000 anos. "Dormitório" vem da mesma raiz. O latim tinha ainda *somnus* (sono como substantivo → "sonolento", "insônia" em português), enquanto *dormire* (o ato de dormir) tem origem distinta.' },
   },
   {
     id: 'rain',
@@ -1688,6 +1721,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'weather', 'elements'],
     funFact: 'Portuguese *chuva* diverged from the other Romance languages\' *pluvia*-forms because the Latin *pl-* cluster simplified differently in the Iberian west. Compare Spanish *lluvia* vs. Portuguese *chuva* — same Latin word, very different sound. The PIE root *plew-* also gives English "flow", "flood", and "fly".',
+    funFacts: { pt: 'O português *chuva* divergiu das formas *pluvia* das outras línguas românicas porque o grupo consonantal *pl-* simplificou de forma diferente no oeste ibérico. Compare o espanhol *lluvia* com o português *chuva* — a mesma palavra latina, sons muito distintos. Uma das marcas fonéticas mais características do português.' },
   },
   {
     id: 'father',
@@ -1722,6 +1756,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['family', 'people', 'relationships'],
     funFact: '"Father", "Vater", "père", "padre", "pai", and "pater" all come from the same PIE word *ph₂tḗr* — unchanged in meaning for over 6,000 years. Grimm\'s Law explains why Latin *p* became Germanic *f*: pater → father, piscis → fish, pes → foot. It\'s one of linguistics\' most elegant patterns.',
+    funFacts: { pt: '"Father", "Vater", "père", "padre", "pai" e "pater" vêm todos do PIE *ph₂tḗr* — sem mudança de significado há mais de 6.000 anos. A Lei de Grimm explica por que o latim *p* virou *f* germânico: *pater* → father, *piscis* → fish, *pes* → foot. O português "pai" é a forma mais curta desse ancestral universal.' },
   },
   {
     id: 'world',
@@ -1750,6 +1785,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['abstract', 'places', 'universe'],
     funFact: 'Romance languages all inherited Latin *mundus* for "world", but Romanian went its own way: *lume* (from Latin *lumen*, "light"). Dutch *wereld* is the closest living form to the original Proto-Germanic *weraldiz* ("age of man"). English "world" and German "Welt" are contractions of the same word, stripped of syllables over centuries.',
+    funFacts: { pt: 'As línguas românicas herdaram o latim *mundus* para "mundo", mas o romeno foi por outro caminho: *lume* (do latim *lumen*, "luz"). O português "mundo" preserva *mundus* fielmente — e os navegadores portugueses foram quem, literalmente, mapeou esse mundo para a Europa.' },
   },
 ]
 
