@@ -215,7 +215,7 @@ export function QuizMode({ words, settings }: Props) {
                 {/* Fun fact if any */}
                 {word.funFact && (
                   <div className="text-xs text-slate-500 leading-relaxed bg-slate-800/60 rounded-lg px-4 py-2 text-left">
-                    💡 {word.funFact}
+                    💡 {word.funFact?.[settings.uiLanguage] ?? word.funFact?.en}
                   </div>
                 )}
 

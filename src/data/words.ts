@@ -36,7 +36,7 @@ export interface WordEntry {
   etymology: EtymologyNode[]
   languages: LanguageEntry[]
   semanticField: string[]
-  funFact?: string
+  funFact?: Partial<Record<string, string>>
 }
 
 export const WORD_ENTRIES: WordEntry[] = [
@@ -66,7 +66,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Nacht', ipa: '/naxt/', register: 'neutral' }], cognateStrength: 'distant' },
     ],
     semanticField: ['time', 'nature', 'daily-life'],
-    funFact: 'The word "nocturnal" in English comes directly from Latin *nocturnalis*, showing how Latin roots persist in scientific vocabulary across languages.',
+    funFact: { en: 'The word "nocturnal" in English comes directly from Latin *nocturnalis*, showing how Latin roots persist in scientific vocabulary across languages.', it: 'La parola inglese "nocturnal" deriva direttamente dal latino *nocturnalis*, dimostrando come le radici latine sopravvivano nel vocabolario scientifico attraverso le lingue.' },
   },
   {
     id: 'day',
@@ -93,7 +93,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Tag', ipa: '/taːk/', context: 'From Proto-Germanic *dagaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['time', 'nature', 'daily-life'],
-    funFact: 'Spanish "día" and Italian "giorno" both come from Latin "dies", but via different paths. Italian took the adjective form "diurnum" → "giorno", while Spanish kept the root directly.',
+    funFact: { en: 'Spanish "día" and Italian "giorno" both come from Latin "dies", but via different paths. Italian took the adjective form "diurnum" → "giorno", while Spanish kept the root directly.', it: 'Lo spagnolo "día" e l'italiano "giorno" vengono entrambi dal latino "dies", ma attraverso percorsi diversi. L'italiano prese la forma aggettivale "diurnum" → "giorno", mentre lo spagnolo mantenne direttamente la radice.' },
   },
   {
     id: 'sun',
@@ -117,7 +117,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Sonne', ipa: '/ˈzɔ.nə/', context: 'From Proto-Germanic *sunnō' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'astronomy', 'weather'],
-    funFact: 'French "soleil" is a diminutive — it literally meant "little sun." Solar, solstice, parasol — all from the same Latin root *sol*.',
+    funFact: { en: 'French "soleil" is a diminutive — it literally meant "little sun." Solar, solstice, parasol — all from the same Latin root *sol*.', it: 'Il francese "soleil" è un diminutivo — significava letteralmente "piccolo sole". Solare, solstizio, parasole — tutti dalla stessa radice latina *sol*.' },
   },
   {
     id: 'moon',
@@ -140,7 +140,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Mond', ipa: '/mɔnt/', context: 'From Proto-Germanic *mēnô' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'astronomy', 'time'],
-    funFact: '"Lunatic," "lunacy," and "lunar" all come from Latin *luna* — the ancients believed the moon influenced the mind. Romanian *lună* uniquely means both moon and month.',
+    funFact: { en: '"Lunatic," "lunacy," and "lunar" all come from Latin *luna* — the ancients believed the moon influenced the mind. Romanian *lună* uniquely means both moon and month.', it: '"Lunatico", "lunare" e l'inglese "lunacy" vengono tutti dal latino *luna* — gli antichi credevano che la luna influenzasse la mente. Il romeno *lună* significa unicamente sia luna che mese.' },
   },
   {
     id: 'water',
@@ -167,7 +167,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Wasser', ipa: '/ˈvas.ɐ/', context: 'From Proto-Germanic' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'elements', 'daily-life'],
-    funFact: 'French "eau" descended from Latin "aqua" through: *aqua → aiga → eaue → eau*. The spelling "eau" preserves the medieval pronunciation!',
+    funFact: { en: 'French "eau" descended from Latin "aqua" through: *aqua → aiga → eaue → eau*. The spelling "eau" preserves the medieval pronunciation!', it: 'Il francese "eau" discende dal latino "aqua" attraverso: *aqua → aiga → eaue → eau*. La grafia "eau" conserva la pronuncia medievale!' },
   },
   {
     id: 'fire',
@@ -190,7 +190,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Feuer', ipa: '/ˈfɔʏ.ɐ/', context: 'From Proto-Germanic *fōr' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'elements', 'daily-life'],
-    funFact: 'All Romance languages chose Latin *focus* (hearth/fireplace) over the classical *ignis* (fire) — a domestic word beat the poetic one. English "focus" is a learned borrowing from Latin, originally meaning "hearth."',
+    funFact: { en: 'All Romance languages chose Latin *focus* (hearth/fireplace) over the classical *ignis* (fire) — a domestic word beat the poetic one. English "focus" is a learned borrowing from Latin, originally meaning "hearth."', it: 'Tutte le lingue romanze scelsero il latino *focus* (focolare) al posto del classico *ignis* (fuoco) — una parola domestica sconfisse quella poetica. L'inglese "focus" è un prestito dotto dal latino, che originariamente significava "focolare".' },
   },
 
   // ── BODY ──────────────────────────────────────────────────────────────────
@@ -218,7 +218,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Herz', ipa: '/hɛrts/', context: 'From Proto-Germanic *hertô' }], cognateStrength: 'distant' },
     ],
     semanticField: ['body', 'emotions', 'anatomy'],
-    funFact: '"Cordial," "accord," "discord," and "courage" all come from Latin *cor/cordis*. In French, *coeur* lives on in "par coeur" (by heart = memorized).',
+    funFact: { en: '"Cordial," "accord," "discord," and "courage" all come from Latin *cor/cordis*. In French, *coeur* lives on in "par coeur" (by heart = memorized).', it: '"Cordiale", "accordo", "discordia" e "coraggio" vengono tutti dal latino *cor/cordis*. In francese, *cœur* sopravvive nell'espressione "par cœur" (a memoria, letteralmente "di cuore").' },
   },
   {
     id: 'hand',
@@ -244,7 +244,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Hand', ipa: '/hant/', context: 'From Proto-Germanic *handuz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['body', 'anatomy'],
-    funFact: 'Latin *manus* gave us: manual, manuscript, manufacture, manipulate, manicure, mandate — and the Italian greeting "ciao" likely has roots in *schiavo* (slave, servant) meaning "I am your servant," not from *manus* itself.',
+    funFact: { en: 'Latin *manus* gave us: manual, manuscript, manufacture, manipulate, manicure, mandate — and the Italian greeting "ciao" likely has roots in *schiavo* (slave, servant) meaning "I am your servant," not from *manus* itself.', it: 'Il latino *manus* ci ha dato: manuale, manoscritto, manifattura, manipolare, manicure, mandato — e il saluto italiano "ciao" ha probabilmente radici in *schiavo* (servo), con il significato "sono il tuo servo", non da *manus* stesso.' },
   },
   {
     id: 'eye',
@@ -267,7 +267,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Auge', ipa: '/ˈaʊ.ɡə/', context: 'From Proto-Germanic *augô' }], cognateStrength: 'distant' },
     ],
     semanticField: ['body', 'anatomy', 'senses'],
-    funFact: 'French has a unique irregular plural: *œil* (eye) → *yeux* (eyes) — completely different stems! This is called suppletion, the same phenomenon as English "go/went."',
+    funFact: { en: 'French has a unique irregular plural: *œil* (eye) → *yeux* (eyes) — completely different stems! This is called suppletion, the same phenomenon as English "go/went."', it: 'Il francese ha un plurale irregolare unico: *œil* (occhio) → *yeux* (occhi) — radici completamente diverse! Questo fenomeno si chiama supplenza, lo stesso che in inglese con "go/went".' },
   },
   {
     id: 'mouth',
@@ -289,7 +289,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Mund', ipa: '/mʊnt/', context: 'From Proto-Germanic *munþaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['body', 'anatomy', 'senses'],
-    funFact: 'All main Romance languages replaced the classical Latin *os/oris* (mouth) with the vulgar *bucca* (puffed cheek). English "oral" and "orifice" preserve the classical root.',
+    funFact: { en: 'All main Romance languages replaced the classical Latin *os/oris* (mouth) with the vulgar *bucca* (puffed cheek). English "oral" and "orifice" preserve the classical root.', it: 'Tutte le principali lingue romanze sostituirono il latino classico *os/oris* (bocca) con il volgare *bucca* (guancia gonfia). L'inglese "oral" e "orifice" conservano la radice classica.' },
   },
 
   // ── NUMBERS ───────────────────────────────────────────────────────────────
@@ -313,7 +313,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'ein / eine', ipa: '/aɪn/', context: 'From Proto-Germanic *ainaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['numbers', 'abstract'],
-    funFact: '"Unique," "union," "universe," "unanimous" — all from Latin *unus*. English "one" and German "ein" are cousins through Proto-Germanic *ainaz.',
+    funFact: { en: '"Unique," "union," "universe," "unanimous" — all from Latin *unus*. English "one" and German "ein" are cousins through Proto-Germanic *ainaz.', it: '"Unico", "unione", "universo", "unanime" — tutti dal latino *unus*. L'inglese "one" e il tedesco "ein" sono cugini attraverso il proto-germanico *ainaz.' },
   },
   {
     id: 'two',
@@ -337,7 +337,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'zwei', ipa: '/tsvaɪ/', context: 'From Proto-Germanic *twai' }], cognateStrength: 'distant' },
     ],
     semanticField: ['numbers', 'abstract'],
-    funFact: '"Duo," "dual," "double," "doubt" (< Latin *dubitare*, to have two minds), "duel," "dozen" (< *duodecim*, twelve) — all from Latin *duo*.',
+    funFact: { en: '"Duo," "dual," "double," "doubt" (< Latin *dubitare*, to have two minds), "duel," "dozen" (< *duodecim*, twelve) — all from Latin *duo*.', it: '"Duo", "duale", "doppio", "dubbio" (< latino *dubitare*, avere due opinioni), "duello", "dozzina" (< *duodecim*, dodici) — tutti dal latino *duo*.' },
   },
   {
     id: 'three',
@@ -361,7 +361,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'drei', ipa: '/dʁaɪ/', context: 'From Proto-Germanic *þrīz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['numbers', 'abstract'],
-    funFact: 'Numbers are uniquely resistant to borrowing — they often show the clearest Indo-European connections. Italian *tre*, French *trois*, English *three*, German *drei*, Sanskrit *trīṇi* — all cousins.',
+    funFact: { en: 'Numbers are uniquely resistant to borrowing — they often show the clearest Indo-European connections. Italian *tre*, French *trois*, English *three*, German *drei*, Sanskrit *trīṇi* — all cousins.', it: 'I numeri sono straordinariamente resistenti ai prestiti linguistici — mostrano spesso le connessioni indoeuropee più chiare. Italiano *tre*, francese *trois*, inglese *three*, tedesco *drei*, sanscrito *trīṇi* — tutti cugini.' },
   },
 
   // ── COLORS ────────────────────────────────────────────────────────────────
@@ -386,7 +386,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'rot', ipa: '/roːt/', context: 'From Proto-Germanic *raudaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['colors', 'abstract'],
-    funFact: 'Portuguese "vermelho" (red) comes from Latin *vermiculus*, meaning "little worm" — specifically the kermes insect used to make crimson dye. English "vermilion" comes from the same root!',
+    funFact: { en: 'Portuguese "vermelho" (red) comes from Latin *vermiculus*, meaning "little worm" — specifically the kermes insect used to make crimson dye. English "vermilion" comes from the same root!', it: 'Il portoghese "vermelho" (rosso) deriva dal latino *vermiculus*, che significa "vermicello" — specificamente l'insetto chermes usato per produrre la tintura cremisi. L'inglese "vermilion" deriva dalla stessa radice!' },
   },
   {
     id: 'white',
@@ -409,7 +409,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'weiß', ipa: '/vaɪs/', context: 'From Proto-Germanic *hwītaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['colors', 'abstract'],
-    funFact: 'Romance languages replaced the classical Latin *albus* with a Germanic loanword *blankaz* — yet Romanian kept *alb*. "Album" (white tablet), "albino," and "albumen" preserve the Latin root in English.',
+    funFact: { en: 'Romance languages replaced the classical Latin *albus* with a Germanic loanword *blankaz* — yet Romanian kept *alb*. "Album" (white tablet), "albino," and "albumen" preserve the Latin root in English.', it: 'Le lingue romanze sostituirono il latino classico *albus* con il prestito germanico *blankaz* — eppure il romeno mantenne *alb*. "Album" (tavoletta bianca), "albino" e "albume" conservano la radice latina in inglese.' },
   },
   {
     id: 'black',
@@ -435,7 +435,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'schwarz', ipa: '/ʃvaʁts/', context: 'From Proto-Germanic *swartaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['colors', 'abstract'],
-    funFact: 'Latin had two blacks: *niger* (shiny, like polished stone) gave us "Negro," "noir," "nero." The other, *ater* (dull, gloomy), gave us "atrocious" — a word that started meaning merely "black."',
+    funFact: { en: 'Latin had two blacks: *niger* (shiny, like polished stone) gave us "Negro," "noir," "nero." The other, *ater* (dull, gloomy), gave us "atrocious" — a word that started meaning merely "black."', it: 'Il latino aveva due neri: *niger* (lucido, come la pietra levigata) ci ha dato "nero", "noir", "negro". L'altro, *ater* (opaco, cupo), ci ha dato "atroce" — una parola che inizialmente significava semplicemente "nero".' },
   },
 
   // ── FOOD & DRINK ──────────────────────────────────────────────────────────
@@ -459,7 +459,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Brot', ipa: '/broːt/', context: 'From Proto-Germanic *braudą' }], cognateStrength: 'distant' },
     ],
     semanticField: ['food', 'daily-life'],
-    funFact: '"Company" comes from Latin *com* + *panis* — literally "with-bread," those you share bread with. A "companion" is your bread-sharer. "Pantry" also comes from *panis*.',
+    funFact: { en: '"Company" comes from Latin *com* + *panis* — literally "with-bread," those you share bread with. A "companion" is your bread-sharer. "Pantry" also comes from *panis*.', it: '"Compagnia" deriva dal latino *com* + *panis* — letteralmente "con-pane", coloro con cui si divide il pane. Un "compagno" è chi condivide il tuo pane. Anche "dispensa" (in inglese "pantry") deriva da *panis*.' },
   },
   {
     id: 'wine',
@@ -485,7 +485,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Wein', ipa: '/vaɪn/', context: 'From Proto-Germanic *wīną (borrowed from Latin)' }], cognateStrength: 'close' },
     ],
     semanticField: ['food', 'drinks', 'culture'],
-    funFact: 'Unlike most words, "wine" / "Wein" in Germanic languages are actually Latin loans — the Romans spread viticulture northward, and the word came with the drink.',
+    funFact: { en: 'Unlike most words, "wine" / "Wein" in Germanic languages are actually Latin loans — the Romans spread viticulture northward, and the word came with the drink.', it: 'A differenza di molte parole, "wine" e "Wein" nelle lingue germaniche sono in realtà prestiti dal latino — i Romani diffusero la viticoltura verso nord e la parola viaggiò con la bevanda.' },
   },
   {
     id: 'fish',
@@ -508,7 +508,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Fisch', ipa: '/fɪʃ/', context: 'From Proto-Germanic *fiskaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['food', 'nature', 'animals'],
-    funFact: 'Spanish uniquely distinguishes *pez* (a living fish in the water) from *pescado* (a fish out of the water, caught or cooked). This live/dead distinction doesn\'t exist in other Romance languages.',
+    funFact: { en: 'Spanish uniquely distinguishes *pez* (a living fish in the water) from *pescado* (a fish out of the water, caught or cooked). This live/dead distinction doesn\'t exist in other Romance languages.', it: 'Lo spagnolo distingue in modo unico *pez* (un pesce vivo nell\'acqua) da *pescado* (un pesce fuori dall\'acqua, pescato o cucinato). Questa distinzione vivo/morto non esiste nelle altre lingue romanze.' },
   },
 
   // ── VERBS ─────────────────────────────────────────────────────────────────
@@ -535,7 +535,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'essen', ipa: '/ˈɛs.ən/', context: 'From Proto-Germanic *etaną' }], cognateStrength: 'distant' },
     ],
     semanticField: ['food', 'action', 'daily-life'],
-    funFact: 'The vulgar Latin *manducare* gave us "mangiare", "manger", "mânca" — and also the English word "munch"! Spanish and Portuguese kept the more classical *comedere*.',
+    funFact: { en: 'The vulgar Latin *manducare* gave us "mangiare", "manger", "mânca" — and also the English word "munch"! Spanish and Portuguese kept the more classical *comedere*.', it: 'Il latino volgare *manducare* ci ha dato "mangiare", "manger", "mânca" — e anche la parola inglese "munch"! Lo spagnolo e il portoghese mantennero il più classico *comedere*.' },
   },
   {
     id: 'speak',
@@ -565,7 +565,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'sprechen', ipa: '/ˈʃpʁɛ.çən/', context: 'From Proto-Germanic' }], cognateStrength: 'distant' },
     ],
     semanticField: ['communication', 'action', 'language'],
-    funFact: 'Spanish "hablar" and Portuguese "falar" both descend from Latin "fabulare" (to tell fables). Italian and French use "parabolare" as their base. These two paths split early in the Romance world!',
+    funFact: { en: 'Spanish "hablar" and Portuguese "falar" both descend from Latin "fabulare" (to tell fables). Italian and French use "parabolare" as their base. These two paths split early in the Romance world!', it: 'Lo spagnolo "hablar" e il portoghese "falar" discendono entrambi dal latino "fabulare" (raccontare favole). L'italiano e il francese usano "parabolare" come base. Questi due percorsi si divisero presto nel mondo romanzo!' },
   },
   {
     id: 'go',
@@ -591,7 +591,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'gehen', ipa: '/ˈɡeː.ən/', context: 'From Proto-Germanic *gangan' }], cognateStrength: 'distant' },
     ],
     semanticField: ['action', 'movement'],
-    funFact: '"To go" is notoriously irregular across all languages because multiple verbs merged. French *aller* comes from *ambulare* (to walk), yet "I go" = *je vais* from *vadere*. English "went" is actually the past tense of a completely different word (*wander*).',
+    funFact: { en: '"To go" is notoriously irregular across all languages because multiple verbs merged. French *aller* comes from *ambulare* (to walk), yet "I go" = *je vais* from *vadere*. English "went" is actually the past tense of a completely different word (*wander*).', it: '"Andare" è notoriamente irregolare in tutte le lingue perché più verbi si fusero. Il francese *aller* viene da *ambulare* (camminare), eppure "io vado" = *je vais* viene da *vadere*. L'inglese "went" è in realtà il passato di una parola completamente diversa (*wander*, vagare).' },
   },
   {
     id: 'give',
@@ -615,7 +615,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'geben', ipa: '/ˈɡeː.bən/', context: 'From Proto-Germanic *gebaną' }], cognateStrength: 'distant' },
     ],
     semanticField: ['action', 'social'],
-    funFact: '"Data" literally means "things given" (neuter plural of Latin *datum*). "Date" (a time) comes from the same root — medieval letters began "datum Romae" (given at Rome) to mark when they were written.',
+    funFact: { en: '"Data" literally means "things given" (neuter plural of Latin *datum*). "Date" (a time) comes from the same root — medieval letters began "datum Romae" (given at Rome) to mark when they were written.', it: '"Data" significa letteralmente "cose date" (neutro plurale di *datum* latino). Anche la parola inglese "date" (una data temporale) viene dalla stessa radice — le lettere medievali iniziavano con "datum Romae" (dato a Roma) per indicare quando erano state scritte.' },
   },
   {
     id: 'see',
@@ -638,7 +638,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'sehen', ipa: '/ˈzeː.ən/', context: 'From Proto-Germanic *sehwaną' }], cognateStrength: 'distant' },
     ],
     semanticField: ['action', 'senses'],
-    funFact: '"Video," "vision," "evident," "provide," "survey," "view" — all from Latin *videre*. Even "wit" and "wise" in English share the same Proto-Indo-European root *weyd-* (to see = to know).',
+    funFact: { en: '"Video," "vision," "evident," "provide," "survey," "view" — all from Latin *videre*. Even "wit" and "wise" in English share the same Proto-Indo-European root *weyd-* (to see = to know).', it: '"Video", "visione", "evidente", "provvedere", "panorama" — tutti dal latino *videre*. Persino "wit" e "wise" in inglese condividono la stessa radice proto-indoeuropea *weyd-* (vedere = sapere).' },
   },
   {
     id: 'know',
@@ -673,7 +673,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'wissen / kennen', ipa: '/ˈvɪ.sən/', context: 'wissen = facts; kennen = acquaintance' }], cognateStrength: 'distant' },
     ],
     semanticField: ['action', 'knowledge', 'abstract'],
-    funFact: 'Italian, Spanish, Portuguese, French, AND German all split "to know" into two verbs: one for facts (*saber/savoir/wissen*) and one for people/places (*conocer/connaître/kennen*). English merged them into one word — a rare simplification.',
+    funFact: { en: 'Italian, Spanish, Portuguese, French, AND German all split "to know" into two verbs: one for facts (*saber/savoir/wissen*) and one for people/places (*conocer/connaître/kennen*). English merged them into one word — a rare simplification.', it: 'Italiano, spagnolo, portoghese, francese E tedesco dividono tutti "sapere/conoscere" in due verbi: uno per i fatti (*saber/savoir/wissen*) e uno per persone e luoghi (*conocer/connaître/kennen*). L'inglese li ha fusi in un'unica parola — una rara semplificazione.' },
   },
 
   // ── SOCIAL & RELATIONSHIPS ────────────────────────────────────────────────
@@ -706,7 +706,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Freund / Freundin', ipa: '/frɔʏnt/', context: 'From Proto-Germanic' }], cognateStrength: 'distant' },
     ],
     semanticField: ['social', 'relationships', 'people'],
-    funFact: 'Romanian uses "prieten" (from Slavic), not a Latin-derived word, showing how Romanian absorbed significant Slavic vocabulary despite being a Romance language.',
+    funFact: { en: 'Romanian uses "prieten" (from Slavic), not a Latin-derived word, showing how Romanian absorbed significant Slavic vocabulary despite being a Romance language.', it: 'Il romeno usa "prieten" (dallo slavo), non una parola derivata dal latino, dimostrando come il romeno abbia assorbito un notevole vocabolario slavo pur essendo una lingua romanza.' },
   },
   {
     id: 'mother',
@@ -741,7 +741,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Mutter', ipa: '/ˈmʊ.tɐ/', context: 'From Proto-Germanic *mōdēr' }], cognateStrength: 'close' },
     ],
     semanticField: ['family', 'people', 'relationships'],
-    funFact: '"Mother," "mutter," "madre," "mère," "mãe," "mater" — one of the most universally shared roots in Indo-European. Even the childlike "mama" (reduplication of *ma*) appears in virtually every language on Earth.',
+    funFact: { en: '"Mother," "mutter," "madre," "mère," "mãe," "mater" — one of the most universally shared roots in Indo-European. Even the childlike "mama" (reduplication of *ma*) appears in virtually every language on Earth.', it: '"Mother", "Mutter", "madre", "mère", "mãe", "mater" — una delle radici più universalmente condivise nelle lingue indoeuropee. Persino il bambinesco "mamma" (reduplicazione di *ma*) compare in praticamente ogni lingua del mondo.' },
   },
   {
     id: 'child',
@@ -780,7 +780,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'en', forms: [{ word: 'child', ipa: '/tʃaɪld/', context: 'From Old English cild' }], cognateStrength: 'distant' },
     ],
     semanticField: ['family', 'people', 'age'],
-    funFact: 'French kept the Latin "infans" → "enfant", while Spanish and Italian developed new words (niño, bambino). "Infant" in English is a Latin borrowing — showing how English often has both a Germanic word and a Latin formal synonym.',
+    funFact: { en: 'French kept the Latin "infans" → "enfant", while Spanish and Italian developed new words (niño, bambino). "Infant" in English is a Latin borrowing — showing how English often has both a Germanic word and a Latin formal synonym.', it: 'Il francese mantenne il latino "infans" → "enfant", mentre lo spagnolo e l'italiano svilupparono nuove parole (niño, bambino). "Infant" in inglese è un prestito latino — che mostra come l'inglese abbia spesso sia una parola germanica che un sinonimo formale latino.' },
   },
 
   // ── ABSTRACT ──────────────────────────────────────────────────────────────
@@ -809,7 +809,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Zeit', ipa: '/tsaɪt/', context: 'From Proto-Germanic *tīdiz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['time', 'abstract', 'weather'],
-    funFact: 'In Italian, Spanish, Portuguese, and French, the same word means both "time" and "weather" — a fascinating polysemy from Latin *tempus*. Ask a Spanish speaker "¿Qué tiempo hace?" and they\'ll tell you the weather, not the hour!',
+    funFact: { en: 'In Italian, Spanish, Portuguese, and French, the same word means both "time" and "weather" — a fascinating polysemy from Latin *tempus*. Ask a Spanish speaker "¿Qué tiempo hace?" and they\'ll tell you the weather, not the hour!', it: 'In italiano, spagnolo, portoghese e francese, la stessa parola significa sia "tempo" (cronologico) che "tempo" (meteorologico) — un'affascinante polisemia dal latino *tempus*. Chiedi a uno spagnolo "¿Qué tiempo hace?" e ti dirà il meteo, non l'ora!' },
   },
   {
     id: 'love',
@@ -835,7 +835,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Liebe', ipa: '/ˈliː.bə/', context: 'From Proto-Germanic *lubō' }], cognateStrength: 'distant' },
     ],
     semanticField: ['emotions', 'relationships', 'abstract'],
-    funFact: 'Romanian "dragoste" (love) is Slavic, while all other Romance languages kept the Latin "amor". Yet Romanian still uses "a iubi" (to love) from Slavic *ljubiti*.',
+    funFact: { en: 'Romanian "dragoste" (love) is Slavic, while all other Romance languages kept the Latin "amor". Yet Romanian still uses "a iubi" (to love) from Slavic *ljubiti*.', it: 'Il romeno "dragoste" (amore) è di origine slava, mentre tutte le altre lingue romanze mantennero il latino "amor". Eppure il romeno usa ancora "a iubi" (amare) dallo slavo *ljubiti*.' },
   },
 
   // ── KNOWLEDGE & CULTURE ───────────────────────────────────────────────────
@@ -859,7 +859,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Buch', ipa: '/buːx/', context: 'From Proto-Germanic *bōks (beech tree)' }], cognateStrength: 'distant' },
     ],
     semanticField: ['knowledge', 'culture', 'objects'],
-    funFact: '"Book" in English and German literally means "beech tree" — ancient Germanic peoples carved writing onto beech bark tablets! Meanwhile, Romance languages kept the Latin *liber* (possibly from the inner bark of a tree).',
+    funFact: { en: '"Book" in English and German literally means "beech tree" — ancient Germanic peoples carved writing onto beech bark tablets! Meanwhile, Romance languages kept the Latin *liber* (possibly from the inner bark of a tree).', it: '"Book" in inglese e "Buch" in tedesco significano letteralmente "faggio" — gli antichi popoli germanici incidevano la scrittura su tavolette di corteccia di faggio! Nel frattempo, le lingue romanze mantennero il latino *liber* (forse dalla corteccia interna di un albero).' },
   },
   {
     id: 'school',
@@ -881,7 +881,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Schule', ipa: '/ˈʃuː.lə/', context: 'Also from Latin schola' }], cognateStrength: 'close' },
     ],
     semanticField: ['knowledge', 'culture', 'education'],
-    funFact: 'The Greek *σχολή* originally meant "leisure" or "free time" — school was what educated people did with their free time! The concept of school as a place of learning came later.',
+    funFact: { en: 'The Greek *σχολή* originally meant "leisure" or "free time" — school was what educated people did with their free time! The concept of school as a place of learning came later.', it: 'Il greco *σχολή* significava originariamente "tempo libero" — la scuola era ciò che le persone colte facevano nel loro tempo libero! Il concetto di scuola come luogo di apprendimento si sviluppò in seguito.' },
   },
 
   // ── HOUSE & DAILY LIFE ────────────────────────────────────────────────────
@@ -908,7 +908,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Haus', ipa: '/haʊs/', context: 'From Proto-Germanic *hūsą' }], cognateStrength: 'distant' },
     ],
     semanticField: ['home', 'architecture', 'daily-life'],
-    funFact: 'French chose "maison" (from Latin *mansio*, a staying-place) while all other major Romance languages stuck with *casa*. This is why a French real-estate agent might confuse an Italian!',
+    funFact: { en: 'French chose "maison" (from Latin *mansio*, a staying-place) while all other major Romance languages stuck with *casa*. This is why a French real-estate agent might confuse an Italian!', it: 'Il francese scelse "maison" (dal latino *mansio*, luogo di sosta) mentre tutte le altre principali lingue romanze rimasero con *casa*. Ecco perché un agente immobiliare francese potrebbe confondere un italiano!' },
   },
   {
     id: 'door',
@@ -932,7 +932,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Tür', ipa: '/tyːɐ̯/', context: 'From Proto-Germanic *durō' }], cognateStrength: 'distant' },
     ],
     semanticField: ['home', 'architecture', 'daily-life'],
-    funFact: 'January (*Ianuarius*) is named after Janus, the Roman god of doors and beginnings — *ianua* (house door) was his symbol. He looked both ways: the old year and the new.',
+    funFact: { en: 'January (*Ianuarius*) is named after Janus, the Roman god of doors and beginnings — *ianua* (house door) was his symbol. He looked both ways: the old year and the new.', it: 'Gennaio (*Ianuarius*) prende il nome da Giano, il dio romano delle porte e dei nuovi inizi — *ianua* (la porta di casa) era il suo simbolo. Guardava in entrambe le direzioni: l\'anno vecchio e quello nuovo.' },
   },
 
   // ── CALENDAR ──────────────────────────────────────────────────────────────
@@ -960,7 +960,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Monat', ipa: '/ˈmoː.nat/', context: 'From Proto-Germanic *mānōþs' }], cognateStrength: 'distant' },
     ],
     semanticField: ['time', 'calendar', 'astronomy'],
-    funFact: 'Romanian "lună" means BOTH "moon" AND "month." In English, "month" and "moon" are related. In French, "lune" (moon) and "mois" (month) split into two words.',
+    funFact: { en: 'Romanian "lună" means BOTH "moon" AND "month." In English, "month" and "moon" are related. In French, "lune" (moon) and "mois" (month) split into two words.', it: 'Il romeno "lună" significa SIA "luna" CHE "mese". In inglese, "month" e "moon" sono correlati. In francese, "lune" (luna) e "mois" (mese) si sono divisi in due parole distinte.' },
   },
   {
     id: 'year',
@@ -983,7 +983,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Jahr', ipa: '/jaːɐ̯/', context: 'From Proto-Germanic *jēran' }], cognateStrength: 'distant' },
     ],
     semanticField: ['time', 'calendar'],
-    funFact: 'French uses two words for year: *an* (a counted year: "Il a 30 ans") and *année* (a lived year: "Bonne année!"). Spanish used to have the same distinction (*año* vs *año*) but merged them.',
+    funFact: { en: 'French uses two words for year: *an* (a counted year: "Il a 30 ans") and *année* (a lived year: "Bonne année!"). Spanish used to have the same distinction (*año* vs *año*) but merged them.', it: 'Il francese usa due parole per "anno": *an* (un anno contato: "Il a 30 ans") e *année* (un anno vissuto: "Bonne année!"). Lo spagnolo aveva la stessa distinzione ma le ha unite.' },
   },
 
   // ── ANIMALS ───────────────────────────────────────────────────────────────
@@ -1013,7 +1013,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Hund', ipa: '/hʊnt/', context: 'From Proto-Germanic *hundaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['animals', 'daily-life'],
-    funFact: 'Brazilian Portuguese uses "cachorro" (puppy) where European Portuguese uses "cão" (from Latin *canis*). Spanish "perro" has no clear Latin etymology — it may be pre-Roman Iberian. English "dog" is also of mysterious origin; "hound" (from *hundaz*) is the true Germanic cousin of Latin *canis*.',
+    funFact: { en: 'Brazilian Portuguese uses "cachorro" (puppy) where European Portuguese uses "cão" (from Latin *canis*). Spanish "perro" has no clear Latin etymology — it may be pre-Roman Iberian. English "dog" is also of mysterious origin; "hound" (from *hundaz*) is the true Germanic cousin of Latin *canis*.', it: 'Il portoghese brasiliano usa "cachorro" (cucciolo) dove il portoghese europeo usa "cão" (dal latino *canis*). Lo spagnolo "perro" non ha una chiara etimologia latina — potrebbe essere di origine iberica pre-romana. Anche l'inglese "dog" ha un'origine misteriosa; "hound" (da *hundaz*) è il vero cugino germanico del latino *canis*.' },
   },
   {
     id: 'cat',
@@ -1037,7 +1037,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Katze', ipa: '/ˈkat.sə/', context: 'From Proto-Germanic *kattuz' }], cognateStrength: 'close' },
     ],
     semanticField: ['animals', 'daily-life'],
-    funFact: '"Cat" in English, "gato" in Spanish/Portuguese, "gatto" in Italian, "chat" in French — all from the same Late Latin *cattus*, which was itself borrowed from Afroasiatic (possibly Nubian *kadīs*). The domestic cat spread from Egypt and its word travelled with it.',
+    funFact: { en: '"Cat" in English, "gato" in Spanish/Portuguese, "gatto" in Italian, "chat" in French — all from the same Late Latin *cattus*, which was itself borrowed from Afroasiatic (possibly Nubian *kadīs*). The domestic cat spread from Egypt and its word travelled with it.', it: '"Cat" in inglese, "gato" in spagnolo/portoghese, "gatto" in italiano, "chat" in francese — tutti dal medesimo latino tardo *cattus*, che a sua volta fu preso in prestito dall'afroantico (forse nubiano *kadīs*). Il gatto domestico si diffuse dall'Egitto e la sua parola viaggiò con lui.' },
   },
   {
     id: 'bird',
@@ -1062,7 +1062,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Vogel', ipa: '/ˈfoː.ɡəl/', context: 'From Proto-Germanic *fuglaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['animals', 'nature'],
-    funFact: 'French "oiseau" (bird) came from Latin *avicellus* (little bird, diminutive of *avis*) through so many sound changes it no longer resembles "avis" at all. English "aviary," "aviation," and "aviator" all preserve the original Latin root.',
+    funFact: { en: 'French "oiseau" (bird) came from Latin *avicellus* (little bird, diminutive of *avis*) through so many sound changes it no longer resembles "avis" at all. English "aviary," "aviation," and "aviator" all preserve the original Latin root.', it: 'Il francese "oiseau" (uccello) deriva dal latino *avicellus* (uccellino, diminutivo di *avis*) attraverso tanti cambiamenti fonetici che non assomiglia più affatto ad "avis". L'inglese "aviary" (voliera), "aviation" e "aviator" conservano tutti la radice latina originale.' },
   },
 
   // ── ADJECTIVES ────────────────────────────────────────────────────────────
@@ -1092,7 +1092,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'groß', ipa: '/ɡroːs/', context: 'From Proto-Germanic *grautaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['adjectives', 'abstract'],
-    funFact: 'Romanian "mare" means both "big" AND "sea" (from Latin *mare*). It\'s a coincidence that two different Latin words (*marem* and *mare*) merged in Romanian. English "grand," "magnitude," and "magnificent" preserve Latin *magnus*.',
+    funFact: { en: 'Romanian "mare" means both "big" AND "sea" (from Latin *mare*). It\'s a coincidence that two different Latin words (*marem* and *mare*) merged in Romanian. English "grand," "magnitude," and "magnificent" preserve Latin *magnus*.', it: 'Il romeno "mare" significa sia "grande" CHE "mare" (dal latino *mare*). È una coincidenza che due diverse parole latine (*marem* e *mare*) si siano fuse in romeno. L'inglese "grand", "magnitude" e "magnificent" conservano il latino *magnus*.' },
   },
   {
     id: 'good',
@@ -1123,7 +1123,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'gut', ipa: '/ɡuːt/', context: 'From Proto-Germanic *gōdaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['adjectives', 'abstract', 'emotions'],
-    funFact: '"Bonus," "bonbon," "bona fide," "bonanza" — all from Latin *bonus*. The Italian greeting "buongiorno" is literally "good day." Galician "bo" is the closest to the original Latin form.',
+    funFact: { en: '"Bonus," "bonbon," "bona fide," "bonanza" — all from Latin *bonus*. The Italian greeting "buongiorno" is literally "good day." Galician "bo" is the closest to the original Latin form.', it: '"Bonus", "bonbon", "bona fide", "bonanza" — tutti dal latino *bonus*. Il saluto italiano "buongiorno" significa letteralmente "buon giorno". Il galiziano "bo" è la forma più vicina all'originale latino.' },
   },
   {
     id: 'new',
@@ -1150,7 +1150,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'neu', ipa: '/nɔʏ/', context: 'From Proto-Germanic *newjaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['adjectives', 'abstract'],
-    funFact: '"Novel," "novelty," "innovate," "renovate," "Nova Scotia" (New Scotland) — all from Latin *novus*. "November" was the ninth month (the *novem* = nine) in the original Roman calendar.',
+    funFact: { en: '"Novel," "novelty," "innovate," "renovate," "Nova Scotia" (New Scotland) — all from Latin *novus*. "November" was the ninth month (the *novem* = nine) in the original Roman calendar.', it: '"Novella", "novità", "innovare", "rinnovare", "Nova Scotia" (Nuova Scozia) — tutti dal latino *novus*. "Novembre" era il nono mese (*novem* = nove) nell'originario calendario romano.' },
   },
 
   // ── MORE VERBS ────────────────────────────────────────────────────────────
@@ -1180,7 +1180,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'wollen', ipa: '/ˈvɔ.lən/', context: 'From Proto-Germanic *wuljaną' }], cognateStrength: 'close' },
     ],
     semanticField: ['action', 'emotions', 'abstract'],
-    funFact: 'Spanish and Portuguese "querer" means BOTH "to want" AND "to love" — "te quiero" is a softer way to say "I love you." Italian "volere" and French "vouloir" kept the Latin *velle* root, while Spanish/Portuguese diverged to *quaerere* (to seek).',
+    funFact: { en: 'Spanish and Portuguese "querer" means BOTH "to want" AND "to love" — "te quiero" is a softer way to say "I love you." Italian "volere" and French "vouloir" kept the Latin *velle* root, while Spanish/Portuguese diverged to *quaerere* (to seek).', it: 'Lo spagnolo e il portoghese "querer" significa SIA "volere" CHE "amare" — "te quiero" è un modo più delicato per dire "ti amo". L'italiano "volere" e il francese "vouloir" mantennero la radice latina *velle*, mentre lo spagnolo/portoghese divergono verso *quaerere* (cercare).' },
   },
   {
     id: 'come',
@@ -1209,7 +1209,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'kommen', ipa: '/ˈkɔ.mən/', context: 'From Proto-Germanic *kwemaną' }], cognateStrength: 'distant' },
     ],
     semanticField: ['action', 'movement'],
-    funFact: '"Venture," "adventure," "avenue," "event," "invent," "prevent," "convention" — all from Latin *venire* (to come). An "event" is something that "comes out" (*ex* + *venire*).',
+    funFact: { en: '"Venture," "adventure," "avenue," "event," "invent," "prevent," "convention" — all from Latin *venire* (to come). An "event" is something that "comes out" (*ex* + *venire*).', it: '"Ventura", "avventura", "viale" (avenue), "evento", "inventare", "prevenire", "convenzione" — tutti dal latino *venire* (venire). Un "evento" è qualcosa che "viene fuori" (*ex* + *venire*).' },
   },
   {
     id: 'have',
@@ -1237,7 +1237,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'haben', ipa: '/ˈhaː.bən/', context: 'From Proto-Germanic *habjaną' }], cognateStrength: 'close' },
     ],
     semanticField: ['action', 'abstract'],
-    funFact: 'Spanish and Portuguese both split "have" into two verbs: *haber/haver* (auxiliary for compound tenses) and *tener/ter* (to physically have). Brazilian Portuguese almost entirely dropped *haver* from everyday speech.',
+    funFact: { en: 'Spanish and Portuguese both split "have" into two verbs: *haber/haver* (auxiliary for compound tenses) and *tener/ter* (to physically have). Brazilian Portuguese almost entirely dropped *haver* from everyday speech.', it: 'Lo spagnolo e il portoghese hanno entrambi diviso "avere" in due verbi: *haber/haver* (ausiliare per i tempi composti) e *tener/ter* (possedere fisicamente). Il portoghese brasiliano ha quasi del tutto eliminato *haver* dal parlato quotidiano.' },
   },
 
   // ── PLACE & MOVEMENT ──────────────────────────────────────────────────────
@@ -1264,7 +1264,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Straße', ipa: '/ˈʃtʁaː.sə/', context: 'From Latin *strata* (same as Italian strada!)' }], cognateStrength: 'close' },
     ],
     semanticField: ['place', 'movement', 'architecture'],
-    funFact: 'The "Camino de Santiago" (Way of Saint James) uses Latin *via* → Spanish *camino*. Italian *strada* and German *Straße* are both from Latin *strata* — the Romans\' paved roads left their word across Europe.',
+    funFact: { en: 'The "Camino de Santiago" (Way of Saint James) uses Latin *via* → Spanish *camino*. Italian *strada* and German *Straße* are both from Latin *strata* — the Romans\' paved roads left their word across Europe.', it: 'Il "Camino de Santiago" (il Cammino di Giacomo) usa il latino *via* → spagnolo *camino*. L'italiano *strada* e il tedesco *Straße* vengono entrambi dal latino *strata* — le strade lastricate dei Romani lasciarono il loro nome in tutta Europa.' },
   },
   {
     id: 'sea',
@@ -1290,7 +1290,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Meer', ipa: '/meːɐ̯/', context: 'From Proto-Germanic *mari*; "See" = lake' }], cognateStrength: 'close' },
     ],
     semanticField: ['nature', 'place', 'geography'],
-    funFact: 'The Mediterranean is *Mare Medi Terra* — the sea in the middle of the land. Spanish "mar" is unique among nouns in being both masculine (*el mar abierto*) and feminine (*la mar brava*) depending on poetic/sailor tradition.',
+    funFact: { en: 'The Mediterranean is *Mare Medi Terra* — the sea in the middle of the land. Spanish "mar" is unique among nouns in being both masculine (*el mar abierto*) and feminine (*la mar brava*) depending on poetic/sailor tradition.', it: 'Il Mediterraneo è *Mare Medi Terra* — il mare in mezzo alla terra. Lo spagnolo "mar" è unico tra i sostantivi nell'essere sia maschile (*el mar abierto*) che femminile (*la mar brava*) a seconda della tradizione poetica/marinara.' },
   },
 
   // ── BODY (CONTINUED) ──────────────────────────────────────────────────────
@@ -1317,7 +1317,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Kopf', ipa: '/kɔpf/', context: 'From *kuppa* (cup, bowl)' }], cognateStrength: 'distant' },
     ],
     semanticField: ['body', 'anatomy'],
-    funFact: 'Italian and French both replaced classical *caput* with slang meaning "pot" or "jar" (*testa*). Romanian and Catalan kept "cap" from *caput*. "Captain," "capital," "chapter," "cape" (headland) all come from *caput* — the head as "the top."',
+    funFact: { en: 'Italian and French both replaced classical *caput* with slang meaning "pot" or "jar" (*testa*). Romanian and Catalan kept "cap" from *caput*. "Captain," "capital," "chapter," "cape" (headland) all come from *caput* — the head as "the top."', it: 'L'italiano e il francese hanno entrambi sostituito il classico *caput* con il termine gergale che significava "pentola" o "vaso" (*testa*). Il romeno e il catalano mantennero "cap" da *caput*. "Capitano", "capitale", "capitolo", "capo" (promontorio) vengono tutti da *caput* — la testa come "la cima".' },
   },
   {
     id: 'foot',
@@ -1343,7 +1343,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Fuß', ipa: '/fuːs/', context: 'From Proto-Germanic *fōts' }], cognateStrength: 'distant' },
     ],
     semanticField: ['body', 'anatomy', 'movement'],
-    funFact: '"Pedestrian," "pedal," "pedicure," "centipede," "expedition" (setting foot out), "impede" (catching the foot) — all from Latin *pes/pedis*. The measurement "foot" is literally named after the body part.',
+    funFact: { en: '"Pedestrian," "pedal," "pedicure," "centipede," "expedition" (setting foot out), "impede" (catching the foot) — all from Latin *pes/pedis*. The measurement "foot" is literally named after the body part.', it: '"Pedestre", "pedale", "pedicure", "centopiedi", "spedizione" (mettere il piede fuori), "impedire" (prendere il piede) — tutti dal latino *pes/pedis*. L'unità di misura inglese "foot" è letteralmente chiamata così dalla parte del corpo.' },
   },
 
   // ── ABSTRACT / LANGUAGE ───────────────────────────────────────────────────
@@ -1372,7 +1372,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Name', ipa: '/ˈnaː.mə/', context: 'From Proto-Germanic *namô' }], cognateStrength: 'distant' },
     ],
     semanticField: ['language', 'abstract', 'identity'],
-    funFact: '"Noun," "pronoun," "nominate," "nominal," "nomenclature," "anonymous" (without name), "synonym" (same name), "pseudonym" (false name) — all from Latin *nomen*. This is one of the most universally shared Indo-European roots.',
+    funFact: { en: '"Noun," "pronoun," "nominate," "nominal," "nomenclature," "anonymous" (without name), "synonym" (same name), "pseudonym" (false name) — all from Latin *nomen*. This is one of the most universally shared Indo-European roots.', it: '"Nome" (grammaticale), "pronome", "nominare", "nominale", "nomenclatura", "anonimo" (senza nome), "sinonimo" (stesso nome), "pseudonimo" (falso nome) — tutti dal latino *nomen*. Questa è una delle radici indoeuropee più universalmente condivise.' },
   },
   {
     id: 'language',
@@ -1400,7 +1400,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'de', forms: [{ word: 'Sprache', ipa: '/ˈʃpʁaː.xə/', context: 'From Proto-Germanic *sprēkaną (to speak)' }], cognateStrength: 'distant' },
     ],
     semanticField: ['language', 'communication', 'abstract'],
-    funFact: 'Occitan is sometimes called "la lenga d\'òc" — the language of "oc" (yes in Occitan). Northern France was "langue d\'oïl" (oïl = yes in Old French → oui). This "yes" word divided medieval France linguistically and gave "Languedoc" its name.',
+    funFact: { en: 'Occitan is sometimes called "la lenga d\'òc" — the language of "oc" (yes in Occitan). Northern France was "langue d\'oïl" (oïl = yes in Old French → oui). This "yes" word divided medieval France linguistically and gave "Languedoc" its name.', it: 'L'occitano è talvolta chiamato "la lenga d'òc" — la lingua dell'"oc" (sì in occitano). La Francia settentrionale era la "langue d'oïl" (oïl = sì in antico francese → oui). Questa parola per "sì" divise linguisticamente la Francia medievale e diede il nome alla regione "Linguadoca".' },
   },
 
   // ── BATCH 2 — DAILY ADDITIONS ─────────────────────────────────────────────
@@ -1433,7 +1433,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'bloem', ipa: '/blum/', context: 'From Proto-Germanic *blōmô' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'plants', 'beauty'],
-    funFact: 'Latin *flos* and Germanic *Blume* share the same PIE root *bʰleh₃-* ("to bloom"), yet they look completely different — the Latin branch preserved the initial *fl-*, while Germanic shifted it to *bl-*. Florence (*Firenze*) literally means "the flowering one".',
+    funFact: { en: 'Latin *flos* and Germanic *Blume* share the same PIE root *bʰleh₃-* ("to bloom"), yet they look completely different — the Latin branch preserved the initial *fl-*, while Germanic shifted it to *bl-*. Florence (*Firenze*) literally means "the flowering one".', it: 'Il latino *flos* e il germanico *Blume* condividono la stessa radice proto-indoeuropea *bʰleh₃-* ("fiorire"), eppure sembrano completamente diverse — il ramo latino conservò l'iniziale *fl-*, mentre il germanico lo trasformò in *bl-*. Firenze (*Florence*) significa letteralmente "la fiorente".' },
   },
   {
     id: 'stone',
@@ -1468,7 +1468,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'steen', ipa: '/steːn/', context: 'From Proto-Germanic *stainaz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'materials', 'elements'],
-    funFact: 'The name *Peter* comes from Greek *Petros* ("rock"), itself from *petra*. Jesus said "upon this rock (petros) I will build my church" — making the apostle\'s name a pun. Meanwhile, "petroleum" literally means *petra* (rock) + *oleum* (oil): oil from rock.',
+    funFact: { en: 'The name *Peter* comes from Greek *Petros* ("rock"), itself from *petra*. Jesus said "upon this rock (petros) I will build my church" — making the apostle\'s name a pun. Meanwhile, "petroleum" literally means *petra* (rock) + *oleum* (oil): oil from rock.', it: 'Il nome *Pietro* viene dal greco *Petros* ("roccia"), a sua volta da *petra*. Gesù disse "su questa roccia (petros) edificherò la mia chiesa" — rendendo il nome dell'apostolo un gioco di parole. Nel frattempo, "petrolio" significa letteralmente *petra* (roccia) + *oleum* (olio): olio dalla roccia.' },
   },
   {
     id: 'salt',
@@ -1495,7 +1495,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'zout', ipa: '/zɑut/', context: 'From Proto-Germanic *saltą* via sound shifts' }], cognateStrength: 'close' },
     ],
     semanticField: ['food', 'cooking', 'nature', 'minerals'],
-    funFact: 'Roman soldiers were sometimes paid in salt — or given an allowance to buy it — giving us the word *salary* (from Latin *salarium*). The phrase "worth his salt" comes from this practice. Salt was so valuable it was used as currency across ancient civilisations.',
+    funFact: { en: 'Roman soldiers were sometimes paid in salt — or given an allowance to buy it — giving us the word *salary* (from Latin *salarium*). The phrase "worth his salt" comes from this practice. Salt was so valuable it was used as currency across ancient civilisations.', it: 'I soldati romani venivano talvolta pagati in sale — o ricevevano un'indennità per acquistarlo — dandoci la parola "salario" (dal latino *salarium*). L'espressione inglese "worth his salt" deriva da questa usanza. Il sale era così prezioso da essere usato come moneta in molte civiltà antiche.' },
   },
   {
     id: 'old',
@@ -1527,7 +1527,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'oud', ipa: '/ɑut/', context: 'From Proto-Germanic *aldaz*' }], cognateStrength: 'distant' },
     ],
     semanticField: ['time', 'description', 'age'],
-    funFact: 'Romanian distinguishes *bătrân* (old person, from Latin *veteranus* via a different path) and *vechi* (old thing, from Latin *vetulus*). Italian *vecchio* and Spanish *viejo* both come from *vetulus* (diminutive of *vetus*) — literally "a little old".',
+    funFact: { en: 'Romanian distinguishes *bătrân* (old person, from Latin *veteranus* via a different path) and *vechi* (old thing, from Latin *vetulus*). Italian *vecchio* and Spanish *viejo* both come from *vetulus* (diminutive of *vetus*) — literally "a little old".', it: 'Il romeno distingue *bătrân* (persona anziana, dal latino *veteranus* attraverso un percorso diverso) e *vechi* (cosa vecchia, dal latino *vetulus*). L'italiano *vecchio* e lo spagnolo *viejo* vengono entrambi da *vetulus* (diminutivo di *vetus*) — letteralmente "un po' vecchio".' },
   },
   {
     id: 'city',
@@ -1562,7 +1562,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'stad', ipa: '/stɑt/', context: 'From Proto-Germanic *stadiz*' }], cognateStrength: 'distant' },
     ],
     semanticField: ['places', 'society', 'daily life'],
-    funFact: 'French uses *ville* for "city" (from Latin *villa*, a country estate — the irony!) and reserves *cité* for the historic old town or, in modern slang, a housing project. English *city* and French *cité* both come from *civitas*, but French preferred *villa* for everyday use, flipping its meaning from rural to urban.',
+    funFact: { en: 'French uses *ville* for "city" (from Latin *villa*, a country estate — the irony!) and reserves *cité* for the historic old town or, in modern slang, a housing project. English *city* and French *cité* both come from *civitas*, but French preferred *villa* for everyday use, flipping its meaning from rural to urban.', it: 'Il francese usa *ville* per "città" (dal latino *villa*, una tenuta di campagna — che ironia!) e riserva *cité* per il centro storico o, nel gergo moderno, un complesso residenziale popolare. L'inglese *city* e il francese *cité* vengono entrambi da *civitas*, ma il francese preferì *villa* per l'uso quotidiano, capovolgendo il suo significato dal rurale all'urbano.' },
   },
 
   // ── BATCH 3 ────────────────────────────────────────────────────────────────
@@ -1595,7 +1595,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'groen', ipa: '/ɡrun/', context: 'From Proto-Germanic *grōniz' }], cognateStrength: 'distant' },
     ],
     semanticField: ['colors', 'nature', 'description'],
-    funFact: '"Verde" is almost perfectly preserved from Latin *viridis* across all five major Romance languages. The name "Cape Verde" (Cabo Verde) means "green cape" — the islands were named for the lush African coast. Latin *viridis* also gives us "virile" via a shared sense of vitality.',
+    funFact: { en: '"Verde" is almost perfectly preserved from Latin *viridis* across all five major Romance languages. The name "Cape Verde" (Cabo Verde) means "green cape" — the islands were named for the lush African coast. Latin *viridis* also gives us "virile" via a shared sense of vitality.', it: '"Verde" è conservato quasi perfettamente dal latino *viridis* in tutte e cinque le principali lingue romanze. Il nome "Capo Verde" (Cabo Verde) significa "promontorio verde" — le isole prendono il nome dalla lussureggiante costa africana. Il latino *viridis* ci dà anche "virile" attraverso un senso condiviso di vitalità.' },
   },
   {
     id: 'sleep',
@@ -1626,7 +1626,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'slapen', ipa: '/ˈslaː.pən/', context: 'From Proto-Germanic *slepaną' }], cognateStrength: 'distant' },
     ],
     semanticField: ['verbs', 'body', 'daily life'],
-    funFact: '"Dormire" is one of the most stable verbs across all Romance languages — it barely changed in 2,000 years. "Dormitory" comes from the same root. Latin had a separate word *somnus* (sleep as a noun → English "somnolent", "insomnia"), itself from PIE *swep-, while *dormire* (the verb "to sleep") has a disputed separate origin.',
+    funFact: { en: '"Dormire" is one of the most stable verbs across all Romance languages — it barely changed in 2,000 years. "Dormitory" comes from the same root. Latin had a separate word *somnus* (sleep as a noun → English "somnolent", "insomnia"), itself from PIE *swep-, while *dormire* (the verb "to sleep") has a disputed separate origin.', it: '"Dormire" è uno dei verbi più stabili in tutte le lingue romanze — è cambiato appena in 2.000 anni. "Dormitorio" viene dalla stessa radice. Il latino aveva una parola separata *somnus* (il sonno come sostantivo → inglese "somnolent", "insomnia"), a sua volta dalla radice proto-indoeuropea *swep-, mentre *dormire* (il verbo "dormire") ha un'origine separata controversa.' },
   },
   {
     id: 'rain',
@@ -1661,7 +1661,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'regen', ipa: '/ˈreː.ɣən/', context: 'From Proto-Germanic *regną' }], cognateStrength: 'distant' },
     ],
     semanticField: ['nature', 'weather', 'elements'],
-    funFact: 'Portuguese *chuva* diverged from the other Romance languages\' *pluvia*-forms because the Latin *pl-* cluster simplified differently in the Iberian west. Compare Spanish *lluvia* vs. Portuguese *chuva* — same Latin word, very different sound. The PIE root *plew-* also gives English "flow", "flood", and "fly".',
+    funFact: { en: 'Portuguese *chuva* diverged from the other Romance languages\' *pluvia*-forms because the Latin *pl-* cluster simplified differently in the Iberian west. Compare Spanish *lluvia* vs. Portuguese *chuva* — same Latin word, very different sound. The PIE root *plew-* also gives English "flow", "flood", and "fly".', it: 'Il portoghese *chuva* diverge dalle forme *pluvia* delle altre lingue romanze perché il gruppo *pl-* latino si semplificò diversamente nella penisola iberica occidentale. Si confronti lo spagnolo *lluvia* con il portoghese *chuva* — stessa parola latina, suono molto diverso. La radice proto-indoeuropea *plew-* dà anche all'inglese "flow", "flood" e "fly".' },
   },
   {
     id: 'father',
@@ -1695,7 +1695,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'vader', ipa: '/ˈvaː.dər/', context: 'From Proto-Germanic *fadēr' }], cognateStrength: 'distant' },
     ],
     semanticField: ['family', 'people', 'relationships'],
-    funFact: '"Father", "Vater", "père", "padre", "pai", and "pater" all come from the same PIE word *ph₂tḗr* — unchanged in meaning for over 6,000 years. Grimm\'s Law explains why Latin *p* became Germanic *f*: pater → father, piscis → fish, pes → foot. It\'s one of linguistics\' most elegant patterns.',
+    funFact: { en: '"Father", "Vater", "père", "padre", "pai", and "pater" all come from the same PIE word *ph₂tḗr* — unchanged in meaning for over 6,000 years. Grimm\'s Law explains why Latin *p* became Germanic *f*: pater → father, piscis → fish, pes → foot. It\'s one of linguistics\' most elegant patterns.', it: '"Father", "Vater", "père", "padre", "pai" e "pater" vengono tutti dalla stessa parola proto-indoeuropea *ph₂tḗr* — invariata nel significato per oltre 6.000 anni. La Legge di Grimm spiega perché il latino *p* diventò germanico *f*: pater → father, piscis → fish, pes → foot. È uno dei modelli più eleganti della linguistica.' },
   },
   {
     id: 'world',
@@ -1723,7 +1723,7 @@ export const WORD_ENTRIES: WordEntry[] = [
       { langCode: 'nl', forms: [{ word: 'wereld', ipa: '/ˈʋeː.rəlt/', context: 'From Proto-Germanic *weraldiz — closest to original form' }], cognateStrength: 'distant' },
     ],
     semanticField: ['abstract', 'places', 'universe'],
-    funFact: 'Romance languages all inherited Latin *mundus* for "world", but Romanian went its own way: *lume* (from Latin *lumen*, "light"). Dutch *wereld* is the closest living form to the original Proto-Germanic *weraldiz* ("age of man"). English "world" and German "Welt" are contractions of the same word, stripped of syllables over centuries.',
+    funFact: { en: 'Romance languages all inherited Latin *mundus* for "world", but Romanian went its own way: *lume* (from Latin *lumen*, "light"). Dutch *wereld* is the closest living form to the original Proto-Germanic *weraldiz* ("age of man"). English "world" and German "Welt" are contractions of the same word, stripped of syllables over centuries.', it: 'Tutte le lingue romanze hanno ereditato il latino *mundus* per "mondo", ma il romeno ha seguito una sua strada: *lume* (dal latino *lumen*, "luce"). L'olandese *wereld* è la forma vivente più vicina al proto-germanico originale *weraldiz* ("età dell'uomo"). L'inglese "world" e il tedesco "Welt" sono contrazioni della stessa parola, private di sillabe nel corso dei secoli.' },
   },
 ]
 
