@@ -142,7 +142,9 @@ export function WordCard({ word, settings, isExpanded, onToggle, matchHint }: Pr
           {word.funFact && settings.showFunFact && (
             <div className="mx-4 mb-4 p-3 rounded-xl bg-indigo-950/40 border border-indigo-800/40">
               <div className="text-xs font-semibold text-indigo-400 mb-1">{t.fun_fact_label} {t.toggle_funfact.replace('💡 ', '')}</div>
-              <p className="text-sm text-slate-300 leading-relaxed">{word.funFact}</p>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                {(settings.uiLanguage === 'es' && word.funFactEs) ? word.funFactEs : word.funFact}
+              </p>
             </div>
           )}
         </div>

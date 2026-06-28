@@ -37,6 +37,7 @@ export interface WordEntry {
   languages: LanguageEntry[]
   semanticField: string[]
   funFact?: string
+  funFactEs?: string
 }
 
 export const WORD_ENTRIES: WordEntry[] = [
@@ -67,6 +68,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'nature', 'daily-life'],
     funFact: 'The word "nocturnal" in English comes directly from Latin *nocturnalis*, showing how Latin roots persist in scientific vocabulary across languages.',
+    funFactEs: 'La palabra "nocturno" en inglés proviene directamente del latín *nocturnalis*, lo que muestra cómo las raíces latinas persisten en el vocabulario científico de distintas lenguas.',
   },
   {
     id: 'day',
@@ -94,6 +96,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['time', 'nature', 'daily-life'],
     funFact: 'Spanish "día" and Italian "giorno" both come from Latin "dies", but via different paths. Italian took the adjective form "diurnum" → "giorno", while Spanish kept the root directly.',
+    funFactEs: '"Día" en español e "giorno" en italiano proceden ambas del latín "dies", pero por caminos distintos. El italiano tomó la forma adjetival "diurnum" → "giorno", mientras que el español conservó la raíz directamente.',
   },
   {
     id: 'sun',
@@ -118,6 +121,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'astronomy', 'weather'],
     funFact: 'French "soleil" is a diminutive — it literally meant "little sun." Solar, solstice, parasol — all from the same Latin root *sol*.',
+    funFactEs: 'El francés "soleil" es un diminutivo: literalmente significaba "solecito". Solar, solsticio, parasol… todas provienen de la misma raíz latina *sol*.',
   },
   {
     id: 'moon',
@@ -141,6 +145,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'astronomy', 'time'],
     funFact: '"Lunatic," "lunacy," and "lunar" all come from Latin *luna* — the ancients believed the moon influenced the mind. Romanian *lună* uniquely means both moon and month.',
+    funFactEs: '"Lunático", "lunación" y "lunar" provienen del latín *luna*: los antiguos creían que la luna influía en la mente. El rumano *lună* es único porque significa a la vez luna y mes.',
   },
   {
     id: 'water',
@@ -168,6 +173,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'elements', 'daily-life'],
     funFact: 'French "eau" descended from Latin "aqua" through: *aqua → aiga → eaue → eau*. The spelling "eau" preserves the medieval pronunciation!',
+    funFactEs: 'El francés "eau" desciende del latín "aqua" así: *aqua → aiga → eaue → eau*. ¡La ortografía "eau" conserva la pronunciación medieval!',
   },
   {
     id: 'fire',
@@ -191,6 +197,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['nature', 'elements', 'daily-life'],
     funFact: 'All Romance languages chose Latin *focus* (hearth/fireplace) over the classical *ignis* (fire) — a domestic word beat the poetic one. English "focus" is a learned borrowing from Latin, originally meaning "hearth."',
+    funFactEs: 'Todas las lenguas romances eligieron el latín *focus* (hogar/chimenea) sobre el clásico *ignis* (fuego): la palabra doméstica venció a la poética. El inglés "focus" es un préstamo culto del latín que originalmente significaba "hogar".',
   },
 
   // ── BODY ──────────────────────────────────────────────────────────────────
@@ -219,6 +226,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'emotions', 'anatomy'],
     funFact: '"Cordial," "accord," "discord," and "courage" all come from Latin *cor/cordis*. In French, *coeur* lives on in "par coeur" (by heart = memorized).',
+    funFactEs: '"Cordial", "acorde", "discordia" y "coraje" provienen del latín *cor/cordis*. En francés, *cœur* vive en "par cœur" (de memoria; literalmente, de corazón).',
   },
   {
     id: 'hand',
@@ -245,6 +253,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy'],
     funFact: 'Latin *manus* gave us: manual, manuscript, manufacture, manipulate, manicure, mandate — and the Italian greeting "ciao" likely has roots in *schiavo* (slave, servant) meaning "I am your servant," not from *manus* itself.',
+    funFactEs: 'El latín *manus* nos dio: manual, manuscrito, manufactura, manipular, manicura, mandato. El saludo italiano "ciao" probablemente proviene de *schiavo* (esclavo, siervo), con el significado de "soy su servidor", no de *manus*.',
   },
   {
     id: 'eye',
@@ -268,6 +277,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy', 'senses'],
     funFact: 'French has a unique irregular plural: *œil* (eye) → *yeux* (eyes) — completely different stems! This is called suppletion, the same phenomenon as English "go/went."',
+    funFactEs: 'El francés tiene un plural irregular único: *œil* (ojo) → *yeux* (ojos), ¡raíces completamente distintas! Este fenómeno se llama suplencia, el mismo que en inglés "go/went" (ir/fui).',
   },
   {
     id: 'mouth',
@@ -290,6 +300,7 @@ export const WORD_ENTRIES: WordEntry[] = [
     ],
     semanticField: ['body', 'anatomy', 'senses'],
     funFact: 'All main Romance languages replaced the classical Latin *os/oris* (mouth) with the vulgar *bucca* (puffed cheek). English "oral" and "orifice" preserve the classical root.',
+    funFactEs: 'Todas las principales lenguas romances sustituyeron el latín clásico *os/oris* (boca) por el vulgar *bucca* (mejilla inflada). El inglés "oral" y "orificio" conservan la raíz clásica.',
   },
 
   // ── NUMBERS ───────────────────────────────────────────────────────────────
